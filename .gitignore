@@ -1,0 +1,13 @@
+.svn
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.tmp
+*.bak
+*.old
+tmp/cache
+tmp/sessions
+tmp/uploads
+logs

@@ -1,0 +1,6 @@
+[submodule "include/fatfree"]
+	path = include/fatfree
+	url = https://github.com/bcosca/fatfree.git
+[submodule "src/html5-boilerplate"]
+	path = src/html5-boilerplate
+	url = https://github.com/h5bp/html5-boilerplate.git

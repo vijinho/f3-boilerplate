@@ -1,0 +1,43 @@
+<VirtualHost 127.0.0.1.:80>
+     ServerName f3-boilerplate.local
+     DocumentRoot /home/vhosts/f3-boilerplate.local/htdocs
+     ErrorLog /home/vhosts/f3-boilerplate.local/logs/tr-error_log
+     CustomLog /home/vhosts/f3-boilerplate.local/logs/tr-access_log common
+
+	DirectoryIndex index.php index.html index.htm 
+
+php_value include_path ".:/home/vhosts/f3-boilerplate.local/htdocs:/home/vhosts/f3-boilerplate.local/include"
+php_value error_log "/home/vhosts/f3-boilerplate.local/logs/php.log"
+php_value session.save_path "/home/vhosts/f3-boilerplate.local/tmp/sessions"
+php_value upload_tmp_dir "/home/vhosts/f3-boilerplate.local/tmp/uploads"
+php_value soap.wsdl_cache_dir "/home/vhosts/f3-boilerplate.local/tmp/cache"
+
+php_value allow_url_fopen on
+php_value default_charset utf-8
+php_value short_open_tag Off
+php_value expose_php Off
+php_value zend.ze1_compatibility_mode off
+php_value register_argc_argv Off
+php_value register_globals Off
+php_value always_populate_raw_post_data Off
+php_value ignore_repeated_errors On
+php_value ignore_repeated_source On
+php_value session.use_cookies 1
+php_value session.use_only_cookies 0
+php_value session.use_trans_sid 0
+
+php_value upload_max_filesize 64M
+php_value memory_limit 256M
+php_value post_max_size 64M
+
+php_value sockets.use_system_read 1
+php_value default_socket_timeout 3600
+php_value max_execution_time 3600
+php_value max_input_time 3600
+php_value set_time_limit 3600
+
+php_value log_errors On
+php_value display_errors On
+php_value html_errors On
+
+</VirtualHost>
