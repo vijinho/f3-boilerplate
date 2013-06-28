@@ -29,13 +29,12 @@ $f3->set('logger', new \Log('app.log'));
 
 // setup database connection params
 // @see http://fatfreeframework.com/databases
-try {
-    if (!$f3->get('db.dsn'))
-        $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s", $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name')));
-    $f3->set('db.connection', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
-} catch (Exception $e) {
-    throw new Exception("Failed to initialise database!");
+if (!$f3->get('db.dsn')) {
+    $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s",
+        $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name'))
+    );
 }
+$f3->set('db.connection', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
