@@ -6,3 +6,6 @@ TEMP=../../tmp/
 db[dsn]=mysql:host=localhost;port=3306;dbname=DATABASE
 db[username]=USERNAME
 db[password]=PASSWORD
+
+application[logfile]=application.log
+application[environment]=development

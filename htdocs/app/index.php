@@ -38,12 +38,13 @@ if (!$f3->get('db.dsn')) {
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
-$f3->route('GET /', 'controllers\Index->home');
+// firstly load routes from ini file
+$f3->config('config/routes.ini');
 
 $f3->run();
 
 // log script execution time if debugging
-if ($f3->get('DEBUG')) {
+if ($f3->get('DEBUG') || $f3->get('application.environment') == 'development') {
     $execution_time = microtime() - $execution_time;
     \Registry::get('logger')->write('Script executed in ' . $execution_time . ' seconds');
 }
