@@ -1,0 +1,8 @@
+[globals]
+DEBUG=3
+LOGS=../../logs/
+TEMP=../../tmp/
+
+db[dsn]=mysql:host=localhost;port=3306;dbname=DATABASE
+db[username]=USERNAME
+db[password]=PASSWORD
