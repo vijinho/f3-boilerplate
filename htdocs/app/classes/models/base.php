@@ -10,7 +10,7 @@ namespace models;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-class Base {
+class Base extends \Prefab {
 
     /**
     * database connection
