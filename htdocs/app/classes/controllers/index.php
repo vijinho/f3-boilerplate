@@ -20,4 +20,16 @@ class Index extends Base {
         echo \View::instance()->render('views/index/home.htm');
     }
 
+    public function about() {
+        echo \View::instance()->render('views/index/about.htm');
+    }
+
+    public function contact() {
+        echo \View::instance()->render('views/index/contact.htm');
+    }
+
+    public function credits() {
+        echo \View::instance()->render('views/index/credits.htm');
+    }
+
 }
