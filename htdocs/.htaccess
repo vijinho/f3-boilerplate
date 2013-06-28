@@ -580,6 +580,10 @@ RewriteRule \.ini$ - [R=404]
 RewriteCond %{REQUEST_URI} \.html?$
 RewriteRule \.html?$ - [R=404]
 
+# deny access from app/ folders except ui
+RewriteRule ^(app/classes|app/config|app/i18n|app/tmp|app/logs) - [F,L,NC]
+#RewriteRule ^app/^(index.php|ui) - [F,L,NC]
+
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteCond %{REQUEST_FILENAME} !-d
