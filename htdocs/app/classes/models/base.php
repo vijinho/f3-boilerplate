@@ -25,6 +25,6 @@ class Base extends \Prefab {
     * @return void
     */
     public function __construct() {
-        $this->db = &\F3::ref('db.connection');
+        $this->db = \Registry::get('db');
     }
 }

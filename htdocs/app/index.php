@@ -25,7 +25,7 @@ if (file_exists('config/config.ini'))
 $f3->set('AUTOLOAD', __dir__.';../../include/fatfree/lib/;classes/helpers/;classes/models/;classes/controllers/;classes/');
 
 // setup application logging
-$f3->set('logger', new \Log('app.log'));
+\Registry::set('logger', new \Log($f3->get('application.logfile')));
 
 // setup database connection params
 // @see http://fatfreeframework.com/databases
@@ -34,7 +34,7 @@ if (!$f3->get('db.dsn')) {
         $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name'))
     );
 }
-$f3->set('db.connection', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
+\Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
@@ -45,5 +45,5 @@ $f3->run();
 // log script execution time if debugging
 if ($f3->get('DEBUG')) {
     $execution_time = microtime() - $execution_time;
-    $f3->get('logger')->write('Script executed in ' . $execution_time . ' seconds');
+    \Registry::get('logger')->write('Script executed in ' . $execution_time . ' seconds');
 }
