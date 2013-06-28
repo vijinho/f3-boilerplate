@@ -25,6 +25,6 @@ class Base {
     * @return void
     */
     public function __construct() {
-        $this->db = \F3::get('db.connection');
+        $this->db = &\F3::ref('db.connection');
     }
 }
