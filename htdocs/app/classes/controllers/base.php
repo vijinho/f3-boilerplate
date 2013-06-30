@@ -13,11 +13,19 @@ namespace controllers;
 class Base {
 
     /**
+    * f3 logger instance
+    *
+    * @var logger
+    */
+    protected $logger;
+
+    /**
     * initialize controller
     *
     * @return void
     */
     public function __construct() {
+        $this->logger = \Registry::get('logger');
     }
 
 }

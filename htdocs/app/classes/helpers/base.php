@@ -11,5 +11,19 @@ namespace helpers;
  */
 
 class Base extends \Prefab {
+    /**
+    * f3 logger instance
+    *
+    * @var logger
+    */
+    protected $logger;
 
+    /**
+    * initialize model
+    *
+    * @return void
+    */
+    public function __construct() {
+        $this->logger = \Registry::get('logger');
+    }
 }

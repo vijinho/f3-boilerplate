@@ -20,11 +20,19 @@ class Base extends \Prefab {
     protected $db;
 
     /**
+    * f3 logger instance
+    *
+    * @var logger
+    */
+    protected $logger;
+
+    /**
     * initialize model
     *
     * @return void
     */
     public function __construct() {
         $this->db = \Registry::get('db');
+        $this->logger = \Registry::get('logger');
     }
 }
