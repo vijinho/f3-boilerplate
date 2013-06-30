@@ -10,7 +10,16 @@ namespace helpers;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-class String extends \Prefab {
+class String extends base {
+
+    /**
+    * initialize controller
+    *
+    * @return void
+    */
+    public function __construct() {
+        parent::__construct();
+    }
 
     /**
      * random string producer
