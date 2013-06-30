@@ -11,6 +11,7 @@ namespace helpers;
  */
 
 class Base extends \Prefab {
+
     /**
     * f3 logger instance
     *
