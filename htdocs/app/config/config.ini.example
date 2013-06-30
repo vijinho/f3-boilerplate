@@ -1,9 +1,9 @@
 [globals]
 DEBUG=3
 
-db[dsn]=mysql:host=localhost;port=3306;dbname=DATABASE
-db[username]=USERNAME
-db[password]=PASSWORD
+db.dsn=mysql:host=localhost;port=3306;dbname=DATABASE
+db.username=USERNAME
+db.password=PASSWORD
 
-application[logfile]=application.log
-application[environment]=development
+application.logfile=application.log
+application.environment=development
