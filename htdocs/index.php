@@ -37,8 +37,8 @@ if (!$f3->get('db.dsn')) {
 }
 \Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
 
-// setup user notifications, merge from session notifications array if needed
-$f3->set('keep_notifications', false);
+// setup user notifications
+$f3->set('keep_notifications', false); // set to true somewhere to keep between requests
 $notifications = $f3->get('SESSION.notifications');
 if (!$f3->exists('SESSION.notifications')) {
     $f3->set('SESSION.notifications', array(
