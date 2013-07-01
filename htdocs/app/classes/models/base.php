@@ -13,6 +13,13 @@ namespace models;
 abstract class Base extends \Prefab {
 
     /**
+    * f3 instance
+    *
+    * @var f3
+    */
+    protected $f3;
+
+    /**
     * database connection
     *
     * @var db
@@ -32,6 +39,7 @@ abstract class Base extends \Prefab {
     * @return void
     */
     public function __construct() {
+        $this->f3 = \F3::instance();
         $this->db = \Registry::get('db');
         $this->logger = \Registry::get('logger');
     }

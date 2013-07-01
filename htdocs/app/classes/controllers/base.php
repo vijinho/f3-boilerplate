@@ -13,6 +13,13 @@ namespace controllers;
 abstract class Base {
 
     /**
+    * f3 instance
+    *
+    * @var f3
+    */
+    protected $f3;
+
+    /**
     * f3 logger instance
     *
     * @var logger
@@ -25,6 +32,7 @@ abstract class Base {
     * @return void
     */
     public function __construct() {
+        $this->f3 = \F3::instance();
         $this->logger = \Registry::get('logger');
     }
 
