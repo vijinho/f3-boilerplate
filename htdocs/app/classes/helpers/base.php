@@ -10,7 +10,7 @@ namespace helpers;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-class Base extends \Prefab {
+abstract class Base extends \Prefab {
 
     /**
     * f3 logger instance
