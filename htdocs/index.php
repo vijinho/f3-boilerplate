@@ -37,12 +37,30 @@ if (!$f3->get('db.dsn')) {
 }
 \Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
 
+// setup user notifications, merge from session notifications array if needed
+$f3->set('keep_notifications', false);
+$notifications = $f3->get('SESSION.notifications');
+if (!$f3->exists('SESSION.notifications')) {
+    $f3->set('SESSION.notifications', array(
+        'error' => array(),
+        'warning' => array(),
+        'success' => array(),
+        'notice' => array()
+    ));
+}
+// add messages like this with $f3->push('SESSION.notifications.error', 'ERROR MESSAGES');
+
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
 // firstly load routes from ini file
 $f3->config('config/routes.ini');
 
 $f3->run();
+
+// clear the session messages unless 'keep_notifications' is not false
+if ($f3->get('keep_notifications') === false) {
+    $f3->set('SESSION.notifications', null);
+}
 
 // log script execution time if debugging
 if ($f3->get('DEBUG') || $f3->get('application.environment') == 'development') {
