@@ -1,5 +1,5 @@
 f3-boilerplate application
 ==========================
 
-(c) Copyright 2013 Firstname Lastname <email@eexample.com>
+(c) Copyright 2013 Vijay Mahrra <vijay.mahrra@gmail.com>
 
