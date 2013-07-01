@@ -2,7 +2,7 @@
 namespace helpers;
 
 /**
- * Base Helper Class
+ * String Helper Class
  *
  * @package helpers
  * @author Vijay Mahrra <vijay.mahrra@gmail.com>
