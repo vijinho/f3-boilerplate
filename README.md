@@ -7,7 +7,7 @@ Layout:
 
 htdocs - website root
 
-htdocs/app - website application, index.php is the default file used by .htaccess for routing
+app - website application lives outside the webroot for security htdocs/index.php is the default file used by .htaccess for routing
 
 logs - logfiles
 

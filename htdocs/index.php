@@ -10,9 +10,10 @@ namespace application;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
+chdir('../app'); // change to app folder outside of webroot
 $execution_time = microtime();
 
-$f3 = require('../../include/fatfree/lib/base.php');
+$f3 = require('../include/fatfree/lib/base.php');
 
 // read config and overrides
 // @see http://fatfreeframework.com/framework-variables#configuration-files
@@ -22,7 +23,7 @@ if (file_exists('config/config.ini'))
 
 // setup class autoloader
 // @see http://fatfreeframework.com/quick-reference#autoload
-$f3->set('AUTOLOAD', __dir__.';../../include/fatfree/lib/;classes/helpers/;classes/models/;classes/controllers/;classes/');
+$f3->set('AUTOLOAD', __dir__.';../include/fatfree/lib/;classes/helpers/;classes/models/;classes/controllers/;classes/');
 
 // setup application logging
 \Registry::set('logger', new \Log($f3->get('application.logfile')));
