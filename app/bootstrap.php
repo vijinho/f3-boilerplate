@@ -61,5 +61,6 @@ if ($f3->get('keep_notifications') === false) {
 
 // log script execution time if debugging
 if ($f3->get('DEBUG') || $f3->get('application.environment') == 'development') {
-    \Registry::get('logger')->write('Script executed in ' . (microtime(true) - $f3->get('TIME')) . ' seconds');
+    $execution_time = microtime(true) - $f3->get('TIME');
+    \Registry::get('logger')->write('Script executed in ' . $execution_time . ' seconds');
 }
