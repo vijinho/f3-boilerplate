@@ -10,8 +10,6 @@ namespace application;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-$execution_time = microtime();
-
 $f3 = require('../include/fatfree/lib/base.php');
 
 // read config and overrides
@@ -63,6 +61,5 @@ if ($f3->get('keep_notifications') === false) {
 
 // log script execution time if debugging
 if ($f3->get('DEBUG') || $f3->get('application.environment') == 'development') {
-    $execution_time = microtime() - $execution_time;
-    \Registry::get('logger')->write('Script executed in ' . $execution_time . ' seconds');
+    \Registry::get('logger')->write('Script executed in ' . microtime(true) - $f3->get('TIME') . ' seconds');
 }
