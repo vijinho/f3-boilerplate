@@ -34,6 +34,10 @@ if (!$f3->get('db.dsn')) {
 }
 \Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
 
+// setup outgoing email server for php mail command
+ini_set("SMTP", $f3->get('email.host'));
+ini_set('sendmail_from', $f3->get('email.from'));
+
 // setup user notifications
 $f3->set('keep_notifications', false); // set to true somewhere to keep between requests
 $notifications = $f3->get('SESSION.notifications');
