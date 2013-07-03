@@ -22,16 +22,23 @@ class String extends base {
     }
 
     /**
-     * random string producer
+     * generate random string
      *
-     * @example $string = \helpers\String::instance()->randomString();
-     * @author Sascha Ohms
-     * @author Philipp Hirsch
-     * @copyright Copyright 2011, Bugtrckr-Team
-     * @license http://www.gnu.org/licenses/lgpl.txt
+     * @param int length of password
+     * @param string chars characters to use
+     * @return string password
      */
-    public static function randomString($length = 8)
+    public static function random_string($length = 10, $chars = null)
     {
-        return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, $length);
+        if (empty($chars)) {
+            $chars = '1234567890abcdefghjkmnopqrstuvwxyz';
+        }
+        $chars = str_shuffle($chars); // shuffle base character string
+        $x = strlen($chars) - 1;
+        $str = '';
+        for ($i = 0; $i < $length; $i++) {
+            $str .= substr($chars, rand(0, $x), 1);
+        }
+        return $str;
     }
 }
