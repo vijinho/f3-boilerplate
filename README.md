@@ -5,9 +5,9 @@ My fatfree framework boilerplate MVC website code using html5boilerplate
 
 Layout:
 
-htdocs - website root
+www - website root
 
-app - website application lives outside the webroot for security htdocs/index.php is the default file used by .htaccess for routing
+app - website application lives outside the webroot for security www/index.php is the default file used by .htaccess for routing
 
 logs - logfiles
 
