@@ -5,5 +5,10 @@ db.dsn=mysql:host=localhost;port=3306;dbname=DATABASE
 db.username=USERNAME
 db.password=PASSWORD
 
+; email/smtp settings
+email.host=localhost
+email.from=you@example.com
+email.subject=Website Email:
+
 application.logfile=application.log
 application.environment=development
