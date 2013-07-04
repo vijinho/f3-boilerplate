@@ -21,21 +21,15 @@ app/classes/cli - used on the command-line
 
 src - src code for projects used on the site, e.g. html5boilerplate
 
-include - external include files/classes
+include - externally included code files/classes/libraries
 
 include/fatfree - fatfree framework git clone
 
 data - website data storage
 
-bin - executables for the site, e.g. for cron
+tmp/cache tmp/sessions tmp/uploads - temporary files 
 
-backup/db/ - db dumps
-
-backup/conf - configuration files (webserver etc)
-
-tmp - temporary files (cache, sessions, uploads)
-
-logs - logfiles
+logs - webserver and application logfiles
 
 
 vijay.mahrra@gmail.com
