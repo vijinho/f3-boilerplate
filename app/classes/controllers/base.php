@@ -69,7 +69,8 @@ abstract class Base {
         $methods = (array_key_exists('methods', $params) ? $params['methods'] : 'GET, POST'); // Don't allow PUT, DELETE by default
         header('Expires:  ' . self::http_header_date(array_key_exists('expires', $params) ? $params['expires'] : time() + $ttl));
         header('Content-type: application/json');
-        header('Access-Control-Allow-Origin: ' . (array_key_exists('origin', $params) ? $params['origin'] : $this->f3->get('REALM')));
+        if (array_key_exists('origin', $params))
+            header('Access-Control-Allow-Origin: ' . $params['origin']);
         header('Access-Control-Max-Age: ' . $ttl);
         header('Access-Control-Allow-Methods: ' .  $methods);
         echo json_encode($x, ($this->f3->get('DEBUG') ? JSON_PRETTY_PRINT : null));
