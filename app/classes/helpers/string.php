@@ -31,7 +31,7 @@ class String extends base {
     public static function random_string($length = 10, $chars = null)
     {
         if (empty($chars)) {
-            $chars = '1234567890abcdefghjkmnopqrstuvwxyz';
+            $chars = '23456789abcdefghjkmnopqrstuvwxyz';
         }
         $chars = str_shuffle($chars); // shuffle base character string
         $x = strlen($chars) - 1;
