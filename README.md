@@ -9,13 +9,21 @@ www - website root
 
 app - website application lives outside the webroot for security www/index.php is the default file used by .htaccess for routing
 
-logs - logfiles
+app/config - configuration files
 
-data - data storage
+app/classes/models - models
 
-include - include files/classes
+app/classes/controllers - controllers
+
+app/classes/helpers - useful static helper functions
+
+src - src code for projects used on the site, e.g. html5boilerplate
+
+include - external include files/classes
 
 include/fatfree - fatfree framework git clone
+
+data - website data storage
 
 bin - executables for the site, e.g. for cron
 
@@ -23,10 +31,9 @@ backup/db/ - db dumps
 
 backup/conf - configuration files (webserver etc)
 
-src - src code for projects used on the site, e.g. html5boilerplate
-
 tmp - temporary files (cache, sessions, uploads)
 
+logs - logfiles
 
 
 vijay.mahrra@gmail.com
