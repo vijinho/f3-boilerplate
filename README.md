@@ -5,31 +5,21 @@ My fatfree framework boilerplate MVC website code using html5boilerplate
 
 Layout:
 
-www - website root
-
-app - website application lives outside the webroot for security www/index.php is the default file used by .htaccess for routing
-
-app/config - configuration files
-
-app/classes/models - models
-
-app/classes/controllers - controllers
-
-app/classes/helpers - useful static helper functions
-
-app/classes/cli - used on the command-line
-
-src - src code for projects used on the site, e.g. html5boilerplate
-
-include - externally included code files/classes/libraries
-
-include/fatfree - fatfree framework git clone
-
-data - website data storage
-
-tmp/cache tmp/sessions tmp/uploads - temporary files 
-
-logs - webserver and application logfiles
-
+* include - external include files/classes
+* include/fatfree - fatfree framework code
+* src - src code for projects used on the site, e.g. html5boilerplate
+* www - website and public doc root (aka public_html or htdocs)
+* app - website application lives outside the webroot for security www/index.php is the default file used by .htaccess for routing
+* app/bootstrap.php - start fatfree by including this file from the webroot or running command-line php against it
+* app/doc - application documentation
+* app/config - application configuration files
+* app/config/vhost - application virtual host configuration files
+* app/classes/models - models
+* app/classes/controllers - controllers
+* app/classes/helpers - useful static helper functions
+* app/classes/cli - command line script classes
+* data - website data storage
+* logs - webserver and application logfiles
+* tmp/cache tmp/sessions tmp/uploads - temporary files
 
 vijay.mahrra@gmail.com
