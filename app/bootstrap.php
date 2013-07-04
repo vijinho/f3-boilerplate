@@ -60,12 +60,7 @@ if (PHP_SAPI != 'cli') {
 if (PHP_SAPI != 'cli') {
     $f3->config('config/routes.ini');
 } else {
-    // setup command line routes
-    $f3->route('GET /',
-        function() {
-            echo 'Hello, world!';
-        }
-    );
+    $f3->config('config/routes-cli.ini');
 }
 
 $f3->run();
