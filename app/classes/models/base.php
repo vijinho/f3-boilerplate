@@ -43,16 +43,4 @@ abstract class Base extends \Prefab {
         $this->db = \Registry::get('db');
         $this->logger = \Registry::get('logger');
     }
-
-    /*
-     * format a database-specific date/time string
-     *
-     * @param optional int $timestamp the unix time (null = now)
-     * @return string date in format of database driver
-     * @todo add a switch for the f3 database driver and set the timestamp
-     */
-    public static function db_datetime($timestamp = null) {
-        $timestamp = (int) $timestamp;
-        return date('Y-m-d H:i:s', empty($timestamp) ? time() : $timestamp);
-    }
 }
