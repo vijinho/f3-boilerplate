@@ -11,5 +11,7 @@ email.to=you@example.org
 email.from=you@example.com
 email.subject=Website Email:
 
+ajax.ttl=10;
+
 application.logfile=application.log
 application.environment=development
