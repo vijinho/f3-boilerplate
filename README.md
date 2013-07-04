@@ -17,6 +17,8 @@ app/classes/controllers - controllers
 
 app/classes/helpers - useful static helper functions
 
+app/classes/cli - used on the command-line
+
 src - src code for projects used on the site, e.g. html5boilerplate
 
 include - external include files/classes
