@@ -16,20 +16,8 @@ class Index extends Base {
         parent::__construct();
     }
 
-    public function home() {
-        echo \View::instance()->render('views/index/home.phtml');
-    }
-
-    public function about() {
-        echo \View::instance()->render('views/index/about.phtml');
-    }
-
-    public function contact() {
-        echo \View::instance()->render('views/index/contact.phtml');
-    }
-
-    public function credits() {
-        echo \View::instance()->render('views/index/credits.phtml');
+    public function index() {
+        echo \View::instance()->render('views/index/index.phtml');
     }
 
 }
