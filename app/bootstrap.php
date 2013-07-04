@@ -38,29 +38,43 @@ if (!$f3->get('db.dsn')) {
 ini_set("SMTP", $f3->get('email.host'));
 ini_set('sendmail_from', $f3->get('email.from'));
 
-// setup user notifications
-$f3->set('keep_notifications', false); // set to true somewhere to keep between requests
-$notifications = $f3->get('SESSION.notifications');
-if (!$f3->exists('SESSION.notifications')) {
-    $f3->set('SESSION.notifications', array(
-        'error' => array(),
-        'warning' => array(),
-        'success' => array(),
-        'notice' => array()
-    ));
+// command line does not have sessions so can't use session notifications
+if (PHP_SAPI != 'cli') {
+    // setup user notifications
+    $f3->set('keep_notifications', false); // set to true somewhere to keep between requests
+    $notifications = $f3->get('SESSION.notifications');
+    if (!$f3->exists('SESSION.notifications')) {
+        $f3->set('SESSION.notifications', array(
+            'error' => array(),
+            'warning' => array(),
+            'success' => array(),
+            'notice' => array()
+        ));
+    }
+    // add messages like this with $f3->push('SESSION.notifications.error', 'ERROR MESSAGES');
 }
-// add messages like this with $f3->push('SESSION.notifications.error', 'ERROR MESSAGES');
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
 // firstly load routes from ini file
-$f3->config('config/routes.ini');
+if (PHP_SAPI != 'cli') {
+    $f3->config('config/routes.ini');
+} else {
+    // setup command line routes
+    $f3->route('GET /',
+        function() {
+            echo 'Hello, world!';
+        }
+    );
+}
 
 $f3->run();
 
-// clear the session messages unless 'keep_notifications' is not false
-if ($f3->get('keep_notifications') === false) {
-    $f3->set('SESSION.notifications', null);
+if (PHP_SAPI != 'cli') {
+    // clear the session messages unless 'keep_notifications' is not false
+    if ($f3->get('keep_notifications') === false) {
+        $f3->set('SESSION.notifications', null);
+    }
 }
 
 // log script execution time if debugging
