@@ -20,7 +20,7 @@ if (file_exists('config/config.ini'))
 
 // setup class autoloader
 // @see http://fatfreeframework.com/quick-reference#autoload
-$f3->set('AUTOLOAD', __dir__.';../include/fatfree/lib/;classes/;include/');
+$f3->set('AUTOLOAD', __dir__.';../include/fatfree/lib/;classes/;../include/');
 
 // setup application logging
 \Registry::set('logger', new \Log($f3->get('application.logfile')));
