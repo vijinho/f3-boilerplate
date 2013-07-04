@@ -10,16 +10,7 @@ namespace helpers;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-class String extends base {
-
-    /**
-    * initialize controller
-    *
-    * @return void
-    */
-    public function __construct() {
-        parent::__construct();
-    }
+class String extends \Prefab {
 
     /**
      * generate random string
@@ -28,7 +19,7 @@ class String extends base {
      * @param string chars characters to use
      * @return string password
      */
-    public static function random_string($length = 10, $chars = null)
+    public static function random($length = 10, $chars = null)
     {
         if (empty($chars)) {
             $chars = '23456789abcdefghjkmnopqrstuvwxyz';
