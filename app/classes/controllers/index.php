@@ -23,11 +23,15 @@ class Index extends Base {
 
     // output some data as json with appropriate headers
     public function json() {
+        $model = \models\Test::instance();
+        $tables = $model->show_tables();
+
         \helpers\Response::json(array(
             'name' => 'Vijay',
             'random' => \helpers\String::random(5),
             'httpdatetime' => \helpers\Time::http(),
-            'dbtimestamp' => \helpers\Time::db()
+            'dbtimestamp' => \helpers\Time::db(),
+            'tables' => $tables
         ), array('ttl' => 600));
     }
 
