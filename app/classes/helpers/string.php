@@ -15,8 +15,8 @@ class String extends \Prefab {
     /**
      * generate random string
      *
-     * @param int length of password
-     * @param string chars characters to use
+     * @param int $length of password
+     * @param string $chars characters to use for random string
      * @return string password
      */
     public static function random($length = 10, $chars = null)

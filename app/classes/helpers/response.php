@@ -13,7 +13,7 @@ namespace helpers;
 class Response extends \Prefab {
 
     /**
-     * Return the input paramater as a json output response includings headingers
+     * Encode the input parameter $x as JSON and output it with appropriate http headers
      *
      * @param mixed $x input variable, takes origin, age, methods
      * @param array $params parameters for the http headers: ttl, origin, methods (GET, POST, PUT, DELETE)
