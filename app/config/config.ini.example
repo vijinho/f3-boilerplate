@@ -7,6 +7,7 @@ db.password=PASSWORD
 
 ; email/smtp settings
 email.host=localhost
+email.to=you@example.org
 email.from=you@example.com
 email.subject=Website Email:
 
