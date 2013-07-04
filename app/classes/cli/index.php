@@ -17,6 +17,6 @@ class Index extends Base {
     }
 
     public function index() {
-        echo 'Hello world!';
+        echo "CLI\n" . "Some random string:" .  \helpers\String::random(255) . "\n";
     }
 }
