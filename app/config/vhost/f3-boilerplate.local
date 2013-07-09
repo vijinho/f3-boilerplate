@@ -4,9 +4,9 @@
      ErrorLog /home/vhosts/f3-boilerplate.local/logs/tr-error_log
      CustomLog /home/vhosts/f3-boilerplate.local/logs/tr-access_log common
 
-	DirectoryIndex index.php index.html index.htm 
+	DirectoryIndex index.php index.html index.htm
 
-php_value include_path ".:/home/vhosts/f3-boilerplate.local/www:/home/vhosts/f3-boilerplate.local/include"
+php_value include_path ".:/home/vhosts/f3-boilerplate.local/www:/home/vhosts/f3-boilerplate.local/vendor"
 php_value error_log "/home/vhosts/f3-boilerplate.local/logs/php.log"
 php_value session.save_path "/home/vhosts/f3-boilerplate.local/tmp/sessions"
 php_value upload_tmp_dir "/home/vhosts/f3-boilerplate.local/tmp/uploads"

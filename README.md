@@ -5,8 +5,8 @@ My fatfree framework boilerplate MVC website code using html5boilerplate
 
 Layout:
 
-* include - external include files/classes
-* include/fatfree - fatfree framework code
+* vendor - external include files/classes
+* vendor/fatfree - fatfree framework code
 * src - src code for projects used on the site, e.g. html5boilerplate
 * www - website and public doc root (aka public_html or htdocs)
 * app - website application lives outside the webroot for security www/index.php is the default file used by .htaccess for routing
