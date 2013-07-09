@@ -59,6 +59,16 @@ if (PHP_SAPI != 'cli') {
 // firstly load routes from ini file
 if (PHP_SAPI != 'cli') {
     $f3->config('config/routes.ini');
+
+    // documentation route
+    $f3->route('GET /doc/@page',function($f3, $params){
+        $filename = 'doc/' . strtoupper($params['page']) . '.md';
+        if (!file_exists($filename)) {
+            die('No such documentation exists!');
+        }
+        echo \Markdown::instance()->convert($f3->read($filename));
+    });
+
 } else {
     $f3->config('config/routes-cli.ini');
 }

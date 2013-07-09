@@ -1,6 +1,6 @@
 # APPLICATION TEAM
 
-* Vijay Mahrra -- vijay.mahrra@gmail.com -- vijinh0
+* Vijay Mahrra -- vijay.mahrra@gmail.com -- @vijinh0
 
 # CONTRIBUTORS
 
@@ -8,5 +8,6 @@
 
 # SOFTWARE PROJECTS
 
-* fatfree project
-* html5boilerplate project
+* Fat-Free Framework - http://fatfreeframework.com/
+* HTML5 ★ BOILERPLATE - http://html5boilerplate.com/
+
