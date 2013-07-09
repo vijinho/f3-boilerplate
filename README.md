@@ -3,6 +3,10 @@ f3-boilerplate
 
 My fatfree framework boilerplate MVC website code using html5boilerplate
 
+Setup:
+# Copy app/config/config.ini.example to config.ini 
+# Edit app/config/config.ini and add anything extra from default.ini for overrides
+
 Layout:
 
 * vendor - external include files/classes
