@@ -17,12 +17,12 @@ class Index extends Base {
     }
 
     // render a php template .phtml view from ui/
-    public function index() {
+    public function index($f3, $params) {
         echo \View::instance()->render('views/index/index.phtml');
     }
 
     // output some data as json with appropriate headers
-    public function json() {
+    public function json($f3, $params) {
         $model = \models\Test::instance();
         $tables = $model->show_tables();
 

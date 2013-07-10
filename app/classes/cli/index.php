@@ -16,7 +16,7 @@ class Index extends Base {
         parent::__construct();
     }
 
-    public function index() {
+    public function index($f3, $params) {
         echo "CLI\n" . "Some random string:" .  \helpers\String::random(255) . "\n";
     }
 }
