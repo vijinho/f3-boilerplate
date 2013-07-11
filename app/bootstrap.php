@@ -61,7 +61,7 @@ if (PHP_SAPI != 'cli') {
     $f3->config('config/routes.ini');
 
     // documentation route
-    $f3->route('GET /doc/@page',function($f3, $params){
+    $f3->route('GET /documentation/@page',function($f3, $params){
         $filename = 'doc/' . strtoupper($params['page']) . '.md';
         echo \View::instance()->render('views/header.phtml');
         if (!file_exists($filename)) {
