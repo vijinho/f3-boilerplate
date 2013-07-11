@@ -23,12 +23,24 @@ if (file_exists('config/config.ini'))
 $f3->set('AUTOLOAD', __dir__.';../vendor/fatfree/lib/;classes/;../vendor/');
 
 // custom error handler if debugging
-if ($f3->get('DEBUG') == 3) {
+$debug = $f3->get('DEBUG');
+    // default error pages if site is not being debugged
+if (PHP_SAPI !== 'cli' && empty($debug)) {
     $f3->set('ONERROR',
         function() use($f3) {
-            // show web page error if not in cli mode
+            if ($f3->get('ERROR.code') == '404') {
+                include_once realpath('./../www/404.html');
+            } else {
+                include_once 'ui/views/error/error.phtml';
+            }
+        }
+    );
+} elseif ($debug == 3) {
+    $f3->set('ONERROR',
+        function() use($f3) {
+            // show debug web page if not in CLI mode
             if (PHP_SAPI !== 'cli') {
-                include_once 'ui/views/error.phtml';
+                include_once 'ui/views/error/debug.phtml';
             } else {
                 print_r($f3->get('ERROR'));
             }
@@ -98,7 +110,7 @@ if ($f3->get('keep_notifications') === false) {
 }
 
 // log script execution time if debugging
-if ($f3->get('DEBUG') || $f3->get('application.environment') == 'development') {
+if ($debug || $f3->get('application.environment') == 'development') {
     $execution_time = microtime(true) - $f3->get('TIME');
     \Registry::get('logger')->write('Script executed in ' . $execution_time . ' seconds');
 }
