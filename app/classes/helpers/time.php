@@ -12,7 +12,7 @@ namespace helpers;
 
 class Time extends \Prefab {
 
-    /*
+    /**
      * format a database-specific date/time string
      *
      * @param optional int $unixtime the unix time (null = now)
@@ -37,7 +37,7 @@ class Time extends \Prefab {
         }
     }
 
-    /*
+    /**
      * Utility to convert timestamp into a http header date/time
      *
      * @param int time php time value
