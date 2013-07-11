@@ -63,10 +63,14 @@ if (PHP_SAPI != 'cli') {
     // documentation route
     $f3->route('GET /doc/@page',function($f3, $params){
         $filename = 'doc/' . strtoupper($params['page']) . '.md';
+        echo \View::instance()->render('views/header.phtml');
         if (!file_exists($filename)) {
-            die('No such documentation exists!');
+            echo '<h1>Documentation Error</h1><p>No such document exists!</p>';
+            $f3->status(404);
+        } else {
+            echo \Markdown::instance()->convert($f3->read($filename));
         }
-        echo \Markdown::instance()->convert($f3->read($filename));
+        echo \View::instance()->render('views/footer.phtml');
     });
 
 } else {
