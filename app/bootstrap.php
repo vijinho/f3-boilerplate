@@ -35,9 +35,14 @@ if (PHP_SAPI !== 'cli' && empty($debug)) {
             }
         }
     );
-} elseif ($debug == 3) {
+} elseif ($debug > 1) {
     $f3->set('ONERROR',
         function() use($f3) {
+            // only write to error log on debug level 3
+            if ($debug == 3) {
+                $l = new \Log('php.log');
+                $l->write(print_r($f3->get('ERROR'), 1));
+            }
             // show debug web page if not in CLI mode
             if (PHP_SAPI !== 'cli') {
                 include_once 'ui/views/error/debug.phtml';
