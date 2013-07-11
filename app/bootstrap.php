@@ -10,7 +10,7 @@ namespace application;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-$f3 = require('../vendor/fatfree/lib/base.php');
+$f3 = require_once('../vendor/fatfree/lib/base.php');
 
 // read config and overrides
 // @see http://fatfreeframework.com/framework-variables#configuration-files
@@ -38,52 +38,49 @@ if (!$f3->get('db.dsn')) {
 ini_set("SMTP", $f3->get('email.host'));
 ini_set('sendmail_from', $f3->get('email.from'));
 
-// command line does not have sessions so can't use session notifications
-if (PHP_SAPI != 'cli') {
-    // setup user notifications
-    $f3->set('keep_notifications', false); // set to true somewhere to keep between requests
-    $notifications = $f3->get('SESSION.notifications');
-    if (!$f3->exists('SESSION.notifications')) {
-        $f3->set('SESSION.notifications', array(
-            'error' => array(),
-            'warning' => array(),
-            'success' => array(),
-            'notice' => array()
-        ));
-    }
-    // add messages like this with $f3->push('SESSION.notifications.error', 'ERROR MESSAGES');
+// If in CLI mode run that from here on...
+if (PHP_SAPI == 'cli') {
+    require_once 'cli.php';
+    exit;
 }
+
+// command line does not have sessions so can't use session notifications
+// setup user notifications
+$f3->set('keep_notifications', false); // set to true somewhere to keep between requests
+$notifications = $f3->get('session.notifications');
+if (!$f3->exists('session.notifications')) {
+    $f3->set('session.notifications', array(
+        'error' => array(),
+        'warning' => array(),
+        'success' => array(),
+        'notice' => array()
+    ));
+}
+// add messages like this with $f3->push('session.notifications.error', 'error messages');
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
 // firstly load routes from ini file
-if (PHP_SAPI != 'cli') {
-    $f3->config('config/routes.ini');
+$f3->config('config/routes.ini');
 
-    // documentation route
-    $f3->route('GET /documentation/@page',function($f3, $params){
-        $filename = 'doc/' . strtoupper($params['page']) . '.md';
-        echo \View::instance()->render('views/header.phtml');
-        if (!file_exists($filename)) {
-            echo '<h1>Documentation Error</h1><p>No such document exists!</p>';
-            $f3->status(404);
-        } else {
-            echo \Markdown::instance()->convert($f3->read($filename));
-        }
-        echo \View::instance()->render('views/footer.phtml');
-    });
-
-} else {
-    $f3->config('config/routes-cli.ini');
-}
+// documentation route
+$f3->route('GET /documentation/@page',function($f3, $params){
+    $filename = 'doc/' . strtoupper($params['page']) . '.md';
+    echo \View::instance()->render('views/header.phtml');
+    if (!file_exists($filename)) {
+        echo '<h1>Documentation Error</h1><p>No such document exists!</p>';
+        $f3->status(404);
+    } else {
+        echo \Markdown::instance()->convert($f3->read($filename));
+    }
+    echo \View::instance()->render('views/footer.phtml');
+});
 
 $f3->run();
 
-if (PHP_SAPI != 'cli') {
-    // clear the session messages unless 'keep_notifications' is not false
-    if ($f3->get('keep_notifications') === false) {
-        $f3->set('SESSION.notifications', null);
-    }
+// clear the session messages unless 'keep_notifications' is not false
+if ($f3->get('keep_notifications') === false) {
+    $f3->set('SESSION.notifications', null);
 }
 
 // log script execution time if debugging
