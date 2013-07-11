@@ -40,7 +40,7 @@ ini_set('sendmail_from', $f3->get('email.from'));
 
 // If in CLI mode run that from here on...
 if (PHP_SAPI == 'cli') {
-    require_once 'cli.php';
+    require_once 'bootstrap-cli.php';
     exit;
 }
 
