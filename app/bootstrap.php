@@ -22,6 +22,20 @@ if (file_exists('config/config.ini'))
 // @see http://fatfreeframework.com/quick-reference#autoload
 $f3->set('AUTOLOAD', __dir__.';../vendor/fatfree/lib/;classes/;../vendor/');
 
+// custom error handler if debugging
+if ($f3->get('DEBUG')) {
+    $f3->set('ONERROR',
+        function() use($f3) {
+            // show web page error if not in cli mode
+            if (PHP_SAPI !== 'cli') {
+                include_once 'ui/views/error.phtml';
+            } else {
+                print_r($f3->get('ERROR'));
+            }
+        }
+    );
+}
+
 // setup application logging
 \Registry::set('logger', new \Log($f3->get('application.logfile')));
 
