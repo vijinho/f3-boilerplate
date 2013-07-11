@@ -22,6 +22,10 @@ Layout:
 * app/classes/controllers - controllers
 * app/classes/helpers - useful static helper functions
 * app/classes/cli - command line script classes
+* app/ui/views/error/ - these files are standard php includes, not f3 templates, used by the error handler function
+* app/ui/views/error/debug.phtml - debug error page (if DEBUG=3)
+* app/ui/views/error/404.phtml - 'friendly' file not found page
+* app/ui/views/error/error.phtml - 'friendly' error page
 * data - website data storage
 * logs - webserver and application logfiles
 * tmp/cache tmp/sessions tmp/uploads - temporary files
