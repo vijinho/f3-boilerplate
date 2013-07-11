@@ -12,6 +12,9 @@
 if (empty($f3)) {
     die("Run bootstrap.php to include this file cli.php!\n");
 }
+if (PHP_SAPI != 'cli') {
+    die("This must be run from the command line!\n");
+}
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
