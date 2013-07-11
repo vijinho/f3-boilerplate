@@ -28,6 +28,7 @@ $debug = $f3->get('DEBUG');
 if (PHP_SAPI !== 'cli' && empty($debug)) {
     $f3->set('ONERROR',
         function() use($f3) {
+            header('Expires:  ' . \helpers\time::http(time() + $f3->get('error.ttl')));
             if ($f3->get('ERROR.code') == '404') {
                 include_once 'ui/views/error/404.phtml';
             } else {
