@@ -39,9 +39,13 @@ if (PHP_SAPI !== 'cli' && empty($debug)) {
     $f3->set('ONERROR',
         function() use($f3) {
             // only write to error log on debug level 3
-            if ($debug == 3) {
-                $l = new \Log('php.log');
-                $l->write(print_r($f3->get('ERROR'), 1));
+            if ($f3->get('DEBUG') == 3) {
+                try {
+                    $l = new \Log('php.log');
+                    $l->write(print_r($f3->get('ERROR'), 1));
+                } catch (\Exception $e) {
+                    // unable to write logfile... do nothing
+                }
             }
             // show debug web page if not in CLI mode
             if (PHP_SAPI !== 'cli') {
