@@ -13,13 +13,13 @@ namespace helpers;
 class Response extends \Prefab {
 
     /**
-     * Encode the input parameter $x as JSON and output it with appropriate http headers
+     * Encode the input parameter $data as JSON and output it with appropriate http headers
      *
-     * @param mixed $x input variable, takes origin, age, methods
+     * @param mixed $data input variable, takes origin, age, methods
      * @param array $params parameters for the http headers: ttl, origin, methods (GET, POST, PUT, DELETE)
      * @see http://www.w3.org/TR/2008/WD-access-control-20080912/
      */
-    public static function json($x, $params = array()) {
+    public static function json($data, $params = array()) {
         header('Content-type: application/json');
 
         $ttl = (array_key_exists('ttl', $params) ? $params['ttl'] : \f3::instance()->get('ajax.ttl')); // cache for $ttl seconds
@@ -40,6 +40,6 @@ class Response extends \Prefab {
             header('Access-Control-Allow-Methods: ' .  $methods);
         }
 
-        echo json_encode($x, (\f3::instance()->get('DEBUG') ? JSON_PRETTY_PRINT : null));
+        echo json_encode($data, (\f3::instance()->get('DEBUG') ? JSON_PRETTY_PRINT : null));
     }
 }
