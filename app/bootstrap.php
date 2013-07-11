@@ -23,7 +23,7 @@ if (file_exists('config/config.ini'))
 $f3->set('AUTOLOAD', __dir__.';../vendor/fatfree/lib/;classes/;../vendor/');
 
 // custom error handler if debugging
-if ($f3->get('DEBUG')) {
+if ($f3->get('DEBUG') == 3) {
     $f3->set('ONERROR',
         function() use($f3) {
             // show web page error if not in cli mode
