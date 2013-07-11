@@ -29,7 +29,7 @@ if (PHP_SAPI !== 'cli' && empty($debug)) {
     $f3->set('ONERROR',
         function() use($f3) {
             if ($f3->get('ERROR.code') == '404') {
-                include_once realpath('./../www/404.html');
+                include_once 'ui/views/error/404.phtml';
             } else {
                 include_once 'ui/views/error/error.phtml';
             }
