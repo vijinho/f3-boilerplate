@@ -84,8 +84,6 @@ $f3->route('GET /documentation/@page',function($f3, $params){
     if (!file_exists($filename)) {
         echo '<h1>Documentation Error</h1><p>No such document exists!</p>';
         $f3->status(404);
-    } else {
-        echo \Markdown::instance()->convert($f3->read($filename));
     }
     echo \View::instance()->render('views/footer.phtml');
 });
