@@ -1,5 +1,43 @@
 <?php
 $e = $f3->get('ERROR');
+
+function highlight_with_linenum($file, $line = null, $offset = 8)
+{
+    // read the file
+    $lines = file($file);
+
+    // fix to start array at 1:
+    array_unshift($lines, null);
+    unset($lines[0]);
+
+    // get lines to show
+    $total = count($lines);
+    $before = $line - $offset;
+    if ($before < 0)
+        $before = 0;
+    $after = $line + $offset;
+    if ($after > $total)
+        $after = $total;
+
+    // extract the codeblock
+    $codeblock = array();
+    for ($i = $before; $i < $after; $i++) {
+        $codeblock[$i] = $lines[$i];
+    }
+
+    // format the codeblock for display
+    $string = "<table>";
+    foreach ($codeblock as $l => $code) {
+        if ($l == $line) {
+            $string .= sprintf("<tr><td>%s</td><td><b>%s</b></td></tr>", $l, highlight_string($code, true));
+        } else {
+            $string .= sprintf("<tr><td>%s</td><td>%s</td></tr>", $l, highlight_string($code, true));
+        }
+    }
+    $string .= "</table>";
+
+    return $string;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +74,8 @@ $e = $f3->get('ERROR');
 <tbody>
 <?php foreach ($e['trace'] as $i => $t): ?>
 <tr>
-    <?php printf("<td>%d</td><td><h3>%s:%d</h3>", $i, $t['file'], $t['line']) ?>
+    <?php printf('<td>%d</td><td><h3><input type="text" size="%d" value="%s"/>:%d</h3>', $i, strlen($t['file']), $t['file'], $t['line']) ?>
+    <?php echo highlight_with_linenum($t['file'], $t['line']); ?>
     <?php if (!empty($t['class'])): ?><?php printf("<br/>%s %s ", $t['class'], $t['type']) ?><?php endif ?>
     <?php if (!empty($t['function'])): ?><?php printf("%s()", $t['function']) ?><?php endif ?>
     </td>
