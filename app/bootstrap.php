@@ -68,7 +68,11 @@ if (!$f3->get('db.dsn')) {
         $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name'))
     );
 }
-\Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
+
+// Use f3's db driver with:
+// \Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
+// Or use your customised version in classes/DB/CustomSQL.php with:
+\Registry::set('db', new \DB\CustomSQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
 
 // setup outgoing email server for php mail command
 ini_set("SMTP", $f3->get('email.host'));
