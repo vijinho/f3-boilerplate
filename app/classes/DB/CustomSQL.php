@@ -93,6 +93,9 @@ class CustomSQL extends \DB\SQL {
                 preg_replace($keys,$vals,$cmd,1).PHP_EOL;
 
         return $query;
+        // process the result above with either of:
+        // while ($row = $stmt->fetch(\CustomSQL::FETCH_ASSOC))
+        // foreach ($query as $index => $row) {
 	}
 
 	/**
