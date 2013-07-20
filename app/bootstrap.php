@@ -84,19 +84,19 @@ if (PHP_SAPI == 'cli') {
     exit;
 }
 
-// command line does not have sessions so can't use session notifications
+// command line does not have SESSIONs so can't use SESSION notifications
 // setup user notifications
 $f3->set('keep_notifications', false); // set to true somewhere to keep between requests
-$notifications = $f3->get('session.notifications');
-if (!$f3->exists('session.notifications')) {
-    $f3->set('session.notifications', array(
+$notifications = $f3->get('SESSION.notifications');
+if (!$f3->exists('SESSION.notifications')) {
+    $f3->set('SESSION.notifications', array(
         'error' => array(),
         'warning' => array(),
         'success' => array(),
         'notice' => array()
     ));
 }
-// add messages like this with $f3->push('session.notifications.error', 'error messages');
+// add messages like this with $f3->push('SESSION.notifications.error', 'error messages');
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
@@ -118,7 +118,7 @@ $f3->route('GET /documentation/@page',function($f3, $params){
 
 $f3->run();
 
-// clear the session messages unless 'keep_notifications' is not false
+// clear the SESSION messages unless 'keep_notifications' is not false
 if ($f3->get('keep_notifications') === false) {
     $f3->set('SESSION.notifications', null);
 }
