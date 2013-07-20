@@ -6,6 +6,10 @@ My fatfree framework boilerplate MVC website code using html5boilerplate
 Setup:
 # Copy app/config/config.ini.example to config.ini
 # Edit app/config/config.ini and add anything extra from default.ini for overrides
+# Setup empty website folders as follows:
+# mkdir -p tmp/cache tmp/sessions tmp/uploads logs data
+# sudo chown -fR www-data:www-data tmp logs data
+# sudo chmod -fR 777 tmp logs data
 
 Layout:
 
