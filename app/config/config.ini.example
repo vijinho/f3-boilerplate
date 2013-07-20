@@ -14,5 +14,7 @@ email.subject=Website Email:
 
 ajax.ttl=10;
 
+analytics.enabled = true
+
 application.logfile=application.log
 application.environment=development
