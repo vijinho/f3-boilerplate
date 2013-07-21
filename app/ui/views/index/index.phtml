@@ -2,6 +2,15 @@
 
 <h1>f3-boilerplate</h1>
 
+<?php printf("<p>Language: %s, Country: %s</p>", \F3::instance()->get('SESSION.language'), \F3::instance()->get('SESSION.country')) ?>
+
+<h2>Switch Language</h2>
+<ul>
+    <li><a href="<?php echo \helpers\URL::i18n('', 'es', 'es') ?>">Spanish</a></li>
+    <li><a href="<?php echo \helpers\URL::i18n('', 'en', 'gb') ?>">English (GB)</a></li>
+    <li><a href="<?php echo \helpers\URL::i18n('', 'sv', 'se') ?>">Swedish</a></li>
+</ul>
+
 <h2>Documentation</h2>
 <ul>
     <li><a href="/documentation/README">README</a></li>
