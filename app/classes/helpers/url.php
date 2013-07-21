@@ -10,7 +10,7 @@ namespace helpers;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-class URL extends base {
+class URL extends \Prefab {
 
 	/**
 	 * Get the base url of the website

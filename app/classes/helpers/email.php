@@ -19,33 +19,11 @@ namespace helpers;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-class Email extends base {
+class Email extends \Prefab {
 
     const MISSING_SUBJECT = 1;
     const MISSING_BODY = 2;
     const SENDING_FAILED = 3;
-
-    /**
-    * email settings
-    *
-    * @var settings
-    */
-    public $settings;
-
-    /**
-    * initialize helper when used as an object
-    *
-    * @return void
-    */
-    public function __construct() {
-        parent::__construct();
-        $f3 = \F3::instance();
-        $this->settings = $f3->get('email');
-
-        // setup outgoing email server for php mail command
-        ini_set("SMTP", $f3->get('email.host'));
-        ini_set('sendmail_from', $f3->get('email.from'));
-    }
 
     /**
      * send an email
@@ -53,33 +31,36 @@ class Email extends base {
      * @param array $params email params, to, from, subject, header etc
      * @return boolean success/failure
      */
-    public function send($params = array()) {
+    public static function send($params = array()) {
+        $f3 = \Base::instance();
+        $settings = $f3->get('email');
+
         $params = array_map('trim', $params); // trim whitespace
 
         if (!array_key_exists('to', $params) || empty($params['to'])) {
-            $params['to'] = $this->settings['to'];
+            $params['to'] = $settings['to'];
         }
 
         if (!array_key_exists('from', $params) || empty($params['from'])) {
-            $params['from'] = $this->settings['from'];
+            $params['from'] = $settings['from'];
         }
 
         if (array_key_exists('subject', $params) && !empty($params['subject'])) {
-            $params['subject'] = $this->settings['subject'] . $params['subject'];
+            $params['subject'] = $settings['subject'] . $params['subject'];
         } else {
-            throw new Exception("Missing email subject!", self::MISSING_SUBJECT);
+            throw new \Exception("Missing email subject!", self::MISSING_SUBJECT);
         }
 
         if (array_key_exists('body', $params) && !empty($params['body'])) {
             $params['body'] = trim($params['body']);
         } else {
-            throw new Exception("Missing email body!", self::MISSING_BODY);
+            throw new \Exception("Missing email body!", self::MISSING_BODY);
         }
 
         $params['header'] = sprintf("From: %s", $params['from']);
 
         if (!mail($params['from'], $params['subject'], $params['body'], $params['header'])) {
-            throw new Exception("Sending the email failed", self::SENDING_FAILED);
+            throw new \Exception("Sending the email failed", self::SENDING_FAILED);
         }
         return true;
     }
