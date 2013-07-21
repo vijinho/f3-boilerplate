@@ -22,7 +22,7 @@ class Response extends \Prefab {
     public static function json($data, $params = array()) {
         header('Content-type: application/json');
 
-        $ttl = (array_key_exists('ttl', $params) ? $params['ttl'] : \f3::instance()->get('ajax.ttl')); // cache for $ttl seconds
+        $ttl = (array_key_exists('ttl', $params) ? $params['ttl'] : \Base::instance()->get('ajax.ttl')); // cache for $ttl seconds
         if (empty($ttl)) {
             header('Cache-Control: no-cache, must-revalidate');
             $ttl = 0;
@@ -40,6 +40,6 @@ class Response extends \Prefab {
             header('Access-Control-Allow-Methods: ' .  $methods);
         }
 
-        echo json_encode($data, (\f3::instance()->get('DEBUG') ? JSON_PRETTY_PRINT : null));
+        echo json_encode($data, (\Base::instance()->get('DEBUG') ? JSON_PRETTY_PRINT : null));
     }
 }
