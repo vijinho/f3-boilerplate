@@ -1,6 +1,8 @@
 [globals]
 DEBUG=3
 TZ=CONTINENT/CITY
+LANGUAGE=LANGUAGE
+COUNTRY=COUNTRY
 
 db.dsn=mysql:host=localhost;port=3306;dbname=DATABASE
 db.username=USERNAME

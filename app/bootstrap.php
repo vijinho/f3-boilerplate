@@ -84,6 +84,19 @@ if (PHP_SAPI == 'cli') {
     exit;
 }
 
+// i18n - get/set the user language/country and keep in the session
+$country = ($f3->exists('SESSION.country')) ? $f3->get('SESSION.country') : $f3->get('COUNTRY');
+$language = ($f3->exists('SESSION.language')) ? $f3->get('SESSION.language') : $f3->get('LANGUAGE');
+$matches = preg_split("/-/", $language); // split language if format en-gb
+if (count($matches) == 2) {
+    $country = $matches[1];
+    $language = $matches[0];
+}
+$f3->set('SESSION.country', $country);
+$f3->set('COUNTRY', $country);
+$f3->set('SESSION.language', $language);
+$f3->set('LANGUAGE', $language . '-' . $country);
+
 // command line does not have SESSIONs so can't use SESSION notifications
 // setup user notifications
 $f3->set('keep_notifications', false); // set to true somewhere to keep between requests
