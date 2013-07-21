@@ -2,9 +2,10 @@
 
 <h1>f3-boilerplate</h1>
 
-<?php printf("<p>Language: %s, Country: %s</p>", \Base::instance()->get('SESSION.language'), \Base::instance()->get('SESSION.country')) ?>
 
 <h2>Switch Language</h2>
+<p><?php printf("<p>Language: %s, Country: %s</p>", \Base::instance()->get('SESSION.language'), \Base::instance()->get('SESSION.country')) ?></p>
+<p><?php echo \Base::instance()->get('i18n.welcome'); ?></p>
 <ul>
     <li><a href="<?php echo \helpers\URL::i18n('', 'es', 'es') ?>">Spanish</a></li>
     <li><a href="<?php echo \helpers\URL::i18n('', 'en', 'gb') ?>">English (GB)</a></li>
