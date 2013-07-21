@@ -99,14 +99,16 @@ $f3->set('LANGUAGE', $language . '-' . $country);
 
 // command line does not have SESSIONs so can't use SESSION notifications
 // setup user notifications
-$f3->set('keep_notifications', false); // set to true somewhere to keep between requests
-$notifications = $f3->get('SESSION.notifications');
+// @see https://github.com/needim/noty for a library to present the messages
+$notifications = $f3->get('session.notifications');
 if (!$f3->exists('SESSION.notifications')) {
     $f3->set('SESSION.notifications', array(
+        'alert' => array(),
         'error' => array(),
         'warning' => array(),
         'success' => array(),
-        'notice' => array()
+        'information' => array(),
+        'confirmation' => array(),
     ));
 }
 // add messages like this with $f3->push('SESSION.notifications.error', 'error messages');
