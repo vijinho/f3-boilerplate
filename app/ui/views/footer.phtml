@@ -3,8 +3,8 @@
 <script src="/js/plugins.js"></script>
 <script src="/js/main.js"></script>
 <?php
-$analytics = \F3::instance()->get('analytics');
-$analytics['enabled'] = $analytics['enabled'] && \F3::instance()->get('application.environment') == 'production';
+$analytics = \Base::instance()->get('analytics');
+$analytics['enabled'] = $analytics['enabled'] && \Base::instance()->get('application.environment') == 'production';
 ?>
 <?php if (!empty($analytics['enabled']) && !empty($analytics['code']) && !empty($analytics['domain'])): ?>
 <script>

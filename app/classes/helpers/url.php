@@ -20,7 +20,7 @@ class URL extends \Prefab {
      */
     public static function base()
     {
-    	$f3 = \F3::instance();
+    	$f3 = \Base::instance();
         if (preg_match("/(^http[s]?:\/\/[^\/]+)/i", $f3->get('REALM'), $matches)) {
             return $matches[1];
         }
@@ -39,8 +39,8 @@ class URL extends \Prefab {
     public static function i18n($url = '', $language = null, $country = null)
     {
         // get the user language if not set
-        $language = substr((empty($language)) ? \F3::instance()->get('LANGUAGE') : $language, 0, 2);
-        $country = (empty($country)) ? \F3::instance()->get('COUNTRY') : $country;
+        $language = substr((empty($language)) ? \Base::instance()->get('LANGUAGE') : $language, 0, 2);
+        $country = (empty($country)) ? \Base::instance()->get('COUNTRY') : $country;
         return self::base() . '/' . $language . '/' . $country . '/' . $url;
     }
 }
