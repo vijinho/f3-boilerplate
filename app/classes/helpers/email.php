@@ -59,7 +59,7 @@ class Email extends \Prefab {
 
         $params['header'] = sprintf("From: %s", $params['from']);
 
-        if (!mail($params['from'], $params['subject'], $params['body'], $params['header'])) {
+        if (!mail($params['to'], $params['subject'], $params['body'], $params['header'])) {
             throw new \Exception("Sending the email failed", self::SENDING_FAILED);
         }
         return true;
