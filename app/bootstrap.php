@@ -36,27 +36,7 @@ if (PHP_SAPI !== 'cli' && empty($debug)) {
             }
         }
     );
-} elseif ($debug > 1) {
-    $f3->set('ONERROR',
-        function() use($f3) {
-            // only write to error log on debug level 3
-            if ($f3->get('DEBUG') == 3) {
-                try {
-                    $l = new \Log('php.log');
-                    $l->write(print_r($f3->get('ERROR'), 1));
-                } catch (\Exception $e) {
-                    // unable to write logfile... do nothing
-                }
-            }
-            // show debug web page if not in CLI mode
-            if (PHP_SAPI !== 'cli') {
-                include_once 'ui/views/error/debug.phtml';
-            } else {
-                print_r($f3->get('ERROR'));
-            }
-        }
-    );
-}
+} 
 
 // setup application logging
 \Registry::set('logger', new \Log($f3->get('application.logfile')));
