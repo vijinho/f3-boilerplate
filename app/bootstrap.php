@@ -65,6 +65,7 @@ if (PHP_SAPI == 'cli') {
 }
 
 // i18n - get/set the user language/country and keep in the session
+// optional, needed for urls beginning in format /en/gb/
 $country = ($f3->exists('SESSION.country')) ? $f3->get('SESSION.country') : $f3->get('COUNTRY');
 $language = ($f3->exists('SESSION.language')) ? $f3->get('SESSION.language') : $f3->get('LANGUAGE');
 $matches = preg_split("/-/", $language); // split language if format en-gb
@@ -93,11 +94,6 @@ if (!$f3->exists('SESSION.notifications')) {
 }
 // add messages like this with $f3->push('SESSION.notifications.error', 'error messages');
 
-// setup routes
-// @see http://fatfreeframework.com/routing-engine
-// firstly load routes from ini file
-$f3->config('config/routes.ini');
-
 // documentation route
 $f3->route('GET /documentation/@page',function($f3, $params){
     $filename = 'doc/' . strtoupper($params['page']) . '.md';
@@ -110,6 +106,11 @@ $f3->route('GET /documentation/@page',function($f3, $params){
     }
     echo \View::instance()->render('views/footer.phtml');
 });
+
+// setup routes
+// @see http://fatfreeframework.com/routing-engine
+// firstly load routes from ini file
+$f3->config('config/routes.ini');
 
 $f3->run();
 
