@@ -1,22 +1,19 @@
 [globals]
 DEBUG=3
-TZ=CONTINENT/CITY
-LANGUAGE=LANGUAGE
-COUNTRY=COUNTRY
+TZ=Europe/London
+LANGUAGE=en-GB
 
-db.dsn=mysql:host=localhost;port=3306;dbname=DATABASE
-db.username=USERNAME
-db.password=PASSWORD
+db.dsn=mysql:host=localhost;port=3306;dbname=www_db
+db.username=www
+db.password=www_password
 
 ; email/smtp settings
-email.host=localhost
-email.to=you@example.org
-email.from=you@example.com
-email.subject=Website Email:
-
-ajax.ttl=10;
+email.host=smtp.example.org
+email.from=www@example.org
 
 analytics.enabled = true
+analytics.code=UA-EXAMPLE-CODE
+analytics.domain=example.org
 
 application.logfile=application.log
 application.environment=development

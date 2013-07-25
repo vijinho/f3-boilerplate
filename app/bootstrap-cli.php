@@ -17,9 +17,6 @@ if (PHP_SAPI != 'cli') {
 }
 
 // setup routes
-// @see http://fatfreeframework.com/routing-engine
-// firstly load routes from ini file
-$f3->config('config/routes-cli.ini');
 
 // documentation route
 $f3->route('GET /documentation/@page',function($f3, $params){
@@ -30,5 +27,9 @@ $f3->route('GET /documentation/@page',function($f3, $params){
         echo $f3->read($filename);
     }
 });
+
+// @see http://fatfreeframework.com/routing-engine
+// firstly load routes from ini file
+$f3->config('config/routes-cli.ini');
 
 $f3->run();
