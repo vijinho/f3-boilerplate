@@ -36,7 +36,7 @@ if (PHP_SAPI !== 'cli' && empty($debug)) {
             }
         }
     );
-} 
+}
 
 // setup application logging
 \Registry::set('logger', new \Log($f3->get('application.logfile')));
@@ -50,9 +50,7 @@ if (!$f3->get('db.dsn')) {
 }
 
 // Use f3's db driver with:
-// \Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
-// Or use your customised version in classes/DB/CustomSQL.php with:
-\Registry::set('db', new \DB\CustomSQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
+\Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
 
 // setup outgoing email server for php mail command
 ini_set("SMTP", $f3->get('email.host'));
@@ -63,20 +61,6 @@ if (PHP_SAPI == 'cli') {
     require_once 'bootstrap-cli.php';
     exit;
 }
-
-// i18n - get/set the user language/country and keep in the session
-// optional, needed for urls beginning in format /en/gb/
-$country = ($f3->exists('SESSION.country')) ? $f3->get('SESSION.country') : $f3->get('COUNTRY');
-$language = ($f3->exists('SESSION.language')) ? $f3->get('SESSION.language') : $f3->get('LANGUAGE');
-$matches = preg_split("/-/", $language); // split language if format en-gb
-if (count($matches) == 2) {
-    $country = $matches[1];
-    $language = $matches[0];
-}
-$f3->set('SESSION.country', $country);
-$f3->set('COUNTRY', $country);
-$f3->set('SESSION.language', $language);
-$f3->set('LANGUAGE', $language . '-' . $country);
 
 // command line does not have SESSIONs so can't use SESSION notifications
 // setup user notifications

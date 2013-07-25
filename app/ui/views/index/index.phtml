@@ -2,14 +2,11 @@
 
 <h1>f3-boilerplate</h1>
 
-<h2>Switch Language</h2>
-<p><?php printf("<p>Language: %s, Country: %s</p>", \Base::instance()->get('SESSION.language'), \Base::instance()->get('SESSION.country')) ?></p>
-<p><?php echo \Base::instance()->get('i18n.welcome'); ?></p>
-<ul>
-    <li><a href="<?php echo \helpers\URL::i18n('', 'es', 'es') ?>">Spanish</a></li>
-    <li><a href="<?php echo \helpers\URL::i18n('', 'en', 'gb') ?>">English (GB)</a></li>
-    <li><a href="<?php echo \helpers\URL::i18n('', 'sv', 'se') ?>">Swedish</a></li>
-</ul>
+<h2>International Welcome</h2>
+<p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?php echo \Base::instance()->get('i18n.welcome'); ?></b></p>
+
+<h3>Helper</h3>
+The example helper in classes/helpers/time.php can output the date/time in a mysql database format like '<?php echo \helpers\time::db() ?>' or for an http header '<?php echo \helpers\time::http() ?>'
 
 <h2>Documentation</h2>
 <ul>
