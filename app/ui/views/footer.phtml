@@ -1,10 +1,11 @@
+<?php $f3 = \Base::instance() ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 <script src="/js/plugins.js"></script>
 <script src="/js/main.js"></script>
 <?php
-$analytics = \Base::instance()->get('analytics');
-$analytics['enabled'] = $analytics['enabled'] && \Base::instance()->get('application.environment') == 'production';
+$analytics = $f3->get('analytics');
+$analytics['enabled'] = $analytics['enabled'] && $f3->get('application.environment') == 'production';
 ?>
 <?php if (!empty($analytics['enabled']) && !empty($analytics['code']) && !empty($analytics['domain'])): ?>
 <script>

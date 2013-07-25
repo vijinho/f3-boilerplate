@@ -1,3 +1,4 @@
+<?php $f3 = \Base::instance() ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -22,7 +23,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-<?php foreach (\F3::get('SESSION.notifications') as $type => $notifications): if (count($notifications) == 0) continue; ?>
+<?php foreach ($f3->get('SESSION.notifications') as $type => $notifications): if (count($notifications) == 0) continue; ?>
 <ul class="<?php echo $type ?>">
 <?php foreach ($notifications as $notification): ?>
 <li class="<?php echo $type ?>"><span class="hidden"><?php echo $type ?>:</span><?php echo $notification ?></li>
