@@ -4,7 +4,7 @@
 <h1>f3-boilerplate</h1>
 
 <h2>International Welcome</h2>
-<p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?php echo \Base::instance()->get('i18n.welcome'); ?></b></p>
+<p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?php echo $f3->get('i18n.welcome'); ?></b></p>
 
 <h3>Helper</h3>
 The example helper in classes/helpers/time.php can output the date/time in a mysql database format like '<?php echo \helpers\time::db() ?>' or for an http header '<?php echo \helpers\time::http() ?>'
