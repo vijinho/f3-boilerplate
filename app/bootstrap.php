@@ -105,6 +105,11 @@ if ($f3->get('keep_notifications') === false) {
 
 // log script execution time if debugging
 if ($debug || $f3->get('application.environment') == 'development') {
+    $logger = \Registry::get('logger');
+    // log database transactions if level 3
+    if ($debug = 3) {
+        $logger->write(\Registry::get('db')->log());
+    }
     $execution_time = round(microtime(true) - $f3->get('TIME'), 3);
-    \Registry::get('logger')->write('Script executed in ' . $execution_time . ' seconds using ' . round(memory_get_usage() / 1024 / 1024, 2) . '/' . round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
+    $logger->write('Script executed in ' . $execution_time . ' seconds using ' . round(memory_get_usage() / 1024 / 1024, 2) . '/' . round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
 }

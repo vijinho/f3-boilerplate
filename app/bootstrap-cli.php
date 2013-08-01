@@ -33,3 +33,13 @@ $f3->route('GET /documentation/@page',function($f3, $params){
 $f3->config('config/routes-cli.ini');
 
 $f3->run();
+
+if ($debug || $f3->get('application.environment') == 'development') {
+    $logger = \Registry::get('logger');
+    // log database transactions if level 3
+    if ($debug = 3) {
+        $logger->write(\Registry::get('db')->log());
+    }
+    $execution_time = round(microtime(true) - $f3->get('TIME'), 3);
+    $logger->write('Script executed in ' . $execution_time . ' seconds using ' . round(memory_get_usage() / 1024 / 1024, 2) . '/' . round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
+}
