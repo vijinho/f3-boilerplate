@@ -39,7 +39,8 @@ if (PHP_SAPI !== 'cli' && empty($debug)) {
 }
 
 // setup application logging
-\Registry::set('logger', new \Log($f3->get('application.logfile')));
+$logger = new \Log($f3->get('application.logfile'));
+\Registry::set('logger', $logger);
 
 // setup database connection params
 // @see http://fatfreeframework.com/databases
@@ -50,7 +51,8 @@ if (!$f3->get('db.dsn')) {
 }
 
 // Use f3's db driver with:
-\Registry::set('db', new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password')));
+$db = new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password'));
+\Registry::set('db', $db);
 
 // setup outgoing email server for php mail command
 ini_set("SMTP", $f3->get('email.host'));
@@ -105,6 +107,10 @@ if ($f3->get('keep_notifications') === false) {
 
 // log script execution time if debugging
 if ($debug || $f3->get('application.environment') == 'development') {
+   // log queries if debug level > 3
+    if ($debug >= 3) {
+        $logger->write($db->log());
+    }
     $execution_time = round(microtime(true) - $f3->get('TIME'), 3);
-    \Registry::get('logger')->write('Script executed in ' . $execution_time . ' seconds using ' . round(memory_get_usage() / 1024 / 1024, 2) . '/' . round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
+    $logger->write('Script executed in ' . $execution_time . ' seconds using ' . round(memory_get_usage() / 1024 / 1024, 2) . '/' . round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
 }
