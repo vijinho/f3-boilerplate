@@ -5,6 +5,8 @@ server {
 
         server_name f3-boilerplate.local;
 
+        client_max_body_size 512M;
+    
         location / {
             index index.php index.html index.htm;
             try_files $uri /index.php?$args;
