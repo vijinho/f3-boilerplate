@@ -47,14 +47,14 @@ $logger = new \Log($f3->get('application.logfile'));
 if ($f3->get('db.driver') == 'sqlite') {
     $dsn = $f3->get('db.dsn');
     $dsn = substr($dsn, 0, strpos($dsn, '/')) . realpath('../') . substr($dsn, strpos($dsn, '/'));
-    $db = new \DB\CustomSQL($dsn);
+    $db = new \DB\SQL($dsn);
 } else {
     if (!$f3->get('db.dsn')) {
         $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s",
             $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name'))
         );
     }
-    $db = new \DB\CustomSQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password'));
+    $db = new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password'));
 }
 \Registry::set('db', $db);
 
