@@ -3,9 +3,11 @@ DEBUG=3
 TZ=Europe/London
 LANGUAGE=en-GB
 
-db.dsn=mysql:host=localhost;port=3306;dbname=www_db
-db.username=www
-db.password=www_password
+db.driver=sqlite
+db.dsn=sqlite:/data/database.sqlite
+;db.dsn=mysql:host=localhost;port=3306;dbname=www_db
+;db.username=www
+;db.password=www_password
 
 ; email/smtp settings
 email.host=smtp.example.org

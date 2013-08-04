@@ -44,15 +44,20 @@ $logger = new \Log($f3->get('application.logfile'));
 
 // setup database connection params
 // @see http://fatfreeframework.com/databases
-if (!$f3->get('db.dsn')) {
-    $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s",
-        $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name'))
-    );
+if ($f3->get('db.driver') == 'sqlite') {
+    $dsn = $f3->get('db.dsn');
+    $dsn = substr($dsn, 0, strpos($dsn, '/')) . realpath('../') . substr($dsn, strpos($dsn, '/'));
+    $db = new \DB\CustomSQL($dsn);
+} else {
+    if (!$f3->get('db.dsn')) {
+        $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s",
+            $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name'))
+        );
+    }
+    $db = new \DB\CustomSQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password'));
 }
-
-// Use f3's db driver with:
-$db = new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password'));
 \Registry::set('db', $db);
+
 
 // setup outgoing email server for php mail command
 ini_set("SMTP", $f3->get('email.host'));
