@@ -5,6 +5,7 @@ LANGUAGE=en-GB
 
 db.driver=sqlite
 db.dsn=sqlite:/data/database.sqlite
+;db.sqlite.attached.otherdb=/full/path/to/db.sqlite
 ;db.dsn=mysql:host=localhost;port=3306;dbname=www_db
 ;db.username=www
 ;db.password=www_password

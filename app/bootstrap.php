@@ -48,6 +48,14 @@ if ($f3->get('db.driver') == 'sqlite') {
     $dsn = $f3->get('db.dsn');
     $dsn = substr($dsn, 0, strpos($dsn, '/')) . realpath('../') . substr($dsn, strpos($dsn, '/'));
     $db = new \DB\SQL($dsn);
+    // attach any other sqlite databases - this example uses the full pathname to the db
+    if ($f3->exists('db.sqlite.attached')) {
+        $attached = $f3->get('db.sqlite.attached');
+        $st = $db->prepare('ATTACH :filename AS :dbname');
+        foreach ($attached as $dbname => $filename) {
+            $st->execute(array(':filename' => $filename, ':dbname' => $dbname));
+        }
+    }    
 } else {
     if (!$f3->get('db.dsn')) {
         $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s",
