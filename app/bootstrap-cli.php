@@ -35,9 +35,8 @@ $f3->config('config/routes-cli.ini');
 $f3->run();
 
 if ($debug || $f3->get('application.environment') == 'development') {
-    $logger = \Registry::get('logger');
     // log database transactions if level 3
-    if ($debug = 3) {
+    if ($debug == 3) {
         $logger->write(\Registry::get('db')->log());
     }
     $execution_time = round(microtime(true) - $f3->get('TIME'), 3);

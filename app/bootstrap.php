@@ -120,9 +120,8 @@ if ($f3->get('keep_notifications') === false) {
 
 // log script execution time if debugging
 if ($debug || $f3->get('application.environment') == 'development') {
-    $logger = \Registry::get('logger');
     // log database transactions if level 3
-    if ($debug = 3) {
+    if ($debug == 3) {
         $logger->write(\Registry::get('db')->log());
     }
     $execution_time = round(microtime(true) - $f3->get('TIME'), 3);

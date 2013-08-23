@@ -5,6 +5,7 @@
 # CONTRIBUTORS
 
 * Christian Knuth -- https://github.com/ikkez
+* Stefano Ricci -- http://www.sharmpro.com
 
 # SOFTWARE PROJECTS
 
