@@ -1,32 +1,57 @@
 server {
 
-        root /f3-boilerplate.local;
-        index index.php index.html index.htm;
+	root /home/vhosts/f3-boilerplate.local/htdocs/;
+	index index.php index.html index.htm;
 
-        server_name f3-boilerplate.local;
+	server_name f3-boilerplate.local
 
-        client_max_body_size 512M;
-    
-        location / {
-            index index.php index.html index.htm;
-            try_files $uri /index.php?$args;
-        }
+	location / {
+ 		index index.php index.html index.htm;
+		#try_files $uri =404;
+        #try_files $uri /index.php;
+  		try_files $uri $uri/ @handler; ## If missing pass the URI to
+        expires 30d; ## Assume all files are cachable
+	}
 
-        location ~ \.php$ {
-            try_files $uri =404;
+    ## These locations would be hidden by .htaccess normally
+    location ^~ /app/                { deny all; }
 
-            fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            include fastcgi_params;
-            fastcgi_index index.php;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            #fastcgi_intercept_errors on;
-            if (-f $request_filename) {
-                fastcgi_pass unix:/var/run/php5-fpm.sock;
-                #fastcgi_pass 127.0.0.1:9000;
-            }
-        }                                                                                                                                                                                                                                              
-        
-        location ~ /\.ht {                                                                                                                                                                                                                             
-                deny all;                                                                                                                                                                                                                              
-        }                                                                                                                                                                                                                                              
-}    
+    #location /var/export/ { ## Allow admins only to view export folder
+    #    auth_basic           "Restricted"; ## Message shown in login window
+    #    auth_basic_user_file htpasswd; ## See /etc/nginx/htpassword
+    #    autoindex            on;
+    #}
+
+    location  /. { ## Disable .htaccess and other hidden files
+        return 404;
+    }
+
+    location @handler {
+        rewrite / /index.php;
+    }
+
+	location /doc/ {
+		alias /usr/share/doc/;
+		autoindex on;
+		allow 127.0.0.1;
+		allow ::1;
+		deny all;
+	}
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+		expires  off; ## Do not cache dynamic content
+        #fastcgi_param  HTTPS $fastcgi_https;
+
+		include fastcgi_params;
+	}
+
+	location ~ /\.ht {
+		deny all;
+	}
+}
+
