@@ -541,8 +541,6 @@ FileETag None
 # <IfModule mod_headers.c>
 #    Header set Connection Keep-Alive
 # </IfModule>
-
-
 # php options
 php_value allow_url_fopen on
 php_value default_charset utf-8
