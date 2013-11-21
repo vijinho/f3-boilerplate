@@ -35,38 +35,4 @@ abstract class Base extends \Prefab {
         $this->f3 = \Base::instance();
         $this->logger = \Registry::get('logger');
     }
-
-    /**
-     * set the language/country from the url
-     */
-    public function beforeRoute($f3, $params){
-        // i18n - get/set the user language/country
-        if (array_key_exists('language', $params)) {
-            $language = trim(strip_tags(strtolower($params['language'])));
-            $matches = preg_split("/-/", $language); // split language if format en-gb
-            if (count($matches) == 2) {
-                $country = $matches[1];
-                $language = $matches[0];
-                if (!empty($country)) {
-                    $f3->set('SESSION.country', $country);
-                    $f3->set('COUNTRY', $country);
-                }
-                if (!empty($language)) {
-                    $f3->set('SESSION.language', $language);
-                    $f3->set('LANGUAGE', $language . '-' . $country);
-                }
-            } else {
-                $f3->set('SESSION.language', $language);
-                $f3->set('LANGUAGE', $language);
-            }
-        }
-
-        if (array_key_exists('country', $params)) {
-            $country = trim(strip_tags(strtolower($params['country'])));
-            if (!empty($country)) {
-                $f3->set('SESSION.country', $country);
-                $f3->set('COUNTRY', $country);
-            }
-        }
-    }
 }
