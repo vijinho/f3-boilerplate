@@ -10,7 +10,7 @@ namespace application;
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-$f3 = require_once('../vendor/fatfree/lib/base.php');
+$f3 = require_once('../vendor/bcosca/fatfree/lib/base.php');
 
 // read config and overrides
 // @see http://fatfreeframework.com/framework-variables#configuration-files
@@ -20,7 +20,7 @@ if (file_exists('config/config.ini'))
 
 // setup class autoloader
 // @see http://fatfreeframework.com/quick-reference#autoload
-$f3->set('AUTOLOAD', __dir__.';../vendor/fatfree/lib/;classes/;../vendor/');
+$f3->set('AUTOLOAD', __dir__.';../vendor/bcosca/fatfree/lib/;classes/;../vendor/');
 
 // custom error handler if debugging
 $debug = $f3->get('DEBUG');

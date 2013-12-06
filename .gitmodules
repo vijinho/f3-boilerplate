@@ -1,5 +1,5 @@
-[submodule "vendor/fatfree"]
-	path = vendor/fatfree
+[submodule "vendor/bcosca/fatfree"]
+	path = vendor/bcosca/fatfree
 	url = https://github.com/bcosca/fatfree.git
 [submodule "src/html5-boilerplate"]
         path = src/html5-boilerplate

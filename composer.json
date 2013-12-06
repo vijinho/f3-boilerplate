@@ -1,0 +1,14 @@
+{
+    "name": "vijinho/fatfree-boilerplate",
+    "description": "My Fat-Free Framework skeleton boilerplate application using HTML5Boilerplate",
+    "license": "GPL3",
+    "authors": [
+        {
+            "name": "Vijay Mahrra",
+            "email": "vijay.mahrra@gmail.com"
+        }
+    ],
+    "require": {
+        "bcosca/fatfree": "dev-master"
+    }
+}
