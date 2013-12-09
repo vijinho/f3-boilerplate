@@ -1,14 +1,38 @@
 {
     "name": "vijinho/fatfree-boilerplate",
     "description": "My Fat-Free Framework skeleton boilerplate application using HTML5Boilerplate",
-    "license": "GPL3",
+    "keywords": ["php", "php framework", "micro framework", "php micro framework", "microframework", "fat-free framework", "fat-free", "skeleton", "skeleton app", "skeleton application"],
+    "homepage": "https://github.com/vijinho/fargo-php",
+    "license": "GPL-3.0+",
+    "type": "application",
     "authors": [
         {
             "name": "Vijay Mahrra",
-            "email": "vijay.mahrra@gmail.com"
+            "email": "vijay@yoyo.org",
+            "homepage": "http://about.me/vijay.mahrra",
+            "role": "Developer"
         }
     ],
     "require": {
+        "php": ">=5.0.0",
         "bcosca/fatfree": "dev-master"
+    },
+    "require-dev": {
+    },
+    "suggest": {
+        "sag/sag": "Couch database backend",
+        "underscore/underscore.php": "Javascript underscore library functionality ported to PHP",
+        "rmccue/requests": "CURL-free request library",
+        "coderkungfu/php-queue": "Front-end PHP queueing library for different backends",
+        "rybakit/phive-queue": "Stand-alone PHP Queueing Library",
+        "mrclay/minify": "Minification utility classes",
+        "dompdf/dompdf": "HTML to PDF convert",
+        "apigen/apigen": "API Documentation Generator",
+        "fzaninotto/faker": "Faked Test Data creator"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }
