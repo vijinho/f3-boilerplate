@@ -20,6 +20,10 @@
     "require-dev": {
     },
     "suggest": {
+        "jlogsdon/cli": "PHP CLI Utilities",
+        "d11wtq/boris": "PHP REPLr",
+        "mobiledetect/mobiledetectlib": "Mobile Detection Library",
+        "willdurand/geocoder": "Geo-location utilities",
         "sag/sag": "Couch database backend",
         "underscore/underscore.php": "Javascript underscore library functionality ported to PHP",
         "rmccue/requests": "CURL-free request library",
