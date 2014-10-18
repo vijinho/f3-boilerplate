@@ -42,4 +42,4 @@ sudo chmod -fR 777 tmp logs data
  * `app/ui/views/error/error.phtml` - 'friendly' error page
 
 --
-vijay.mahrra@gmail.com
+http://about.me/vijay.mahrra
