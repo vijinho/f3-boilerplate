@@ -1,9 +1,15 @@
 # humanstxt.org/
 # The humans responsible & technology colophon
 
-# TEAM
+# AUTHOR
 
     Vijay Mahrra -- vijay.mahrra@gmail.com -- @vijinh0
+
+# CONTRIBUTORS
+
+    Christian Knuth -- https://github.com/ikkez
+    Stefano Ricci -- http://www.sharmpro.com
+    Patrick Müller -- http://patrickmueller.net
 
 # THANKS
 
