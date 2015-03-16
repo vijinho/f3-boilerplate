@@ -12,12 +12,6 @@
             "email": "vijay@yoyo.org",
             "homepage": "http://about.me/vijay.mahrra",
             "role": "Developer"
-        },
-        {
-            "name": "Sheikh Ahmed",
-            "email": "sheikh@designbyfail.com",
-            "homepage": "http://www.designbyfail.com",
-            "role": "Designer"
         }
     ],
     "autoload": {
@@ -28,43 +22,7 @@
         "bcosca/fatfree": "dev-master"
     },
     "suggest": {
-        "php": ">=5.0.0",
-        "joseph-lenton/php-error": "dev-master",
-        "underscore/underscore.php": "dev-master",
-        "ircmaxell/password-compat": "dev-master",
-        "danielstjules/stringy": "dev-master",
-        "monolog/monolog": "1.7.*@dev",
-        "mustangostang/spyc": "0.5.*@dev",
-        "mrclay/minify": "dev-master",
-        "leafo/scssphp": "dev-master",
-        "clio/clio": "@stable",
-        "jlogsdon/cli": "dev-master",
-        "d11wtq/boris": "dev-master",
-        "evenement/evenement": "2.0.*",
-        "wixel/gump": "dev-master",
-        "erusev/parsedown": "dev-master",
-        "mustache/mustache": "dev-dev",
-        "mobiledetect/mobiledetectlib": "dev-master",
-        "willdurand/geocoder": "dev-master",
-        "rmccue/requests": "dev-master",
-        "kijin/beaver": "dev-master",
-        "sag/sag": "dev-master",
-        "gregwar/image": "dev-master",
-        "nielse63/phpimagecache": "dev-master",
-        "paranoiq/php-zip": "dev-master",
-        "chumper/zipper": "dev-master",
-        "apigen/apigen": "API Documentation Generator",
-        "fzaninotto/faker": "Faked Test Data creator",
-        "ronanguilloux/isocodes": "ISO Codes Validator for many types of ISO",
-        "sirprize/postal-code-validator": "Postal Code Validator",
-        "coderkungfu/php-queue": "Front-end PHP queueing library for different backends",
-        "dompdf/dompdf": "HTML to PDF convert",
-        "opauth/opauth": "OPAUTH implmentation",
-        "opauth/facebook": "OPAUTH implmentation for Facebook",
-        "opauth/twitter": "OPAUTH implmentation for Twitter",
-        "opauth/google": "OPAUTH implmentation for Google",
-        "opauth/github": "OPAUTH implmentation for GitHub",
-        "opauth/bitbucket": "OPAUTH implmentation for BitBucket"        
+        "php": ">=5.0.0"
     },
     "extra": {
         "branch-alias": {
