@@ -20,19 +20,11 @@ abstract class Base extends \Prefab {
     protected $f3;
 
     /**
-    * f3 logger instance
-    *
-    * @var logger
-    */
-    protected $logger;
-
-    /**
     * initialize controller
     *
     * @return void
     */
     public function __construct() {
         $this->f3 = \Base::instance();
-        $this->logger = \Registry::get('logger');
     }
 }
