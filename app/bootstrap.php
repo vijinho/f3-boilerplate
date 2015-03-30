@@ -103,6 +103,17 @@ if (!$f3->exists('SESSION.notifications'))
 
 // add messages like this with $f3->push('SESSION.notifications.error', 'error messages');
 
+// @see http://fatfreeframework.com/optimization
+$f3->route('GET /minify/@type',
+    function($f3, $args) {
+            $type = $args['type'];
+            $path = $f3->get('UI').$type.'/';
+            $files = str_replace('../','',$_GET['files']); // close potential hacking attempts  
+            echo \Web::instance()->minify($files, null, true, $path);
+    },
+    $f3->get('minify.ttl')
+);
+        
 // documentation route
 $f3->route('GET /documentation/@page',function($f3, $params){
     $filename = 'doc/' . strtoupper($params['page']) . '.md';
