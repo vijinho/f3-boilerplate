@@ -125,7 +125,7 @@ $f3->route('GET /documentation/@page',function($f3, $params){
         echo \Markdown::instance()->convert($f3->read($filename));
     }
     echo \View::instance()->render('views/footer.phtml');
-});
+}, $f3->get('doc.ttl'));
 
 // setup routes
 // @see http://fatfreeframework.com/routing-engine
