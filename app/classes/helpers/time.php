@@ -24,9 +24,8 @@ class Time extends \Prefab {
 
         // use current time if bad time value or unset
         $unixtime = (int) $unixtime;
-        if ($unixtime <= 0) {
+        if ($unixtime <= 0)
             $unixtime = time();
-        }
 
         // format date/time according to database driver
         $dbms = (empty($dbms)) ? \F3::get('db.driver') : $dbms;
@@ -47,16 +46,14 @@ class Time extends \Prefab {
 
         // use current time if bad time value or unset
         $unixtime = (int) $unixtime;
-        if ($unixtime <= 0) {
+        if ($unixtime <= 0)
             $unixtime = time();
-        }
 
         // if its not a 3 letter timezone set it to GMT
-        if (strlen($zone) != 3) {
+        if (strlen($zone) != 3)
             $zone = 'GMT';
-        } else {
+        else
             $zone = strtoupper($zone);
-        }
 
         return gmdate("D, d M Y H:i:s", $unixtime) . ' ' . $zone;
     }

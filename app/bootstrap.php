@@ -29,11 +29,10 @@ if (PHP_SAPI !== 'cli' && empty($debug)) {
     $f3->set('ONERROR',
         function() use($f3) {
             header('Expires:  ' . \helpers\time::http(time() + $f3->get('error.ttl')));
-            if ($f3->get('ERROR.code') == '404') {
+            if ($f3->get('ERROR.code') == '404')
                 include_once 'ui/views/error/404.phtml';
-            } else {
+            else 
                 include_once 'ui/views/error/error.phtml';
-            }
         }
     );
 }
@@ -52,20 +51,25 @@ if ($f3->get('db.driver') == 'sqlite') {
     if ($f3->exists('db.sqlite.attached')) {
         $attached = $f3->get('db.sqlite.attached');
         $st = $db->prepare('ATTACH :filename AS :dbname');
-        foreach ($attached as $dbname => $filename) {
+        foreach ($attached as $dbname => $filename) 
             $st->execute(array(':filename' => $filename, ':dbname' => $dbname));
-        }
     }    
 } else {
-    if (!$f3->get('db.dsn')) {
+    if (!$f3->get('db.dsn'))
         $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s",
-            $f3->get('db.driver'), $f3->get('db.hostname'), $f3->get('db.port'), $f3->get('db.name'))
+            $f3->get('db.driver'), 
+            $f3->get('db.hostname'), 
+            $f3->get('db.port'), 
+            $f3->get('db.name'))
         );
-    }
-    $db = new \DB\SQL($f3->get('db.dsn'), $f3->get('db.username'), $f3->get('db.password'));
+    
+    $db = new \DB\SQL(
+        $f3->get('db.dsn'), 
+        $f3->get('db.username'), 
+        $f3->get('db.password')
+    );
 }
 \Registry::set('db', $db);
-
 
 // setup outgoing email server for php mail command
 ini_set("SMTP", $f3->get('email.host'));
@@ -81,7 +85,7 @@ if (PHP_SAPI == 'cli') {
 // setup user notifications
 // @see https://github.com/needim/noty for a library to present the messages
 $notifications = $f3->get('session.notifications');
-if (!$f3->exists('SESSION.notifications')) {
+if (!$f3->exists('SESSION.notifications'))
     $f3->set('SESSION.notifications', array(
         'alert' => array(),
         'error' => array(),
@@ -90,7 +94,7 @@ if (!$f3->exists('SESSION.notifications')) {
         'information' => array(),
         'confirmation' => array(),
     ));
-}
+
 // add messages like this with $f3->push('SESSION.notifications.error', 'error messages');
 
 // documentation route
@@ -114,16 +118,17 @@ $f3->config('config/routes.ini');
 $f3->run();
 
 // clear the SESSION messages unless 'keep_notifications' is not false
-if ($f3->get('keep_notifications') === false) {
+if ($f3->get('keep_notifications') === false) 
     $f3->set('SESSION.notifications', null);
-}
 
 // log script execution time if debugging
 if ($debug || $f3->get('application.environment') == 'development') {
     // log database transactions if level 3
-    if ($debug == 3) {
+    if ($debug == 3) 
         $logger->write(\Registry::get('db')->log());
-    }
+    
     $execution_time = round(microtime(true) - $f3->get('TIME'), 3);
-    $logger->write('Script executed in ' . $execution_time . ' seconds using ' . round(memory_get_usage() / 1024 / 1024, 2) . '/' . round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
+    $logger->write('Script executed in ' . $execution_time . ' seconds using ' . 
+        round(memory_get_usage() / 1024 / 1024, 2) . '/' . 
+        round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
 }
