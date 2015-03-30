@@ -16,6 +16,27 @@ var_dump($geo->location()); // locate client IP
 ?>
 </pre>
 
+<h3>Your device</h3>
+<p>
+<?php
+$audit = \Audit::instance();
+$bot = $audit->isbot();
+if ($bot) {
+    print "You are a bot!";
+} else {
+    $desktop = $audit->isdesktop();
+    if ($desktop) {
+        print "You are on a desktop device!";
+    } else {
+        $mobile = $audit->ismobile();
+        if ($mobile) {
+            print "You are on a mobile device!";
+        }
+    }
+}
+?>
+</p>
+
 <h3>Helper</h3>
 The example helper in classes/helpers/time.php can output the date/time in a mysql database format like '<?php echo \helpers\time::db() ?>' or for an http header '<?php echo \helpers\time::http() ?>'
 
