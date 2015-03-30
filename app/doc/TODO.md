@@ -1,8 +1,3 @@
 # TODO #
-## Frontend ##
-* Some task
-* Another task
 
-## Backend ##
-
-## Other ##
+* Implement HMVC for v2.0

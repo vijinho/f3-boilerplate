@@ -1,4 +1,5 @@
 # ROAD MAP #
-## VERSION 1.0 ##
 
-### DASHBOARD ###
+## VERSION 2.0 ##
+
+* Use a HMVC structure for modules
