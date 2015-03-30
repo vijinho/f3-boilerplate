@@ -38,9 +38,9 @@ abstract class Base extends \Prefab {
     *
     * @return void
     */
-    public function __construct() {
+    public function __construct($db = null, $logger  = null) {
         $this->f3 = \Base::instance();
-        $this->db = \Registry::get('db');
-        $this->logger = \Registry::get('logger');
+        $this->db = empty($db) ? \Registry::get('db') : $db;
+        $this->logger = empty($logger) ? \Registry::get('logger') : $logger;
     }
 }
