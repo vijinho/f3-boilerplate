@@ -1,16 +1,17 @@
 <?php
-namespace helpers;
+namespace FFMVC\Helpers;
 
 /**
  * Time and Date Helper Class
  *
- * @package helpers
+ * @package FFMVC\Helpers
  * @author Vijay Mahrra <vijay.mahrra@gmail.com>
- * @copyright (c) Copyright 2013 Vijay Mahrra
+ * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 
-class Time extends \Prefab {
+class Time extends \Prefab 
+{
 
     /**
      * format a database-specific date/time string
@@ -20,7 +21,8 @@ class Time extends \Prefab {
      * @return string date in format of database driver
      * @todo add a switch for the f3 database driver and set the timestamp
      */
-    public static function db($unixtime = null, $dbms = null) {
+    final public static function database($unixtime = null, $dbms = null) 
+    {
 
         // use current time if bad time value or unset
         $unixtime = (int) $unixtime;
@@ -42,7 +44,8 @@ class Time extends \Prefab {
      * @param int time php time value
      * @param string $zone timezone, default GMT
      */
-    public static function http($unixtime = null, $zone = 'GMT') {
+    final public static function HTTP($unixtime = null, $zone = 'GMT') 
+    {
 
         // use current time if bad time value or unset
         $unixtime = (int) $unixtime;
