@@ -1,0 +1,22 @@
+<?php $f3 = \Base::instance() ?>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/minify/js?files=/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+<script src="/minify/js?files=/js/plugins,js,main.js"></script>
+<?php
+$analytics = $f3->get('analytics');
+$analytics['enabled'] = $analytics['enabled'] && $f3->get('application.environment') == 'production';
+?>
+<?php if (!empty($analytics['enabled']) && !empty($analytics['code']) && !empty($analytics['domain'])): ?>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '<?php echo $analytics['code'] ?>', '<?php echo $analytics['domain'] ?>');
+  ga('send', 'pageview');
+</script>
+<?php endif ?>
+
+</body>
+</html>
