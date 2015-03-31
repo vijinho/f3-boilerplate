@@ -12,7 +12,7 @@ namespace FFMVC\App;
 
 class Main extends \Prefab 
 {
-    const APP_VERSION = '1.2';
+    const APP_VERSION = '1.3';
             
     /**
     * setup the base application environment

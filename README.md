@@ -12,20 +12,20 @@ Empty PHP Fatfree-framework MVC website code
 Setup empty website folders as follows:
 
 ```
-mkdir -p tmp/cache tmp/sessions tmp/uploads logs data
-sudo chown -fR www-data:www-data tmp logs data
-sudo chmod -fR 777 tmp logs data
+mkdir -p tmp/cache tmp/sessions tmp/uploads tmp/logs data
+sudo chown -fR www-data:www-data tmp data
+sudo chmod -fR 777 tmp data
 ```
 
 ## Description of Project Layout
 
  * `www` - website and public doc root (aka `public_html` or `htdocs` etc)
  * `www/index.php` - start website application here
- * `vendor/fatfree` - fatfree framework lives here
+ * `app/lib/` - all library files/classes
+ * `app/lib/bcosca/fatfree` - fatfree framework lives here
  * `tmp/cache` `tmp/sessions` `tmp/uploads` - temporary files
- * `logs` - webserver and application logfiles
+ * `tmp/logs` - application logfiles
  * `data` - website data storage
- * `vendor` - other external include files/classes
  * `src` - src code for projects used on the site
  * `app` - the website application lives outside the webroot for security `www/index.php` is the default file used by `.htaccess` for routing
  * `app/doc` - application documentation (markdown files)
@@ -38,10 +38,10 @@ sudo chmod -fR 777 tmp logs data
  * `app/lib/FFMVC/Controllers` - MVC Controllers
  * `app/lib/FFMVC/Helpers` - Useful static helper functions and utility libraries specific to the project
  * `app/lib/FFMVC/CLI` - Command line script controller lib
- * `app/ui/views/error/` - these files are standard php includes, not f3 templates, used by the error handler function
- * `app/ui/views/error/debug.phtml` - debug error page (if DEBUG=3)
- * `app/ui/views/error/404.phtml` - 'friendly' file not found page
- * `app/ui/views/error/error.phtml` - 'friendly' error page
+ * `app/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function
+ * `app/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
+ * `app/templates/www/error/404.phtml` - 'friendly' file not found page
+ * `app/templates/www/error/error.phtml` - 'friendly' error page
 
 --
 http://about.me/vijay.mahrra

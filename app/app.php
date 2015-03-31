@@ -14,9 +14,9 @@ namespace FFMVC\App;
 function Run() 
 {
     // @see http://fatfreeframework.com/quick-reference#autoload
-    $f3 = require_once('../vendor/bcosca/fatfree/lib/base.php');
-    $f3->set('AUTOLOAD', __dir__.';../vendor/bcosca/fatfree/lib/;lib/;../vendor/');
-    Main::start($f3);
+    $f3 = require_once('lib/bcosca/fatfree/lib/base.php');
+    $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree/lib/;lib/');
+    Main::start($f3); 
 
         // cli start
     if (PHP_SAPI == 'cli') {
@@ -42,23 +42,23 @@ function Run()
                 function() use($f3) {
                     header('Expires:  ' . \FFMVC\Helpers\Time::HTTP(time() + $f3->get('error.ttl')));
                     if ($f3->get('ERROR.code') == '404')
-                        include_once 'ui/views/error/404.phtml';
+                        include_once 'templates/www/error/404.phtml';
                     else 
-                        include_once 'ui/views/error/error.phtml';
+                        include_once 'templates/www/error/error.phtml';
                 }
             );
         }
         
         $f3->route('GET /doc/@page',function($f3, $params){
             $filename = 'doc/' . strtoupper($params['page']) . '.md';
-            echo \View::instance()->render('views/header.phtml');
+            echo \View::instance()->render('www/header.phtml');
             if (!file_exists($filename)) {
                 echo '<h1>Documentation Error</h1><p>No such document exists!</p>';
                 $f3->status(404);
             } else {
                 echo \Markdown::instance()->convert($f3->read($filename));
             }
-            echo \View::instance()->render('views/footer.phtml');
+            echo \View::instance()->render('www/footer.phtml');
         }, $f3->get('doc.ttl'));
 
         $f3->config('config/routes.ini');

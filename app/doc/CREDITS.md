@@ -12,4 +12,3 @@
 
 * Fat-Free Framework - http://fatfreeframework.com/
 * HTML5 ★ BOILERPLATE - http://html5boilerplate.com/
-

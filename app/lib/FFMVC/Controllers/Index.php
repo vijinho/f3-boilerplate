@@ -15,6 +15,6 @@ class Index
     // render a php template .phtml view from ui/
     final public function index($f3, $params) 
     {
-        echo \View::instance()->render('views/index/index.phtml');
+        echo \View::instance()->render('www/index/index.phtml');
     }
 }
