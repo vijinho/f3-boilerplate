@@ -104,8 +104,7 @@ class Main extends \Prefab
                 $logger->write(\Registry::get('db')->log());
             $execution_time = round(microtime(true) - $f3->get('TIME'), 3);
             $params = $f3->get('PARAMS');
-            $uri = (PHP_SAPI == 'cli') ? $params[0] : $f3->get('ENV.REQUEST_URI');
-            $logger->write('Script ' . $uri .' executed in ' . $execution_time . ' seconds using ' . 
+            $logger->write('Script ' . $params[0] .' executed in ' . $execution_time . ' seconds using ' . 
                 round(memory_get_usage() / 1024 / 1024, 2) . '/' . 
                 round(memory_get_peak_usage() / 1024 / 1024, 2) . ' MB memory/peak');
         }
