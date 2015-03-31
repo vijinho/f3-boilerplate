@@ -7,6 +7,7 @@ Empty PHP Fatfree-framework MVC website code
 ### Configuration
  - Copy `app/config/config.ini.example` to `config.ini`
  - Edit `app/config/config.ini `and add anything extra from `default.ini` for overrides
+ - In the top level folder `run composer install`
 
 ### Folders & Permissions
 Setup empty website folders as follows:
