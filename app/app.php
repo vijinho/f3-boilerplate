@@ -17,7 +17,7 @@ function Run()
     $f3 = require_once('../vendor/bcosca/fatfree/lib/base.php');
     $f3->set('AUTOLOAD', __dir__.';../vendor/bcosca/fatfree/lib/;lib/;../vendor/');
     $app = new \FFMVC\App\Main();
-    $f3 = $app->start($f3);
+    $app->start($f3);
     $logger = &$f3->ref('logger');
 
         // cli start
