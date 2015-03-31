@@ -33,11 +33,11 @@ sudo chmod -fR 777 tmp logs data
  * `app/config/vhost` - application virtual host configuration files (apache and nginx supported)
  * `app/app.php` - start fatfree by including this file and running FFMVC\App\Run();
  * `app/cli.php` - command-line specific bootstrap instructions
- * `app/classes/FFMVC/App` - Base Application Classes
- * `app/classes/FFMVC/Models` - MVC Models
- * `app/classes/FFMVC/Controllers` - MVC Controllers
- * `app/classes/FFMVC/Helpers` - Useful static helper functions and utility libraries specific to the project
- * `app/classes/FFMVC/CLI` - Command line script controller classes
+ * `app/lib/FFMVC/App` - Base Application Classes
+ * `app/lib/FFMVC/Models` - MVC Models
+ * `app/lib/FFMVC/Controllers` - MVC Controllers
+ * `app/lib/FFMVC/Helpers` - Useful static helper functions and utility libraries specific to the project
+ * `app/lib/FFMVC/CLI` - Command line script controller lib
  * `app/ui/views/error/` - these files are standard php includes, not f3 templates, used by the error handler function
  * `app/ui/views/error/debug.phtml` - debug error page (if DEBUG=3)
  * `app/ui/views/error/404.phtml` - 'friendly' file not found page
