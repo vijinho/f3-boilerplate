@@ -11,3 +11,8 @@
 * Display extra error information if in development mode
 * BUGFIX: Homepage will display OK without error even if app not configured
 * BUGFIX: Prevent error 500 from .htaccess when running under CGI
+
+### Version 1.2 ###
+ 
+* Made code PSR-4 compliant except for logger
+* Merged in changes from fatfree-mvc - https://github.com/vijinho/fatfree-mvc

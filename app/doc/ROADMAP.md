@@ -1,5 +1,5 @@
 # ROAD MAP #
 
-## VERSION 2.0 ##
+## VERSION 1.3 ##
 
 * Use a HMVC structure for modules
