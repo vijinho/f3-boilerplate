@@ -27,7 +27,6 @@ sudo chmod -fR 777 tmp data
  * `tmp/cache` `tmp/sessions` `tmp/uploads` - temporary files
  * `tmp/logs` - application logfiles
  * `data` - website data storage
- * `src` - src code for projects used on the site
  * `app` - the website application lives outside the webroot for security `www/index.php` is the default file used by `.htaccess` for routing
  * `app/doc` - application documentation (markdown files)
  * `app/config` - application configuration files
