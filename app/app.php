@@ -63,31 +63,9 @@ function Run()
         }, $f3->get('doc.ttl'));
 
         $f3->config('config/routes.ini');
-        
-        // command line does not have SESSIONs so can't use SESSION notifications
-        // setup user notifications
-        // @see https://github.com/needim/noty for a library to present the messages
-        $notifications = $f3->get('session.notifications');
-        if (!$f3->exists('SESSION.notifications'))
-            $f3->set('SESSION.notifications', array(
-                'alert' => array(),
-                'error' => array(),
-                'warning' => array(),
-                'success' => array(),
-                'information' => array(),
-                'confirmation' => array(),
-            ));
-
-        // add messages like this with $f3->push('SESSION.notifications.error', 'error messages');         
     }
 
     $f3->run();
-    
-    if (PHP_SAPI !== 'cli') {
-        // clear the SESSION messages unless 'keep_notifications' is not false
-        if ($f3->get('keep_notifications') === false) 
-            $f3->set('SESSION.notifications', null);
-    }
     
     Main::finish($f3);
 }
