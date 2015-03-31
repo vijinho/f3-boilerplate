@@ -16,8 +16,7 @@ function Run()
     // @see http://fatfreeframework.com/quick-reference#autoload
     $f3 = require_once('../vendor/bcosca/fatfree/lib/base.php');
     $f3->set('AUTOLOAD', __dir__.';../vendor/bcosca/fatfree/lib/;lib/;../vendor/');
-    $app = new \FFMVC\App\Main();
-    $app->start($f3);
+    Main::start($f3);
     $logger = &$f3->ref('logger');
 
         // cli start
@@ -90,5 +89,5 @@ function Run()
             $f3->set('SESSION.notifications', null);
     }
     
-    $app->finish($f3);
+    Main::finish($f3);
 }
