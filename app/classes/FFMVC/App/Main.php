@@ -33,11 +33,6 @@ class Main extends \Prefab
         $logfile = $f3->get('application.logfile');
         if (!empty($logfile)) {
             $logger = new \Log($logfile);
-            if ($logger && $debug || $f3->get('application.environment') == 'development') {
-                $params = $f3->get('PARAMS');
-                $uri = (PHP_SAPI == 'cli') ? $params[0] : $f3->get('ENV.REQUEST_URI');
-                $logger->write('Started ' . $uri);
-            }
             $f3->set('logger', $logger);
         }
         
