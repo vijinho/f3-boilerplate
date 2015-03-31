@@ -16,3 +16,4 @@
  
 * Made code PSR-4 compliant except for logger
 * Merged in changes from fatfree-mvc - https://github.com/vijinho/fatfree-mvc
+* Renamed classes folder to lib 
