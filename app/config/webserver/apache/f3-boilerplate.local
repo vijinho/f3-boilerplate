@@ -12,7 +12,7 @@
     php_value error_log /vhosts/f3-boilerplate.local/tmp/logs/php.log
     php_value session.save_path /vhosts/f3-boilerplate.local/tmp/sessions
     php_value soap.wsdl_cache_dir /vhosts/f3-boilerplate.local/tmp/cache
-    php_value include_path .:/vhosts/f3-boilerplate.local/app/classes:/vhosts/f3-boilerplate.local/vendor
+    php_value include_path .:/vhosts/f3-boilerplate.local/app/lib:/vhosts/f3-boilerplate.local/vendor
     php_value session.save_path /vhosts/f3-boilerplate.local/tmp/sessions
     php_value upload_tmp_dir /vhosts/f3-boilerplate.local/tmp/uploads
     php_value soap.wsdl_cache_dir /vhosts/f3-boilerplate.local/tmp/cache

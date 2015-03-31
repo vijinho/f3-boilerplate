@@ -71,7 +71,7 @@ server {
 error_log=/vhosts/f3-boilerplate.local/logs/php.log
 session.save_path=/vhosts/f3-boilerplate.local/tmp/sessions
 soap.wsdl_cache_dir=/vhosts/f3-boilerplate.local/tmp/cache
-include_path=.:/vhosts/f3-boilerplate.local/app/classes:/vhosts/f3-boilerplate.local/vendor
+include_path=.:/vhosts/f3-boilerplate.local/app/lib:/vhosts/f3-boilerplate.local/vendor
 session.save_path=/vhosts/f3-boilerplate.local/tmp/sessions
 upload_tmp_dir=/vhosts/f3-boilerplate.local/tmp/uploads
 soap.wsdl_cache_dir=/vhosts/f3-boilerplate.local/tmp/cache
