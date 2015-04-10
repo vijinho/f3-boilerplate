@@ -13,7 +13,7 @@ $analytics['enabled'] = $analytics['enabled'] && $f3->get('application.environme
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', '<?php echo $analytics['code'] ?>', '<?php echo $analytics['domain'] ?>');
+  ga('create', '<?=$analytics['code'] ?>', '<?=$analytics['domain'] ?>');
   ga('send', 'pageview');
 </script>
 <?php endif ?>

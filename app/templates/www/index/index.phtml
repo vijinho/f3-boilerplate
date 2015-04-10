@@ -1,12 +1,12 @@
 <?php $f3 = \Base::instance() ?>
-<?php echo \View::instance()->render('www/header.phtml'); ?>
+<?=\View::instance()->render('www/header.phtml'); ?>
 
 <h1>f3-boilerplate</h1>
 
 <p>This project is built on the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
 <h2>International Welcome</h2>
-<p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?php echo $f3->get('i18n.welcome'); ?></b></p>
+<p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?=$f3->get('i18n.welcome'); ?></b></p>
 
 <h3>Geo-location</h3>
 <pre>    
@@ -38,7 +38,7 @@ if ($bot) {
 </p>
 
 <h3>Helper</h3>
-The example helper in lib/helpers/time.php can output the date/time in a mysql database format like '<?php echo \FFMVC\Helpers\Time::database() ?>' or for an http header '<?php echo \FFMVC\Helpers\Time::HTTP() ?>'
+The example helper in lib/helpers/time.php can output the date/time in a mysql database format like '<?=\FFMVC\Helpers\Time::database() ?>' or for an http header '<?=\FFMVC\Helpers\Time::HTTP() ?>'
 
 <h2>Documentation</h2>
 <ul>
@@ -53,4 +53,4 @@ The example helper in lib/helpers/time.php can output the date/time in a mysql d
 
 <?php phpinfo() ?>
 
-<?php echo \View::instance()->render('www/footer.phtml'); ?>
+<?=\View::instance()->render('www/footer.phtml'); ?>
