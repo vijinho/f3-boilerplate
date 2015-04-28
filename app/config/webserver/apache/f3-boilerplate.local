@@ -1,0 +1,74 @@
+<VirtualHost 127.0.0.1:80>
+    ServerName f3-boilerplate.local
+
+    DocumentRoot /vhosts/f3-boilerplate.local/www
+    ErrorLog "|/usr/sbin/rotatelogs /vhosts/f3-boilerplate.local/tmp/logs/error.log 86400"
+    CustomLog "|/usr/sbin/rotatelogs /vhosts/f3-boilerplate.local/tmp/logs/access.log 86400" common
+
+    RewriteRule ^(.*\.(css|js))$ min/index.php?f=$1&debug=0 [L,NC]
+
+    php_value date.timezone Europe/Stockholm
+    php_value log_errors On
+    php_value error_log /vhosts/f3-boilerplate.local/tmp/logs/php.log
+    php_value session.save_path /vhosts/f3-boilerplate.local/tmp/sessions
+    php_value soap.wsdl_cache_dir /vhosts/f3-boilerplate.local/tmp/cache
+    php_value include_path .:/vhosts/f3-boilerplate.local/app/lib:/vhosts/f3-boilerplate.local/lib/vendor
+    php_value session.save_path /vhosts/f3-boilerplate.local/tmp/sessions
+    php_value upload_tmp_dir /vhosts/f3-boilerplate.local/tmp/uploads
+    php_value soap.wsdl_cache_dir /vhosts/f3-boilerplate.local/tmp/cache
+    php_value xcache.coveragedump_directory /vhosts/f3-boilerplate.local/tmp/cache
+    php_value xcache.coredump_directory /vhosts/f3-boilerplate.local/tmp
+
+    DirectoryIndex index.php index.html index.htm
+
+    php_value allow_url_fopen on
+    php_value default_charset utf-8
+    php_value short_open_tag Off
+    php_value expose_php Off
+    php_value zend.ze1_compatibility_mode off
+    php_value register_argc_argv Off
+    php_value register_globals Off
+    php_value always_populate_raw_post_data Off
+    php_value ignore_repeated_errors On
+    php_value ignore_repeated_source On
+    php_value session.use_cookies 1
+    php_value session.use_only_cookies 0
+    php_value session.use_trans_sid 0
+    php_value session.cookie_lifetime 86400
+
+    php_value upload_max_filesize 1024M
+    php_value memory_limit 1024M
+    php_value post_max_size 1024M
+
+    php_value sockets.use_system_read 1
+    php_value default_socket_timeout 3600
+    php_value max_execution_time 3600
+    php_value max_input_time 3600
+    php_value set_time_limit 3600
+
+    php_value log_errors On
+    php_value display_errors Off
+    php_value html_errors Off
+    php_value php_error.force_disabled On
+    php_value php_error.autorun Off
+    php_value php_error.catch_ajax_errors Off
+    php_value zlib.output_compression Off
+
+    # Link http://httpd.apache.org/docs/2.2/mod/mod_expires.html
+
+    ExpiresActive On
+    ExpiresByType image/htm A86400
+    ExpiresByType image/html A86400
+    ExpiresByType image/ico A86400
+    ExpiresByType image/gif A3600
+    ExpiresByType image/png A3600
+    ExpiresByType image/jpg A3600
+    ExpiresByType image/jpeg A3600
+    ExpiresByType text/css A3600
+    ExpiresByType text/scss A10
+    ExpiresByType text/javascript A600
+    ExpiresByType application/pdf A86400
+    ExpiresByType application/x-javascript A600
+    ExpiresByType application/x-Shockwave-Flash A86400
+
+</VirtualHost>

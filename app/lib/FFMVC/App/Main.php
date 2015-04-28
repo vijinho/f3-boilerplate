@@ -35,7 +35,7 @@ class Main extends \Prefab
             $logger = new \Log($logfile);
             $f3->set('logger', $logger);
         }
-        
+/*        
         // setup database connection params
         // @see http://fatfreeframework.com/databases
         $db_enabled = !empty($f3->get('db.driver') || $f3->get('db.dsn'));
@@ -68,7 +68,7 @@ class Main extends \Prefab
             }
             \Registry::set('db', $db);
         }
-
+*/
         // setup outgoing email server for php mail command
         ini_set("SMTP", $f3->get('email.host'));
         ini_set('sendmail_from', $f3->get('email.from'));

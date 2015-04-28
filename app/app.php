@@ -48,6 +48,12 @@ function Run()
                 }
             );
         }
+                
+        $f3->route('GET /trade/',function($f3, $params){
+            echo \View::instance()->render('www/header.phtml');
+            print "poop"
+            echo \View::instance()->render('www/footer.phtml');
+        });
         
         $f3->route('GET /doc/@page',function($f3, $params){
             $filename = 'doc/' . strtoupper($params['page']) . '.md';
