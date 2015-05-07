@@ -51,7 +51,7 @@ function Run()
                 
         $f3->route('GET /trade/',function($f3, $params){
             echo \View::instance()->render('www/header.phtml');
-            print "poop"
+            print "poop";
             echo \View::instance()->render('www/footer.phtml');
         });
         

@@ -15,6 +15,6 @@ class Cf
     // render a php template .phtml view from ui/
     final public function trade($f3, $params) 
     {
-        print "poop"
+        print "poop";
     }
 }
