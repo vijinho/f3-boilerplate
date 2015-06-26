@@ -7,6 +7,7 @@
 * Christian Knuth -- https://github.com/ikkez
 * Stefano Ricci -- http://www.sharmpro.com
 * Patrick Müller -- http://patrickmueller.net
+* Hanxue -- https://github.com/hanxue
  
 # SOFTWARE PROJECTS
 
