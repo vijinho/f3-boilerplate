@@ -14,3 +14,6 @@ tmp/sessions
 tmp/uploads
 logs
 /nbproject/private/
+app/lib/autoload.php
+app/lib/bcosca
+app/lib/composer
