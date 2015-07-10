@@ -21,7 +21,7 @@ class Time extends \Prefab
      *
      * @todo add a switch for the f3 database driver and set the timestamp
      */
-    final public static function database($unixtime = null, $dbms = null)
+    public static function database($unixtime = null, $dbms = null)
     {
 
         // use current time if bad time value or unset
