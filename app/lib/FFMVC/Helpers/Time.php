@@ -1,33 +1,34 @@
 <?php
+
 namespace FFMVC\Helpers;
 
 /**
- * Time and Date Helper Class
+ * Time and Date Helper Class.
  *
- * @package FFMVC\Helpers
  * @author Vijay Mahrra <vijay.mahrra@gmail.com>
  * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
-
-class Time extends \Prefab 
+class Time extends \Prefab
 {
-
     /**
-     * format a database-specific date/time string
+     * format a database-specific date/time string.
      *
-     * @param optional int $unixtime the unix time (null = now)
-     * @param optional string $dbms the database software the timestamp is for
+     * @param optional int    $unixtime the unix time (null = now)
+     * @param optional string $dbms     the database software the timestamp is for
+     *
      * @return string date in format of database driver
+     *
      * @todo add a switch for the f3 database driver and set the timestamp
      */
-    final public static function database($unixtime = null, $dbms = null) 
+    final public static function database($unixtime = null, $dbms = null)
     {
 
         // use current time if bad time value or unset
         $unixtime = (int) $unixtime;
-        if ($unixtime <= 0)
+        if ($unixtime <= 0) {
             $unixtime = time();
+        }
 
         // format date/time according to database driver
         $dbms = (empty($dbms)) ? \F3::get('db.driver') : $dbms;
@@ -39,25 +40,27 @@ class Time extends \Prefab
     }
 
     /**
-     * Utility to convert timestamp into a http header date/time
+     * Utility to convert timestamp into a http header date/time.
      *
      * @param int time php time value
      * @param string $zone timezone, default GMT
      */
-    final public static function HTTP($unixtime = null, $zone = 'GMT') 
+    final public static function HTTP($unixtime = null, $zone = 'GMT')
     {
 
         // use current time if bad time value or unset
         $unixtime = (int) $unixtime;
-        if ($unixtime <= 0)
+        if ($unixtime <= 0) {
             $unixtime = time();
+        }
 
         // if its not a 3 letter timezone set it to GMT
-        if (strlen($zone) != 3)
+        if (strlen($zone) != 3) {
             $zone = 'GMT';
-        else
+        } else {
             $zone = strtoupper($zone);
+        }
 
-        return gmdate("D, d M Y H:i:s", $unixtime) . ' ' . $zone;
+        return gmdate('D, d M Y H:i:s', $unixtime).' '.$zone;
     }
 }
