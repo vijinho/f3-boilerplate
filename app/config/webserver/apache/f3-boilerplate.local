@@ -5,9 +5,17 @@
     ErrorLog "|/usr/sbin/rotatelogs /vhosts/f3-boilerplate.local/tmp/logs/error.log 86400"
     CustomLog "|/usr/sbin/rotatelogs /vhosts/f3-boilerplate.local/tmp/logs/access.log 86400" common
 
-    RewriteRule ^(.*\.(css|js))$ min/index.php?f=$1&debug=0 [L,NC]
+    DirectoryIndex index.php index.html index.htm
 
-    php_value date.timezone Europe/Stockholm
+    RewriteEngine On
+
+    RewriteRule ^(.*\.(css|js))$ min/index.php?f=$1&debug=0 [L,NC]
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule .* index.php [L,QSA,E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    php_value date.timezone Europe/London
     php_value log_errors On
     php_value error_log /vhosts/f3-boilerplate.local/tmp/logs/php.log
     php_value session.save_path /vhosts/f3-boilerplate.local/tmp/sessions
@@ -18,8 +26,6 @@
     php_value soap.wsdl_cache_dir /vhosts/f3-boilerplate.local/tmp/cache
     php_value xcache.coveragedump_directory /vhosts/f3-boilerplate.local/tmp/cache
     php_value xcache.coredump_directory /vhosts/f3-boilerplate.local/tmp
-
-    DirectoryIndex index.php index.html index.htm
 
     php_value allow_url_fopen on
     php_value default_charset utf-8
