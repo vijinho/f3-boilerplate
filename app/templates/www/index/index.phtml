@@ -8,6 +8,39 @@
 <h2>International Welcome</h2>
 <p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?=$f3->get('i18n.welcome'); ?></b></p>
 
+<h2>Installation</h2>
+            
+<h3>File Permissions</h3>
+<pre>
+<?php
+foreach (array('LOGS', 'UPLOADS', 'TEMP') as $dir) {
+    if (!is_writable($f3->get($dir))) {
+        print "Directory: $dir NOT writable!\n";
+    } else {
+        print "Directory: $dir writable.\n";
+    }
+}
+?>
+</pre>
+<?php 
+$db = \Registry::get('db');        
+if (!empty($db)) {
+?>
+            
+<h3>Database</h3>
+<pre>
+<?php
+    try {
+        $db = \Registry::get('db');
+        $result = $db->exec('SHOW TABLES');
+        print "Database: Connection OK.\n";
+    } catch (Exception $ex) {
+        print "Database failure!\n" . print_r($ex,1);
+    }
+}
+?>
+</pre>
+
 <h3>Geo-location</h3>
 <pre>    
 <?php
