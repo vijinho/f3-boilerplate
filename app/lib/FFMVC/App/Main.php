@@ -91,7 +91,7 @@ class Main extends \Prefab
     final public static function finish(&$f3)
     {
         // log script execution time if debugging
-        $debug = $f3->get('debug');
+        $debug = $f3->get('DEBUG');
         $logger = &$f3->ref('logger');
 
         if ($logger && $debug || $f3->get('application.environment') == 'development') {
