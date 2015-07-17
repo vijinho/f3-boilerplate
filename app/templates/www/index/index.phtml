@@ -1,5 +1,8 @@
-<?php $f3 = \Base::instance() ?>
-<?=\View::instance()->render('www/header.phtml'); ?>
+<?php $f3 = \Base::instance();
+$title = 'Home';
+$f3->set('title', $title);
+?>
+<?=\View::instance()->render('www/header.phtml') ?>
 
 <h1>f3-boilerplate</h1>
 
