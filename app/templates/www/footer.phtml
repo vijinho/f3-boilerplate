@@ -1,7 +1,5 @@
 <?php $f3 = \Base::instance() ?>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/minify/js?files=/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-<script src="/minify/js?files=/js/plugins,js,main.js"></script>
+<script src="/minify/js?files=main.js"></script>
 <?php
 $analytics = $f3->get('analytics');
 $analytics['enabled'] = $analytics['enabled'] && $f3->get('application.environment') == 'production';
