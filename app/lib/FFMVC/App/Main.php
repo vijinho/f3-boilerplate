@@ -33,30 +33,32 @@ class Main extends \Prefab
             $logger = new \Log($logfile);
             $f3->set('logger', $logger);
         }
-/*
+
         // setup database connection params
         // @see http://fatfreeframework.com/databases
         $db_enabled = !empty($f3->get('db.driver') || $f3->get('db.dsn'));
         if ($db_enabled) {
             if ($f3->get('db.driver') == 'sqlite') {
                 $dsn = $f3->get('db.dsn');
-                $dsn = substr($dsn, 0, strpos($dsn, '/')) . realpath('../') . substr($dsn, strpos($dsn, '/'));
+                $dsn = substr($dsn, 0, strpos($dsn, '/')).realpath('../').substr($dsn, strpos($dsn, '/'));
                 $db = new \DB\SQL($dsn);
                 // attach any other sqlite databases - this example uses the full pathname to the db
                 if ($f3->exists('db.sqlite.attached')) {
                     $attached = $f3->get('db.sqlite.attached');
                     $st = $db->prepare('ATTACH :filename AS :dbname');
-                    foreach ($attached as $dbname => $filename)
+                    foreach ($attached as $dbname => $filename) {
                         $st->execute(array(':filename' => $filename, ':dbname' => $dbname));
+                    }
                 }
             } else {
-                if (!$f3->get('db.dsn'))
-                    $f3->set('db.dsn', sprintf("%s:host=%s;port=%d;dbname=%s",
+                if (!$f3->get('db.dsn')) {
+                    $f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
                         $f3->get('db.driver'),
                         $f3->get('db.hostname'),
                         $f3->get('db.port'),
                         $f3->get('db.name'))
                     );
+                }
 
                 $db = new \DB\SQL(
                     $f3->get('db.dsn'),
@@ -66,7 +68,7 @@ class Main extends \Prefab
             }
             \Registry::set('db', $db);
         }
-*/
+
         // setup outgoing email server for php mail command
         ini_set('SMTP', $f3->get('email.host'));
         ini_set('sendmail_from', $f3->get('email.from'));

@@ -36,6 +36,7 @@ sudo chmod -fR 777 tmp data
  * `app/lib/FFMVC/App` - Base Application Classes
  * `app/lib/FFMVC/Models` - MVC Models
  * `app/lib/FFMVC/Controllers` - MVC Controllers
+ * `app/lib/FFMVC/Controllers/Api` - MVC Rest API Controllers
  * `app/lib/FFMVC/Helpers` - Useful static helper functions and utility libraries specific to the project
  * `app/lib/FFMVC/CLI` - Command line script controller lib
  * `app/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function

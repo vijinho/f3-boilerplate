@@ -1,6 +1,6 @@
 <?php
 
-namespace FFMVC\Helpers;
+namespace FFMVC\helpers;
 
 /**
  * Time and Date Helper Class.
@@ -43,9 +43,9 @@ class Time extends \Prefab
      * Utility to convert timestamp into a http header date/time.
      *
      * @param int time php time value
-     * @param string $zone timezone, default GMT
+     * @param string $zone timezone
      */
-    final public static function HTTP($unixtime = null, $zone = 'GMT')
+    final public static function HTTP($unixtime = null, $zone = '')
     {
 
         // use current time if bad time value or unset
@@ -55,10 +55,10 @@ class Time extends \Prefab
         }
 
         // if its not a 3 letter timezone set it to GMT
-        if (strlen($zone) != 3) {
-            $zone = 'GMT';
-        } else {
+        if (strlen($zone) == 3) {
             $zone = strtoupper($zone);
+        } else {
+            $zone = 'UTC';
         }
 
         return gmdate('D, d M Y H:i:s', $unixtime).' '.$zone;
