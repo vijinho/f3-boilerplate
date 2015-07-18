@@ -136,7 +136,7 @@ class Api {
     public function failure($code, $message, $http_status = null) {
         $this->errors[$code] = $message;
         if (!empty($http_status)) {
-            $this->params['http_status'] = 400;
+            $this->params['http_status'] = $http_status;
         }
     }
 
