@@ -15,8 +15,60 @@ function Run()
     // @see http://fatfreeframework.com/quick-reference#autoload
     $f3 = require_once 'lib/bcosca/fatfree/lib/base.php';
     $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree/lib/;lib/');
+    
     Main::start($f3);
+    
+    // setup database connection params
+    // @see http://fatfreeframework.com/databases
+    if (!empty($f3->get('db.driver') || $f3->get('db.dsn') || $f3->get('db.http_dsn'))) {
+        if ($http_dsn = $f3->get('db.http_dsn')) {
+            if (preg_match('/^(?<driver>[^:]+):\/\/(?<username>[^:]+):(?<password>[^@]+)@(?<hostname>[^:]+):(?<port>[\d]+)?\/(?<database>.+)/', $http_dsn, $m)) {
+                $f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
+                    $m['driver'],
+                    $m['hostname'],
+                    $m['port'],
+                    $m['database']
+                ));
+                $f3->mset(array(
+                    'db.driver' => $m['driver'],
+                    'db.username' => $m['username'],
+                    'db.password' => $m['password']
+                ));
+            }
+        } elseif (empty($f3->get('db.dsn'))) {
+            $f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
+                $f3->get('db.driver'),
+                $f3->get('db.hostname'),
+                $f3->get('db.port'),
+                $f3->get('db.name'))
+            );
+        }
 
+        if ($f3->get('db.driver') !== 'sqlite') {
+            if ($dsn = $f3->get('db.dsn')) {
+                $db = new \DB\SQL(
+                    $dsn,
+                    $f3->get('db.username'),
+                    $f3->get('db.password')
+                );
+            }
+        } else {
+            $dsn = $f3->get('db.dsn');
+            $dsn = substr($dsn, 0, strpos($dsn, '/')).realpath('../').substr($dsn, strpos($dsn, '/'));
+            $db = new \DB\SQL($dsn);
+            // attach any other sqlite databases - this example uses the full pathname to the db
+            if ($f3->exists('db.sqlite.attached')) {
+                $attached = $f3->get('db.sqlite.attached');
+                $st = $db->prepare('ATTACH :filename AS :dbname');
+                foreach ($attached as $dbname => $filename) {
+                    $st->execute(array(':filename' => $filename, ':dbname' => $dbname));
+                }
+            }
+        } 
+        
+        \Registry::set('db', $db);
+    }
+    
         // cli start
     if (PHP_SAPI == 'cli') {
         $f3->route('GET /doc/@page', function ($f3, $params) {
@@ -33,7 +85,7 @@ function Run()
         $f3->config('config/routes-cli.ini');
     } else {
         // web start
-
+        // 
         // custom error handler if debugging
         $debug = $f3->get('DEBUG');
         if (empty($debug)) {
@@ -48,6 +100,17 @@ function Run()
                 }
             );
         }
+        
+        // @see http://fatfreeframework.com/optimization
+        $f3->route('GET /minify/@type',
+            function ($f3, $args) {
+                    $type = $args['type'];
+                    $path = $f3->get('UI').$type.'/';
+                    $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
+                    echo \Web::instance()->minify($files, null, true, $path);
+            },
+            $f3->get('minify.ttl')
+        );
 
         $f3->route('GET /doc/@page', function ($f3, $params) {
             $filename = 'doc/'.strtoupper($params['page']).'.md';
