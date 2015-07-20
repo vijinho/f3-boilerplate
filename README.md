@@ -9,7 +9,6 @@ Empty PHP Fatfree-framework MVC website code
 - [Get Composer](https://getcomposer.org/) - `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer`
 - Run `composer update`
 - Setup webserver config
-- Browse to [api.local](http://api.local/)
 
 ### Configuration
  - Copy `app/config/config.ini.example` to `config.ini`
@@ -17,6 +16,8 @@ Empty PHP Fatfree-framework MVC website code
  - In the top level folder `run composer install`
 
 #### SSL 
+This will run by default at https://api.local
+
 `openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=GB/ST=STATE/L=TOWN/O=Office/CN=api.local" -keyout api.key -out api.crt`
 
 Add to apache virtual host (and also see the api-ssl.local files in
