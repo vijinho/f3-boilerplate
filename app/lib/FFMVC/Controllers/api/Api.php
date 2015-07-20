@@ -167,17 +167,20 @@ class Api {
 
 // set relative URL    
     protected function rel($path) {
-        $this->data['rel'] = \FFMVC\Helpers\Url::base() . $path;
+        $f3 = \Base::instance();
+        $this->data['rel'] = $f3->get('SCHEME') . '://' . $f3->get('HOST') .
+$path;
         return;
     }
 
 // set canonical URL    
     protected function href($path = null) {
+        $f3 = \Base::instance();
         if (empty($path)) {
-            $f3 = \Base::instance();
             $this->data['href'] = $f3->get('REALM');
         } else {
-            $this->data['href'] = \FFMVC\Helpers\Url::base() . $path;
+            $this->data['href'] = $f3->get('SCHEME') . '://' . $f3->get('HOST')
+. $path;
         }
         return;
     }

@@ -4,10 +4,30 @@ Empty PHP Fatfree-framework MVC website code
 
 ## Setup
 
+### Composer and Webserver
+
+- [Get Composer](https://getcomposer.org/) - `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer`
+- Run `composer update`
+- Setup webserver config
+- Browse to [api.local](http://api.local/)
+
 ### Configuration
  - Copy `app/config/config.ini.example` to `config.ini`
  - Edit `app/config/config.ini `and add anything extra from `default.ini` for overrides
  - In the top level folder `run composer install`
+
+#### SSL 
+`openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=GB/ST=STATE/L=TOWN/O=Office/CN=api.local" -keyout api.key -out api.crt`
+
+Add to apache virtual host (and also see the api-ssl.local files in
+[app/config/webserver/](app/config/webserver/)
+```
+    SSLCertificateFile ssl/api.crt
+    SSLCertificateKeyFile ssl/api.key
+```
+[MAMP](https://www.mamp.info/) lets you add the SSL file in the Hosts/SSL tab.
+
+If it's all working - now move on to configuration.
 
 ### Folders & Permissions
 Setup empty website folders as follows:
