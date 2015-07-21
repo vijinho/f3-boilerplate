@@ -85,7 +85,21 @@ function Run()
         $f3->config('config/routes-cli.ini');
     } else {
         // web start
-        // 
+        
+        // clean ALL incoming user input by default, lower-case input vars
+        foreach (array('GET', 'POST') as $var) {
+            $input = $f3->get($var);
+            if (is_array($input) && count($input)) {
+                $cleaned = array();
+                foreach ($input as $k => $v) {
+                    $k = strtolower(trim($f3->clean($k)));
+                    $v = $f3->clean($v);
+                    $cleaned[$k] = $v;
+                }
+                $f3->set($var, $cleaned);
+            }
+        }
+
         // custom error handler if debugging
         $debug = $f3->get('DEBUG');
         if (empty($debug)) {
