@@ -2,28 +2,31 @@
 $title = 'Home';
 $f3->set('title', $title);
 ?>
-<?=\View::instance()->render('www/header.phtml') ?>
+<?=\View::instance()->render('www/header.phtml'); ?>
+<div class="container">
+    <div class="row">
+        <div class="eight columns">
+                        
+            <h1>f3-boilerplate</h1>
 
-<h1>f3-boilerplate</h1>
+            <p>This project is built on the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
-<p>This project is built on the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
+            <h2>International Welcome</h2>
+            <p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?=$f3->get('i18n.welcome'); ?></b></p>
 
-<h2>International Welcome</h2>
-<p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?=$f3->get('i18n.welcome'); ?></b></p>
+            <h1>Rest API</h1>
 
-<h1>Rest API</h1>
-
-<ul>
-    <li><a href="/api/">API (JSON)</a>
-    <li><a href="/api?return=xml">API (XML)</a>
-    <li><a href="/api/test/request">Test Request (JSON)</a>
-    <li><a href="/api/test/request?return=xml">Test Request (XML)</a>
-</ul>
-
-<h2>Installation</h2>
+            <ul>
+                <li><a href="/api/">API (JSON)</a>
+                <li><a href="/api?return=xml">API (XML)</a>
+                <li><a href="/api/test/request">Test Request (JSON)</a>
+                <li><a href="/api/test/request?return=xml">Test Request (XML)</a>
+            </ul>
             
-<h3>File Permissions</h3>
-<pre>
+            <h2>Installation</h2>
+            
+            <h3>File Permissions</h3>
+            <pre>
 <?php
 foreach (array('LOGS', 'UPLOADS', 'TEMP') as $dir) {
     if (!is_writable($f3->get($dir))) {
@@ -33,14 +36,14 @@ foreach (array('LOGS', 'UPLOADS', 'TEMP') as $dir) {
     }
 }
 ?>
-</pre>
+            </pre>
 <?php 
 $db = \Registry::get('db');        
 if (!empty($db)) {
 ?>
             
-<h3>Database</h3>
-<pre>
+            <h3>Database</h3>
+            <pre>
 <?php
     try {
         $db = \Registry::get('db');
@@ -51,51 +54,58 @@ if (!empty($db)) {
     }
 }
 ?>
-</pre>
+            </pre>
 
-<h3>Geo-location</h3>
-<pre>    
-<?php
-$geo = \Web\Geo::instance();
-var_dump($geo->location()); // locate client IP
-?>
-</pre>
+            <h3>Geo-location</h3>
+            <pre>    
+            <?php
+            $geo = \Web\Geo::instance();
+            var_dump($geo->location()); // locate client IP
+            ?>
+            </pre>
 
-<h3>Your device</h3>
-<p>
-<?php
-$audit = \Audit::instance();
-$bot = $audit->isbot();
-if ($bot) {
-    print "You are a bot!";
-} else {
-    $desktop = $audit->isdesktop();
-    if ($desktop) {
-        print "You are on a desktop device!";
-    } else {
-        $mobile = $audit->ismobile();
-        if ($mobile) {
-            print "You are on a mobile device!";
-        }
-    }
-}
-?>
-</p>
+            <h3>Your device</h3>
+            <p>
+            <?php
+            $audit = \Audit::instance();
+            $bot = $audit->isbot();
+            if ($bot) {
+                print "You are a bot!";
+            } else {
+                $desktop = $audit->isdesktop();
+                if ($desktop) {
+                    print "You are on a desktop device!";
+                } else {
+                    $mobile = $audit->ismobile();
+                    if ($mobile) {
+                        print "You are on a mobile device!";
+                    }
+                }
+            }
+            ?>
+            </p>
 
-<h3>Helper</h3>
-The example helper in lib/helpers/time.php can output the date/time in a mysql database format like '<?=\FFMVC\Helpers\Time::database() ?>' or for an http header '<?=\FFMVC\Helpers\Time::HTTP() ?>'
+            <h3>Helper</h3>
+            The example helper in lib/helpers/time.php can output the date/time in a mysql database format like '<?=\FFMVC\Helpers\Time::database() ?>' or for an http header '<?=\FFMVC\Helpers\Time::HTTP() ?>'
 
-<h2>Documentation</h2>
-<ul>
-    <li><a href="/doc/CHANGES">CHANGES</a></li>
-    <li><a href="/doc/TODO">TODO</a></li>
-    <li><a href="/doc/ROADMAP">ROADMAP</a></li>
-    <li><a href="/doc/LICENSE">LICENSE</a></li>
-    <li><a href="/doc/CREDITS">CREDITS</a></li>
-</ul>
+            <h2>Documentation</h2>
+            <ul>
+                <li><a href="/doc/README">README</a></li>
+                <li><a href="/doc/CHANGES">CHANGES</a></li>
+                <li><a href="/doc/TODO">TODO</a></li>
+                <li><a href="/doc/ROADMAP">ROADMAP</a></li>
+                <li><a href="/doc/LICENSE">LICENSE</a></li>
+                <li><a href="/doc/CREDITS">CREDITS</a></li>
+            </ul>
 
-<h2>PHPINFO</h2>
+            <h2>PHPINFO</h2>
 
-<?php phpinfo() ?>
+            <div class="phpinfo">
+            <?php phpinfo() ?>
+            </div>
+
+      </div>
+    </div>
+  </div>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>

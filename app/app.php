@@ -99,7 +99,7 @@ function Run()
                 $f3->set($var, $cleaned);
             }
         }
-
+        
         // custom error handler if debugging
         $debug = $f3->get('DEBUG');
         if (empty($debug)) {

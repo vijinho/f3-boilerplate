@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Jul-2015, 21:56:22
+    Author     : vijay
+*/
+
+@import "//fonts.googleapis.com/css?family=Raleway";
+
+body {
+    font-size:1.9rem;
+    line-height:2.5rem;
+    color:#404040;
+    font-family:'Raleway',sans-serif
+}
+
+.phpinfo {
+    margin-top:1.5rem;
+    margin-bottom:2rem;
+    line-height:1em;
+    height:400px;
+    width:100%;
+    overflow:auto
+}

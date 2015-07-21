@@ -13,7 +13,7 @@ tmp/cache
 tmp/sessions
 tmp/uploads
 logs
-/nbproject/
+/nbproject
 app/lib/autoload.php
 app/lib/bcosca
 app/lib/composer

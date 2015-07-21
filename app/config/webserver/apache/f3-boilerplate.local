@@ -27,6 +27,7 @@
     php_value xcache.coveragedump_directory /vhosts/f3-boilerplate.local/tmp/cache
     php_value xcache.coredump_directory /vhosts/f3-boilerplate.local/tmp
 
+
     php_value allow_url_fopen on
     php_value default_charset utf-8
     php_value short_open_tag Off
@@ -52,7 +53,6 @@
     php_value max_input_time 3600
     php_value set_time_limit 3600
 
-    php_value log_errors On
     php_value display_errors Off
     php_value html_errors Off
     php_value php_error.force_disabled On

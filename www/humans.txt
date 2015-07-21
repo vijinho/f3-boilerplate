@@ -10,14 +10,11 @@
     Christian Knuth -- https://github.com/ikkez
     Stefano Ricci -- http://www.sharmpro.com
     Patrick Müller -- http://patrickmueller.net
-    hanxue -- https://github.com/hanxue
 
 # THANKS
 
 * Fat-Free Framework - http://fatfreeframework.com/
-* HTML5 ★ BOILERPLATE - http://html5boilerplate.com/
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+* Skeleton CSS - http://getskeleton.com/
