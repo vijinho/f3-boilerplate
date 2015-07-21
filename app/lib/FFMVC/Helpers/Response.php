@@ -1,11 +1,11 @@
 <?php
 
-namespace FFMVC\helpers;
+namespace FFMVC\Helpers;
 
 /**
  * HTTP Response Helper Class.
  *
- * @author Vijay Mahrra <vijay.mahrra@gmail.com>
+ * @author Vijay Mahrra <vijay@yoyo.org>
  * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
@@ -65,7 +65,7 @@ class Response extends \Prefab
         } else {
             $headers['ETag'] = md5($body);
         }
-        
+
         if (empty($output)) {
             return array('headers' => $headers, 'body' => $body);
         } else {
@@ -91,20 +91,21 @@ class Response extends \Prefab
             }
         }
     }
-    
+
     /**
-    * Converts an array to XML
-    *
-    * @param array $array
-    * @param SimpleXMLElement $xml
-    * @param string $child_name
-    * @return SimpleXMLElement $xml
-    * @url http://stackoverflow.com/questions/1397036/how-to-convert-array-to-simplexml
-    */
+     * Converts an array to XML.
+     *
+     * @param array            $array
+     * @param SimpleXMLElement $xml
+     * @param string           $child_name
+     *
+     * @return SimpleXMLElement $xml
+     * @url http://stackoverflow.com/questions/1397036/how-to-convert-array-to-simplexml
+     */
     private static function arrayToXML($array, \SimpleXMLElement $xml, $child_name)
     {
         foreach ($array as $k => $v) {
-            if(is_array($v)) {
+            if (is_array($v)) {
                 (is_int($k)) ? self::arrayToXML($v, $xml->addChild($child_name), $v) : self::arrayToXML($v, $xml->addChild(strtolower($k)), $child_name);
             } else {
                 (is_int($k)) ? $xml->addChild($child_name, $v) : $xml->addChild(strtolower($k), $v);
@@ -168,7 +169,7 @@ class Response extends \Prefab
         } else {
             $headers['ETag'] = md5($body);
         }
-        
+
         if (empty($output)) {
             return array('headers' => $headers, 'body' => $xml);
         } else {
@@ -193,5 +194,5 @@ class Response extends \Prefab
                     echo $body;
             }
         }
-    }    
+    }
 }

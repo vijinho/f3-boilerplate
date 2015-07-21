@@ -3,18 +3,21 @@
 namespace FFMVC\App;
 
 /**
- * Main App Class.
+ * Main App Class
  *
- * @author Vijay Mahrra <vijay.mahrra@gmail.com>
+ * This should be included and run by every app upon initialisation and termination
+ *
+ * @author Vijay Mahrra <vijay@yoyo.org>
  * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 class Main extends \Prefab
 {
-    const APP_VERSION = '1.3';
+    const APP_VERSION = '1.5';
 
     /**
      * setup the base application environment.
+     *
      * @param object $logger inject your own logger
      */
     final public static function start(&$f3, $logger = null)
@@ -55,7 +58,7 @@ class Main extends \Prefab
 
         if ($logger && $debug || $f3->get('application.environment') == 'development') {
             // log database transactions if level 3
-            if ($debug == 3 && method_exists($logger, 'write') 
+            if ($debug == 3 && method_exists($logger, 'write')
                     && $db = $f3->get('db') && method_exists($db, 'log')) {
                 $logger->write(\Registry::get('db')->log());
             }

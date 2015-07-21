@@ -3,7 +3,7 @@
     "description": "My Fat-Free Framework skeleton mvc boilerplate application",
     "keywords": ["php", "php framework", "micro framework", "php micro framework", "microframework", "fat-free framework", "fat-free", "skeleton", "skeleton app", "skeleton application", "mvc"],
     "homepage": "https://github.com/vijinho/f3-boilerplate",
-    
+
     "license": "GPL-3.0+",
     "type": "application",
     "authors": [
@@ -22,14 +22,14 @@
     },
     "require": {
         "php": ">=5.5.0",
-        "bcosca/fatfree": "dev-master"
+        "bcosca/fatfree-core": "dev-master"
     },
     "suggest": {
         "php": ">=5.6.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.4-dev"
+            "dev-master": "1.6-dev"
         }
     }
 }

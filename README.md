@@ -1,6 +1,6 @@
 # f3-boilerplate
 
-Empty PHP Fatfree-framework MVC website code 
+Skeleton PHP Fatfree-framework MVC website codebase.
 
 ## Setup
 
@@ -12,25 +12,8 @@ Empty PHP Fatfree-framework MVC website code
 
 ### Configuration
   - Copy `app/config/config.ini.example` to `config.ini`
-  - Edit `app/config/config.ini `and add anything extra from `default.ini` for
-    overrides
+  - Edit `app/config/config.ini `and add anything extra from `default.ini` for overrides
   - In the top level folder `run composer install`
- 
-#### SSL 
-Runs by default on [api.local](http://api.local/)
-
-`openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=GB/ST=STATE/L=TOWN/O=Office/CN=api.local" -keyout api.key -out api.crt`
-
-Add to apache virtual host (and also see the api-ssl.local files in [app/config/webserver/](app/config/webserver/)
-
-```
-    SSLCertificateFile ssl/api.crt
-    SSLCertificateKeyFile ssl/api.key
-```
-[MAMP](https://www.mamp.info/) lets you add the SSL file in the Hosts/SSL tab.
-
-If it's all working - now move on to configuration.
-
 
 ### Folders & Permissions
 Setup empty website folders as follows:
@@ -46,7 +29,7 @@ sudo chmod -fR 777 tmp data
  * `www` - website and public doc root (aka `public_html` or `htdocs` etc)
  * `www/index.php` - start website application here
  * `app/lib/` - all library files/classes
- * `app/lib/bcosca/fatfree` - fatfree framework lives here
+ * `app/lib/bcosca/fatfree-core` - [fatfree framework (core)](https://github.com/bcosca/fatfree-core) lives here
  * `tmp/cache` `tmp/sessions` `tmp/uploads` - temporary files
  * `tmp/logs` - application logfiles
  * `data` - website data storage
@@ -66,6 +49,19 @@ sudo chmod -fR 777 tmp data
  * `app/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
  * `app/templates/www/error/404.phtml` - 'friendly' file not found page
  * `app/templates/www/error/error.phtml` - 'friendly' error page
+
+#### SSL (Optional)
+Runs by default on [api.local](http://api.local/)
+
+`openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=GB/ST=STATE/L=TOWN/O=Office/CN=api.local" -keyout api.key -out api.crt`
+
+Add to apache virtual host (and also see the api-ssl.local files in [app/config/webserver/](app/config/webserver/)
+
+```
+    SSLCertificateFile ssl/api.crt
+    SSLCertificateKeyFile ssl/api.key
+```
+[MAMP](https://www.mamp.info/) lets you add the SSL file in the Hosts/SSL tab.
 
 --
 http://about.me/vijay.mahrra

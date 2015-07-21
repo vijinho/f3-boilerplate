@@ -6,13 +6,10 @@ $f3->set('title', $title);
 <div class="container">
     <div class="row">
         <div class="eight columns">
-                        
+
             <h1>f3-boilerplate</h1>
 
-            <p>This project is built on the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
-
-            <h2>International Welcome</h2>
-            <p>In the i18n/ folder there are translations for English, Swedish and Spanish for the text<br/>i18n.welcome: <b><?=$f3->get('i18n.welcome'); ?></b></p>
+            <p>This project is by <a href="http://about.me/vijay.mahrra">Vijay Mahrra</a> and it is built on, and serves as, an example of the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
             <h1>Rest API</h1>
 
@@ -22,9 +19,9 @@ $f3->set('title', $title);
                 <li><a href="/api/test/request">Test Request (JSON)</a>
                 <li><a href="/api/test/request?return=xml">Test Request (XML)</a>
             </ul>
-            
+
             <h2>Installation</h2>
-            
+
             <h3>File Permissions</h3>
             <pre>
 <?php
@@ -37,11 +34,11 @@ foreach (array('LOGS', 'UPLOADS', 'TEMP') as $dir) {
 }
 ?>
             </pre>
-<?php 
-$db = \Registry::get('db');        
+<?php
+$db = \Registry::get('db');
 if (!empty($db)) {
 ?>
-            
+
             <h3>Database</h3>
             <pre>
 <?php
@@ -57,7 +54,7 @@ if (!empty($db)) {
             </pre>
 
             <h3>Geo-location</h3>
-            <pre>    
+            <pre>
             <?php
             $geo = \Web\Geo::instance();
             var_dump($geo->location()); // locate client IP

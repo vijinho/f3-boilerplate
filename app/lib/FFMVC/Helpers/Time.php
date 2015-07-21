@@ -1,11 +1,11 @@
 <?php
 
-namespace FFMVC\helpers;
+namespace FFMVC\Helpers;
 
 /**
  * Time and Date Helper Class.
  *
- * @author Vijay Mahrra <vijay.mahrra@gmail.com>
+ * @author Vijay Mahrra <vijay@yoyo.org>
  * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
@@ -58,7 +58,7 @@ class Time extends \Prefab
         if (strlen($zone) == 3) {
             $zone = strtoupper($zone);
         } else {
-            $zone = 'UTC';
+            $zone = '';
         }
 
         return gmdate('D, d M Y H:i:s', $unixtime).' '.$zone;

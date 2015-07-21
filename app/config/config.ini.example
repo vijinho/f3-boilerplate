@@ -1,7 +1,7 @@
 [globals]
 DEBUG=3
-TZ=Europe/London
-LANGUAGE=en-GB
+TZ=Europe/Madrid
+LANGUAGE=es-ES
 
 ;db.driver=sqlite
 ;db.dsn=sqlite:/data/database.sqlite
@@ -20,5 +20,5 @@ analytics.enabled = true
 analytics.code=UA-EXAMPLE-CODE
 analytics.domain=example.org
 
-application.logfile=application.log
+application.logfile=app.log
 application.environment=development

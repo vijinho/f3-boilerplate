@@ -1,4 +1,4 @@
 # TODO #
 
 * Implement HMVC
-* Use a PSR-compliant logger
+* Show a sample i18n translation on the homepage

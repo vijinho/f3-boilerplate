@@ -5,7 +5,7 @@ namespace FFMVC\Controllers;
 /**
  * Index Controller Class.
  *
- * @author Vijay Mahrra <vijay.mahrra@gmail.com>
+ * @author Vijay Mahrra <vijay@yoyo.org>
  * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */

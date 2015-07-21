@@ -6,18 +6,19 @@ namespace FFMVC\App;
  * fat-free framework application
  * execute with call to FFMVC\App\Run();.
  *
- * @author Vijay Mahrra <vijay.mahrra@gmail.com>
+ * @author Vijay Mahrra <vijay@yoyo.org>
  * @copyright (c) Copyright 2013 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 function Run()
 {
     // @see http://fatfreeframework.com/quick-reference#autoload
-    $f3 = require_once 'lib/bcosca/fatfree/lib/base.php';
-    $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree/lib/;lib/');
-    
+    $f3 = require_once 'lib/bcosca/fatfree-core/base.php';
+    $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree-core/;lib/');
+
+    // initialise application
     Main::start($f3);
-    
+
     // setup database connection params
     // @see http://fatfreeframework.com/databases
     if (!empty($f3->get('db.driver') || $f3->get('db.dsn') || $f3->get('db.http_dsn'))) {
@@ -32,7 +33,7 @@ function Run()
                 $f3->mset(array(
                     'db.driver' => $m['driver'],
                     'db.username' => $m['username'],
-                    'db.password' => $m['password']
+                    'db.password' => $m['password'],
                 ));
             }
         } elseif (empty($f3->get('db.dsn'))) {
@@ -64,11 +65,11 @@ function Run()
                     $st->execute(array(':filename' => $filename, ':dbname' => $dbname));
                 }
             }
-        } 
-        
+        }
+
         \Registry::set('db', $db);
     }
-    
+
         // cli start
     if (PHP_SAPI == 'cli') {
         $f3->route('GET /doc/@page', function ($f3, $params) {
@@ -85,7 +86,7 @@ function Run()
         $f3->config('config/routes-cli.ini');
     } else {
         // web start
-        
+
         // clean ALL incoming user input by default, lower-case input vars
         foreach (array('GET', 'POST') as $var) {
             $input = $f3->get($var);
@@ -99,7 +100,7 @@ function Run()
                 $f3->set($var, $cleaned);
             }
         }
-        
+
         // custom error handler if debugging
         $debug = $f3->get('DEBUG');
         if (empty($debug)) {
@@ -114,7 +115,7 @@ function Run()
                 }
             );
         }
-        
+
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
             function ($f3, $args) {
@@ -143,5 +144,6 @@ function Run()
 
     $f3->run();
 
+    // terminate application
     Main::finish($f3);
 }

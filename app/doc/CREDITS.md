@@ -1,6 +1,6 @@
 # APPLICATION TEAM
 
-* Vijay Mahrra -- vijay.mahrra@gmail.com -- @vijinh0
+* Vijay Mahrra -- vijay@yoyo.org -- @vijinh0
 
 # CONTRIBUTORS
 
