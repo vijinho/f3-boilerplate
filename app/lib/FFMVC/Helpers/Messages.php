@@ -20,8 +20,9 @@ class Messages extends \Prefab
     final public static function init($sessionify = false)
     {
         $f3 = \Base::instance();
+        $cli = (PHP_SAPI == 'cli');
         $messages = $f3->get('messages');
-        if (empty($messages)) {
+        if (empty($messages) && !$cli) {
             $messages = $f3->get('SESSION.messages');
             if (empty($messages)) {
                 $messages = array();
@@ -33,23 +34,32 @@ class Messages extends \Prefab
             }
         }
         $f3->set('messages', $messages);
-        $f3->set('sessionify_messages', $sessionify); // save messages in session?
+        if (!$cli) {
+            $f3->set('sessionify_messages', $sessionify); // save messages in session?
+        }
     }
 
 
     final public static function sessionify($boolean)
     {
-        $f3 = \Base::instance();
-        $f3->set('sessionify_messages', $boolean);
+        if (PHP_SAPI !== 'cli') {
+            $f3 = \Base::instance();
+            $f3->set('sessionify_messages', $boolean);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
     public function __destruct()
     {
-        $f3 = \Base::instance();
-        // save persistent messages
-        $f3->set('SESSION.messages',
-            empty($f3->get('sessionify_messages')) ? null : $f3->get('messages'));
+        if (PHP_SAPI !== 'cli') {
+            $f3 = \Base::instance();
+            // save persistent messages
+            $f3->set('SESSION.messages',
+                empty($f3->get('sessionify_messages')) ? null : $f3->get('messages'));
+        }
     }
 
 
