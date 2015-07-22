@@ -1,5 +1,9 @@
 # Application Releases #
 
+### Version 1.6 ###
+
+- Added messages helper to store/manage messages for displaying to the end-user
+
 ### Version 1.5 ###
 
 - Load in fatfree-core as a library

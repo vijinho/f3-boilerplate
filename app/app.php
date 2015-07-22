@@ -2,6 +2,8 @@
 
 namespace FFMVC\App;
 
+use FFMVC\Helpers as Helpers;
+
 /**
  * fat-free framework application
  * execute with call to FFMVC\App\Run();.
@@ -18,6 +20,10 @@ function Run()
 
     // initialise application
     Main::start($f3);
+
+    // user feedback messages helper, inisialise so methods can be called statically
+    $messages = Helpers\Messages::instance();
+    $messages->add('Welcome, friend!', 'success');
 
     // setup database connection params
     // @see http://fatfreeframework.com/databases
