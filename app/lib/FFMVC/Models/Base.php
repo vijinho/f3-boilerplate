@@ -11,19 +11,38 @@ namespace FFMVC\Models;
  */
 abstract class Base
 {
+    /**
+     * @var object database class
+     */
     protected $db;
+
+    /**
+     * @var object user messages class
+     */
+    protected $messages;
+
+    /**
+     * @var object logging class
+     */
     protected $logger;
 
     /**
-     * setup model, allow injection of different db and logger than f3
-     *
-     * @param (optional) object $db database object
-     * @param (optional) object $logger logging object
+     * initialize with params, fallback to f3 values
      */
-    public function __construct($db = null, $logger = null)
+    public function __construct($params = array())
     {
         $f3 = \Base::instance();
-        $this->db = empty($db) ? \Registry::get('db') : $db;
-        $this->logger = empty($logger) ? &$f3->ref('logger') : $logger;
+        foreach ($params as $k => $v) {
+            $this->$k = $v;
+        }
+        if (empty($this->db)) {
+            $this->db = \Registry::get('db');
+        }
+        if (empty($this->messages)) {
+            $this->messages = Helpers\Messages::instance();
+        }
+        if (empty($this->logger)) {
+            $this->logger = &$f3->ref('logger');
+        }
     }
 }
