@@ -2,6 +2,9 @@
 
 namespace FFMVC\Controllers;
 
+use FFMVC\Helpers as Helpers;
+
+
 /**
  * Index Controller Class.
  *
@@ -14,6 +17,8 @@ class Index
     // render a php template .phtml view from ui/
     final public function index($f3, $params)
     {
+        $messages = Helpers\Messages::instance();
+        $messages->add('Welcome!', 'success');
         echo \View::instance()->render('www/index/index.phtml');
     }
 }

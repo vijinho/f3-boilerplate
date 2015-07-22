@@ -24,7 +24,6 @@ function Run()
     // user feedback messages helper, inisialise so methods can be called statically
     $messages = Helpers\Messages::instance();
     $messages->init();
-    Helpers\Messages::add('Welcome, friend!', 'success');
 
     // setup database connection params
     // @see http://fatfreeframework.com/databases
