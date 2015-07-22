@@ -38,6 +38,9 @@ function Run()
                 ));
                 $f3->mset(array(
                     'db.driver' => $m['driver'],
+                    'db.hostname' => $m['hostname'],
+                    'db.port' => $m['port'],
+                    'db.name' => $m['database'],
                     'db.username' => $m['username'],
                     'db.password' => $m['password'],
                 ));
