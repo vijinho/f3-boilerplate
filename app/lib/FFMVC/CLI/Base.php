@@ -12,7 +12,7 @@ use FFMVC\Helpers as Helpers;
  * @copyright (c) Copyright Keycom Plc
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
-class Base
+abstract class Base
 {
 
     /**
