@@ -1,5 +1,8 @@
 <?php
 
-// run f3-boilerplate application on command line
+namespace FFMVC\App;
+
+chdir(realpath(__DIR__));
+require_once 'lib/autoload.php';
 require_once 'app.php';
-FFMVC\App\Run();
+Run();
