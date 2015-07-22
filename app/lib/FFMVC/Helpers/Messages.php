@@ -48,9 +48,8 @@ class Messages extends \Prefab
     {
         $f3 = \Base::instance();
         // save persistent messages
-        if (!empty($f3->get('sessionify_messages'))) {
-            $f3->set('SESSION.messages', $f3->get('messages'));
-        }
+        $f3->set('SESSION.messages',
+            empty($f3->get('sessionify_messages')) ? null : $f3->get('messages'));
     }
 
 
