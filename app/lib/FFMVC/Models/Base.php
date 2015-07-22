@@ -9,7 +9,7 @@ namespace FFMVC\Models;
  * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
-abstract class Base
+abstract class Base extends \Prefab
 {
     /**
      * @var object database class
@@ -31,6 +31,8 @@ abstract class Base
      */
     public function __construct($params = array())
     {
+        parent::__construct();
+
         $f3 = \Base::instance();
         foreach ($params as $k => $v) {
             $this->$k = $v;
