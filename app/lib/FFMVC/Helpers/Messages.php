@@ -17,12 +17,15 @@ class Messages extends \Prefab
         'warning',
         'message');
 
-    public function __construct()
+    final public static function init($sessionify = false)
     {
         $f3 = \Base::instance();
         $messages = $f3->get('messages');
         if (empty($messages)) {
-            $messages = array();
+            $messages = $f3->get('SESSION.messages');
+            if (empty($messages)) {
+                $messages = array();
+            }
         }
         foreach (self::TYPES as $type) {
             if (!array_key_exists($type, $messages)) {
@@ -30,8 +33,27 @@ class Messages extends \Prefab
             }
         }
         $f3->set('messages', $messages);
+        $f3->set('sessionify_messages', $sessionify); // save messages in session?
     }
-    
+
+
+    final public static function sessionify($boolean)
+    {
+        $f3 = \Base::instance();
+        $f3->set('sessionify_messages', $boolean);
+    }
+
+
+    public function __destruct()
+    {
+        $f3 = \Base::instance();
+        // save persistent messages
+        if (!empty($f3->get('sessionify_messages'))) {
+            $f3->set('SESSION.messages', $f3->get('messages'));
+        }
+    }
+
+
     // add a message, default type is message
     final public static function add($message, $type = null)
     {
