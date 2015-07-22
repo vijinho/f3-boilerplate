@@ -58,9 +58,12 @@ class Main extends \Prefab
 
         if ($logger && $debug || $f3->get('application.environment') == 'development') {
             // log database transactions if level 3
-            if ($debug == 3 && method_exists($logger, 'write')
-                    && $db = $f3->get('db') && method_exists($db, 'log')) {
-                $logger->write(\Registry::get('db')->log());
+            $db = \Registry::get('db');    
+            if ($debug == 3 && 
+                method_exists($logger, 'write') &&
+                method_exists($db, 'log')) 
+            {
+                $logger->write($db->log());
             }
             $execution_time = round(microtime(true) - $f3->get('TIME'), 3);
             $params = $f3->get('PARAMS');
