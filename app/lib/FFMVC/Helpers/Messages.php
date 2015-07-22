@@ -24,9 +24,9 @@ class Messages extends \Prefab
         $messages = $f3->get('messages');
         if (empty($messages) && !$cli) {
             $messages = $f3->get('SESSION.messages');
-            if (empty($messages)) {
-                $messages = array();
-            }
+        }
+        if (empty($messages)) {
+            $messages = array();
         }
         foreach (self::TYPES as $type) {
             if (!array_key_exists($type, $messages)) {
