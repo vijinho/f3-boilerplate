@@ -3,7 +3,7 @@
 namespace FFMVC\Helpers;
 
 /**
- * URL Helper Class.
+ * Messages Helper Class.
  *
  * @author Vijay Mahrra <vijay.mahrra@gmail.com>
  * @copyright (c) Copyright 2006-2015 Vijay Mahrra
