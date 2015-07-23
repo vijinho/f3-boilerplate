@@ -3,6 +3,7 @@
 ### Version 1.6 ###
 
 - Added messages helper to store/manage messages for displaying to the end-user
+- Output buffering enabled by default to display errors better
 
 ### Version 1.5 ###
 
