@@ -22,3 +22,4 @@ analytics.domain=example.org
 
 application.logfile=app.log
 application.environment=development
+application.salt=MY_SALT
