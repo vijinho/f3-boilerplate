@@ -84,8 +84,16 @@ if (!empty($db)) {
             ?>
             </p>
 
-            <h3>Helper</h3>
+            <h3>Helpers</h3>
+            <h4>Time/Date</h4>
             The example helper in lib/helpers/time.php can output the date/time in a mysql database format like '<?=\FFMVC\Helpers\Time::database() ?>' or for an http header '<?=\FFMVC\Helpers\Time::HTTP() ?>'
+
+            <h4>String</h4>
+            <ul>
+                <li>Random String: <?=\FFMVC\Helpers\String::random(20) ?></li>
+                <li>Hashed+Salted String: <?=\FFMVC\Helpers\String::salted(time(),
+                    'f3-boilerplate') ?></li>
+            </ul>
 
             <h2>Documentation</h2>
             <ul>
