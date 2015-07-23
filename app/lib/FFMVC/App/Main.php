@@ -22,6 +22,9 @@ class Main extends \Prefab
      */
     final public static function start(&$f3, $logger = null)
     {
+        // http://php.net/manual/en/function.ob-start.php
+        ob_start();
+
         // read config and overrides
         // @see http://fatfreeframework.com/framework-variables#configuration-files
         $f3->config('config/default.ini');
@@ -72,6 +75,10 @@ class Main extends \Prefab
                 round(memory_get_peak_usage() / 1024 / 1024, 2).' MB memory/peak');
         }
 
-        return $f3;
+        // http://php.net/manual/en/function.ob-end-flush.php
+        while (ob_get_level()) {
+            ob_end_flush();
+            flush();
+        }
     }
 }

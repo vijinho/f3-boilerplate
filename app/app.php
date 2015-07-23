@@ -95,6 +95,35 @@ function Run()
         $f3->config('config/routes-cli.ini');
     } else {
         // web start
+        // custom error handler if debugging
+        $debug = $f3->get('DEBUG');
+        if (empty($debug)) {
+            $f3->set('ONERROR',
+                function() use ($f3) {
+                while (ob_get_level()) {
+                    ob_end_clean();
+                }
+                header('Expires:  ' . \Helpers\Time::HTTP(time() + $f3->get('error.ttl')));
+                if ($f3->get('ERROR.code') == '404') {
+                    include_once 'templates/www/error/404.phtml';
+                } else {
+                    include_once 'templates/www/error/error.phtml';
+                }
+                // http://php.net/manual/en/function.ob-end-flush.php
+                ob_end_flush();
+            });
+        } else {
+            $f3->set('ONERROR',
+                function() use ($f3) {
+                // recursively clear existing output buffers:
+                while (ob_get_level()) {
+                    ob_end_clean();
+                }
+                include_once 'templates/www/error/debug.phtml';
+                // http://php.net/manual/en/function.ob-end-flush.php
+                ob_end_flush();
+            });
+        }
 
         // clean ALL incoming user input by default, lower-case input vars
         foreach (array('GET', 'POST') as $var) {
@@ -108,21 +137,6 @@ function Run()
                 }
                 $f3->set($var, $cleaned);
             }
-        }
-
-        // custom error handler if debugging
-        $debug = $f3->get('DEBUG');
-        if (empty($debug)) {
-            $f3->set('ONERROR',
-                function () use ($f3) {
-                    header('Expires:  '.\FFMVC\Helpers\Time::HTTP(time() + $f3->get('error.ttl')));
-                    if ($f3->get('ERROR.code') == '404') {
-                        include_once 'templates/www/error/404.phtml';
-                    } else {
-                        include_once 'templates/www/error/error.phtml';
-                    }
-                }
-            );
         }
 
         // @see http://fatfreeframework.com/optimization
