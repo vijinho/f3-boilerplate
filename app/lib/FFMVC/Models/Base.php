@@ -11,6 +11,7 @@ namespace FFMVC\Models;
  */
 abstract class Base extends \Prefab
 {
+
     /**
      * @var object database class
      */
@@ -27,12 +28,10 @@ abstract class Base extends \Prefab
     protected $logger;
 
     /**
-     * initialize with params, fallback to f3 values
+     * initialize.
      */
     public function __construct($params = array())
     {
-        parent::__construct();
-
         $f3 = \Base::instance();
         foreach ($params as $k => $v) {
             $this->$k = $v;
@@ -47,4 +46,6 @@ abstract class Base extends \Prefab
             $this->logger = &$f3->ref('logger');
         }
     }
+
+
 }
