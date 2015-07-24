@@ -1,14 +1,10 @@
-<?php $e = $f3->get('ERROR'); ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Error: <?=$e['code'] ?></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-</head>
-<body>
+<?php
+$f3 = \Base::instance();
+$e = $f3->get('ERROR');
+$title = 'Error:' . $e['code'];
+$f3->set('title', $title);
+?>
+<?=\View::instance()->render('www/header.phtml'); ?>
 <h1>Error: <?=$e['code'] ?></h1>
 
 <p><em><?=$e['status']?></em><br/></p>
@@ -25,6 +21,4 @@
 </pre>
 <?php endif ?>
 
-<hr/>
-</body>
-</html>
+<?=\View::instance()->render('www/footer.phtml'); ?>

@@ -13,13 +13,14 @@ $f3->set('title', $title);
 
             <p>This project is by <a href="http://about.me/vijay.mahrra">Vijay Mahrra</a> and it is built on, and serves as, an example of the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
-            <h1>Rest API</h1>
-
+            <h2>Documentation</h2>
             <ul>
-                <li><a href="/api/">API (JSON)</a>
-                <li><a href="/api?return=xml">API (XML)</a>
-                <li><a href="/api/test/request">Test Request (JSON)</a>
-                <li><a href="/api/test/request?return=xml">Test Request (XML)</a>
+                <li><a href="/doc/README">README</a></li>
+                <li><a href="/doc/CHANGES">CHANGES</a></li>
+                <li><a href="/doc/TODO">TODO</a></li>
+                <li><a href="/doc/ROADMAP">ROADMAP</a></li>
+                <li><a href="/doc/LICENSE">LICENSE</a></li>
+                <li><a href="/doc/CREDITS">CREDITS</a></li>
             </ul>
 
             <h2>Installation</h2>
@@ -87,23 +88,16 @@ if (!empty($db)) {
             <h3>Helper</h3>
             The example helper in lib/helpers/time.php can output the date/time in a mysql database format like '<?=\FFMVC\Helpers\Time::database() ?>' or for an http header '<?=\FFMVC\Helpers\Time::HTTP() ?>'
 
-            <h2>Documentation</h2>
+            <h1>Rest API</h1>
+
             <ul>
-                <li><a href="/doc/README">README</a></li>
-                <li><a href="/doc/CHANGES">CHANGES</a></li>
-                <li><a href="/doc/TODO">TODO</a></li>
-                <li><a href="/doc/ROADMAP">ROADMAP</a></li>
-                <li><a href="/doc/LICENSE">LICENSE</a></li>
-                <li><a href="/doc/CREDITS">CREDITS</a></li>
+                <li><a href="/api/">API (JSON)</a>
+                <li><a href="/api?return=xml">API (XML)</a>
+                <li><a href="/api/test/request">Test Request (JSON)</a>
+                <li><a href="/api/test/request?return=xml">Test Request (XML)</a>
             </ul>
 
-            <h2>PHPINFO</h2>
-
-            <div class="phpinfo">
-            <?php phpinfo() ?>
-            </div>
-
-      </div>
+        </div>
     </div>
   </div>
 
