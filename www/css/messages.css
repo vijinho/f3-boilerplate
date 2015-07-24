@@ -10,7 +10,6 @@
     font-weight: bold;
     margin-top: 4px;
     clear: all;
-    white-space: nowrap;
 }
 
 .message_message, .message_warning, .message_success, .message_error {
