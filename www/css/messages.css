@@ -4,47 +4,35 @@
 
 /* Content Elements: Messages */
 #messages{
-padding: 0;
-margin: 0;
-font-size: 14px;
-font-weight: bold;
-margin-top: 4px;
-clear: all;
-white-space: nowrap;
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 4px;
+    clear: all;
+    white-space: nowrap;
+}
+
+.message_message, .message_warning, .message_success, .message_error {
+    padding: 4px;
+    width: 100%;
+    color: #ffffff;
+    float: left;
+    margin-bottom: 3px;
 }
 
 .message_message {
-    padding: 4px;
-width: 100%;
-color: #ffffff;
-background-color: #aaa9a6;
-float: left;
-margin-bottom: 3px;
+    background-color: #aaa9a6;
 }
 
 .message_warning {
-    padding: 4px;
-width: 100%;
-color: #ffffff;
-background-color: #ff9900;
-float: left;
-margin-bottom: 3px;
+    background-color: #ff9900;
 }
 
 .message_success {
-    padding: 4px;
-width: 100%;
-color: #ffffff;
-background-color: #009000;
-float: left;
-margin-bottom: 3px;
+    background-color: #000A00;
 }
 
 .message_error {
-    padding: 4px;
-width: 100%;
-color: #ffffff;
-background-color: #900000;
-float: left;
-margin-bottom: 3px;
+    background-color: #F00000;
 }
