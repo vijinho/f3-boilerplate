@@ -43,6 +43,7 @@ class Main extends \Prefab
                 if ($f3->get('application.environment') == 'development') {
                     ini_set('error_reporting', -1);
                 }
+                $f3->set('logger', $logger);
             }
         }
         // setup outgoing email server for php mail command
