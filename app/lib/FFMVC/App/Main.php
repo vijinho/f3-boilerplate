@@ -34,15 +34,17 @@ class Main extends \Prefab
 
         $debug = $f3->get('debug');
 
-        // setup application logging
         if (empty($logger)) {
             $logfile = $f3->get('application.logfile');
             if (!empty($logfile)) {
                 $logger = new \Log($logfile);
+                ini_set('log_errors', true);
+                ini_set('error_log', $logfile);
+                if ($f3->get('application.environment') == 'development') {
+                    ini_set('error_reporting', -1);
+                }
             }
         }
-        $f3->set('logger', $logger);
-
         // setup outgoing email server for php mail command
         ini_set('SMTP', $f3->get('email.host'));
         ini_set('sendmail_from', $f3->get('email.from'));
