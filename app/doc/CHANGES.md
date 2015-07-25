@@ -5,6 +5,7 @@
 - Added messages helper to store/manage messages for displaying to the end-user
 - Output buffering enabled by default to display errors better
 - Added a string helper class for generating random strings and hashing
+- Log php errors to log file
 
 ### Version 1.5 ###
 
