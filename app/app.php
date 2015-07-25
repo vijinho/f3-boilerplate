@@ -27,6 +27,7 @@ function Run()
 
     // setup database connection params
     // @see http://fatfreeframework.com/databases
+    $db = null;
     if (!empty($f3->get('db.driver') || $f3->get('db.dsn') || $f3->get('db.http_dsn'))) {
         if ($http_dsn = $f3->get('db.http_dsn')) {
             if (preg_match('/^(?<driver>[^:]+):\/\/(?<username>[^:]+):(?<password>[^@]+)@(?<hostname>[^:]+):(?<port>[\d]+)?\/(?<database>.+)/', $http_dsn, $m)) {
@@ -75,9 +76,8 @@ function Run()
                 }
             }
         }
-
-        \Registry::set('db', $db);
     }
+    \Registry::set('db', $db);
 
         // cli start
     if (PHP_SAPI == 'cli') {
