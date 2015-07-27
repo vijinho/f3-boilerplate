@@ -1,11 +1,13 @@
 <?php
 
-namespace FFMVC\Controllers\api;
+namespace FFMVC\Controllers\API;
+
+use \FFMVC\Helpers as Helpers;
 
 /**
  * Api Controller Class.
  *
- * @author Vijay Mahrra <vijay@yoyo.org>
+ * @author Vijay Mahrra <vijay.mahrra@gmail.com>
  * @copyright (c) Copyright 2015 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
@@ -31,7 +33,7 @@ class Api
      *     - 401 - unauthorised
      *     - 403 - forbidden
      *     - 404 - not found
-     *     - 405 - method no allowed
+     *     - 405 - method not allowed
      *     - 406 - not acceptable (e.g. not in correct format like json)
      * 5xx: Server Error - The server was responsible.
      *
@@ -40,21 +42,21 @@ class Api
     protected $errors = array();
 
     /**
-     * response data - the actual data to return to the client
+     * response data.
      *
      * @var data
      */
     protected $data = array();
 
     /**
-     * response params - configuration of response and headers
+     * response params.
      *
      * @var params
      */
     protected $params = array();
 
     /**
-     * response helper for returning JSON/XML
+     * response helper.
      *
      * @var response
      */
@@ -68,15 +70,72 @@ class Api
     protected $db;
 
     /**
+     * Error format required by RFC6794
+     *
+     * @var type
+     * @url https://tools.ietf.org/html/rfc6749
+     */
+    protected $oAuthErrorTypes = array(
+        'invalid_request' => array(
+            'code' => '',
+            'description' => 'The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'unauthorized_client' => array(
+            'code' => 'unauthorized_client',
+            'description' => 'The client is not authorized to request an authorization code using this method.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'access_denied' => array(
+            'code' => 'access_denied',
+            'description' => 'The resource owner or authorization server denied the request.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'unsupported_response_type' => array(
+            'code' => 'unsupported_response_type',
+            'description' => 'The authorization server does not support obtaining an authorization code using this method.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'invalid_scope' => array(
+            'code' => 'invalid_scope',
+            'description' => 'The requested scope is invalid, unknown, or malformed.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'server_error' => array(
+            'code' => 'server_error',
+            'description' => 'The authorization server encountered an unexpected condition that prevented it from fulfilling the request.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'temporarily_unavailable' => array(
+            'code' => 'temporarily_unavailable',
+            'description' => 'The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.',
+            'uri' => '',
+            'state' => ''
+        )
+    );
+
+    /**
+     * The OAuth Error to return if an OAuthError occurs
+     *
+     * @var array OAuthError
+     */
+    protected $OAuthError = null;
+
+    /**
      * initialize.
      */
     public function __construct()
     {
         $f3 = \Base::instance();
         $this->db = \Registry::get('db');
-        $this->response = \FFMVC\Helpers\Response::instance();
+        $this->response = Helpers\Response::instance();
         $params = $f3->get('PARAMS');
-        $this->params['ttl'] = $f3->get('api.ttl');
     }
 
     /**
@@ -101,7 +160,7 @@ class Api
             $version = $this->version;
         }
         if ($version !== $this->version) {
-            $this->failure(4000, 'Unknown API version requested.', 400);
+            $this->failure(4999, 'Unknown API version requested.', 400);
         }
         if (empty($this->data['href'])) {
             $data['href'] = $this->href();
@@ -109,11 +168,18 @@ class Api
         $data = array(
             'service' => 'API',
             'api' => $version,
+            'time' => time(),
 //            'protocol' => $f3->get('SCHEME'),
         ) + $this->data;
-        if (count($this->errors)) {
-            ksort($this->errors);
-            $data['errors'] = $this->errors;
+
+        // if an OAuthError is set, return that instead of errors array
+        if (!empty($this->OAuthError)) {
+            $data['error'] = $this->OAuthError;
+        } else {
+            if (count($this->errors)) {
+                ksort($this->errors);
+                $data['errors'] = $this->errors;
+            }
         }
         $return = $f3->get('GET.return');
         switch ($return) {
@@ -143,6 +209,40 @@ class Api
     }
 
     /**
+     * Get OAuth Error Type
+     * @param type $type
+     * @return mixed array error type or boolean false
+     */
+    public function getOAuthErrorType($type)
+    {
+        return array_key_exists($type, $this->getOAuthErrorTypes) ? $this->getOAuthErrorTypes($type) : false;
+    }
+
+    /**
+     * Set the RFC-compliant OAuth Error to return
+     *
+     * @param type $code of error code from RFC
+     * @param type $state optional application state
+     * @throws ApiException
+     * @return the OAuth error array
+     */
+    public function setOAuthError($code, $state = null)
+    {
+        $error = $this->getOAuthErrorType($code);
+        if (empty($error)) {
+            throw new ApiException('Invalid OAuth error type.', 5100);
+        } else {
+            if (empty($state)) {
+                unset($error['state']);
+            } else {
+                $error['state'] = $state;
+            }
+            $this->OAuthError = $error;
+        }
+        return $error;
+    }
+
+    /**
      * authenticate and check account_group of user.
      *
      * @return bool true/false if authenticated successfully
@@ -165,14 +265,14 @@ class Api
 // unknown catch-all api method
     public function unknown($f3, $params)
     {
-        $this->failure('4001', 'Unknown API Request', 400);
+        $this->failure(4998, 'Unknown API Request', 400);
     }
 
 // set relative URL
     protected function rel($path)
     {
         $f3 = \Base::instance();
-        $this->data['rel'] = $f3->get('SCHEME').'://'.$f3->get('HOST') . $path;
+        $this->data['rel'] = $f3->get('SCHEME').'://'.$f3->get('HOST').$path;
 
         return;
     }
@@ -184,7 +284,7 @@ class Api
         if (empty($path)) {
             $this->data['href'] = $f3->get('REALM');
         } else {
-            $this->data['href'] = $f3->get('SCHEME').'://'.$f3->get('HOST') . $path;
+            $this->data['href'] = $f3->get('SCHEME').'://'.$f3->get('HOST').$path;
         }
 
         return;
@@ -197,3 +297,5 @@ class Api
         $this->rel('/api');
     }
 }
+
+class ApiException extends \Exception {}
