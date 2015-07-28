@@ -8,7 +8,10 @@ $f3->set('title', $title);
 
 <h1><?=$title ?></h1>
 
-<p><em><?=$e['status']?></em><br/>We're sorry but an error occurred.  Our best muppets are on the case.</p>
+<p>
+<em><?=$e['status']?></em><br/>
+We're sorry but an error occurred.
+</p>
 
 <?php if ($f3->get('application.environment') !== 'production'): ?>
 <h2>Error Context</h2>
@@ -18,8 +21,10 @@ $f3->set('title', $title);
 
 <h2>Error Trace</h2>
 <pre>
-<?=$e['trace'] ?>    
+    <?=nl2br($e['trace']) ?>
 </pre>
 <?php endif ?>
+
+<?=\View::instance()->render('www/keycom_footer.phtml'); ?>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>

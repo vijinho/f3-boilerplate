@@ -5,20 +5,26 @@ $title = 'Error:' . $e['code'];
 $f3->set('title', $title);
 ?>
 <?=\View::instance()->render('www/header.phtml'); ?>
-<h1>Error: <?=$e['code'] ?></h1>
 
-<p><em><?=$e['status']?></em><br/></p>
+<h1><?=$title ?></h1>
+
+<p>
+<em><?=$e['status']?></em><br/>
+We're sorry but an error occurred.  Our best muppets are on the case.
+</p>
 
 <?php if ($f3->get('application.environment') !== 'production'): ?>
 <h2>Error Context</h2>
 <pre>
-<?=$e['text'] ?>    
+<?=$e['text'] ?>
 </pre>
 
 <h2>Error Trace</h2>
 <pre>
-<?=$e['trace'] ?>    
+    <?=nl2br($e['trace']) ?>
 </pre>
 <?php endif ?>
+
+<?=\View::instance()->render('www/keycom_footer.phtml'); ?>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>
