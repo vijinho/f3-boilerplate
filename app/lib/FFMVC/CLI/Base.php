@@ -8,8 +8,6 @@ use FFMVC\Helpers as Helpers;
 /**
  * Base CLI Controller Class.
  *
- * @author Vijay Mahrra <vijay.mahrra@keycom.co.uk>
- * @copyright (c) Copyright Keycom Plc
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 abstract class Base
