@@ -69,16 +69,35 @@ class Api
      */
     protected $db;
 
+
     /**
      * Error format required by RFC6794
      *
      * @var type
      * @url https://tools.ietf.org/html/rfc6749
      */
-    protected $oAuthErrorTypes = array(
+    protected $OAuthErrorTypes = array(
         'invalid_request' => array(
-            'code' => '',
+            'code' => 'invalid_request',
             'description' => 'The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'invalid_client' => array(
+            'code' => 'invalid_client',
+            'description' => 'Client authentication failed (e.g., unknown client, no client authentication included, or unsupported authentication method).',
+            'uri' => '',
+            'state' => ''
+        ),
+        'invalid_grant' => array(
+            'code' => 'invalid_grant',
+            'description' => 'The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.',
+            'uri' => '',
+            'state' => ''
+        ),
+        'unsupported_grant_type' => array(
+            'code' => 'unsupported_grant_type',
+            'description' => 'The authorization grant type is not supported by the authorization server.',
             'uri' => '',
             'state' => ''
         ),
@@ -213,9 +232,9 @@ class Api
      * @param type $type
      * @return mixed array error type or boolean false
      */
-    public function getOAuthErrorType($type)
+    final protected function getOAuthErrorType($type)
     {
-        return array_key_exists($type, $this->getOAuthErrorTypes) ? $this->getOAuthErrorTypes($type) : false;
+        return array_key_exists($type, $this->OAuthErrorTypes) ? $this->OAuthErrorTypes[$type] : false;
     }
 
     /**
@@ -236,6 +255,14 @@ class Api
                 unset($error['state']);
             } else {
                 $error['state'] = $state;
+            }
+            switch ($code) {
+                case 'invalid_client': // as per-spec
+                    $this->params['http_status'] = 401;
+                    break;
+                default:
+                    $this->params['http_status'] = 400;
+                    break;
             }
             $this->OAuthError = $error;
         }
@@ -261,6 +288,51 @@ class Api
 
         return true;
     }
+
+    /**
+     * Basic Authentication for login:password of developer
+     * Check that the credentials match the database
+     * Cache result for 60 seconds
+     * @return boolean success/failure
+     */
+    protected function basicAuthenticate($f3, $params)
+    {
+        $auth = new \Auth(new \DB\SQL\Mapper(\Registry::get('db'), '<TABLE>', array('login', 'password'), 60), array(
+            'id' => 'login',
+            'pw' => 'password'
+        ));
+        return $auth->basic(function() use ($auth, $f3) {
+        });
+    }
+
+    /**
+     * Check if we have a bearer access token, if so, set it in the f3 hive as access_token
+     *
+     * @return array $access_token the access token data
+     */
+    final protected function getBearerAccessToken()
+    {
+        $f3 = \Base::instance();
+
+        // get the access token in order of preference
+        foreach ($f3->get('SERVER') as $k => $header) {
+            if (stristr($k, 'authorization') !== false) {
+                if (preg_match('/Bearer\s+(?P<access_token>.+)$/i', $header, $matches)) {
+                    $token = $matches['access_token'];
+                }
+            }
+            break;
+        }
+        if (empty($token)) {
+            $token = $f3->get('POST.access_token');
+        }
+        if (empty($token)) {
+            $token = $f3->get('GET.access_token');
+        }
+        
+        return $token;
+    }
+
 
 // unknown catch-all api method
     public function unknown($f3, $params)
