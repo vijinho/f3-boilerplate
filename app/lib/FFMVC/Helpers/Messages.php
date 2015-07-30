@@ -11,7 +11,7 @@ namespace FFMVC\Helpers;
  */
 class Messages extends \Prefab
 {
-    const TYPES = array(
+    public static $TYPES = array(
         'success',
         'error',
         'warning',
@@ -28,7 +28,7 @@ class Messages extends \Prefab
         if (empty($messages)) {
             $messages = array();
         }
-        foreach (self::TYPES as $type) {
+        foreach (self::$TYPES as $type) {
             if (!array_key_exists($type, $messages)) {
                 $messages[$type] = array();
             }
@@ -69,7 +69,7 @@ class Messages extends \Prefab
         $f3 = \Base::instance();
         $messages = $f3->get('messages');
         $type     = (empty($type) || !in_array($type,
-                                               self::TYPES)) ? 'message' : $type;
+                                               self::$TYPES)) ? 'message' : $type;
         // don't repeat messages!
         if (!in_array($message, $messages[$type]) && is_string($message)) {
             $messages[$type][] = $message;
@@ -83,7 +83,7 @@ class Messages extends \Prefab
         $f3 = \Base::instance();
         $messages = $f3->get('messages');
         if (!empty($type)) {
-            if (in_array($type, self::TYPES)) {
+            if (in_array($type, self::$TYPES)) {
                 $i = count($messages[$type]);
                 return $i;
             } else {
@@ -91,7 +91,7 @@ class Messages extends \Prefab
             }
         }
         $i = 0;
-        foreach (self::TYPES as $type) {
+        foreach (self::$TYPES as $type) {
             $i += count($messages[$type]);
         }
         return $i;
@@ -103,7 +103,7 @@ class Messages extends \Prefab
         $f3 = \Base::instance();
         $messages = $f3->get('messages');
         if (!empty($type)) {
-            if (in_array($type, self::TYPES)) {
+            if (in_array($type, self::$TYPES)) {
                 $i = count($messages[$type]);
                 if ($i > 0) {
                     return $messages[$type];
@@ -117,7 +117,7 @@ class Messages extends \Prefab
         
         // return false if there actually are no messages in the session
         $i = 0;
-        foreach (self::TYPES as $type) {
+        foreach (self::$TYPES as $type) {
             $i += count($messages[$type]);
         }
         if ($i == 0) {
@@ -126,7 +126,7 @@ class Messages extends \Prefab
 
         // order return by order of type array above
         // i.e. success, error, warning and then informational messages last
-        foreach (self::TYPES as $type) {
+        foreach (self::$TYPES as $type) {
             $return[$type] = $messages[$type];
         }
         return $return;
