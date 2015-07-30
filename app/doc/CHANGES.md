@@ -1,13 +1,15 @@
-# Application Releases #
+# Application Releases 
 
-### Version 1.6 ###
+## Version 1.6
 
 - Added messages helper to store/manage messages for displaying to the end-user
 - Output buffering enabled by default to display errors better
 - Added a string helper class for generating random strings and hashing
 - Log php errors to log file
+- Api controller example can perform a basic authentication against a db
+- Api controller can fetch any Bearer access token in the incoming request (e.g for OAuth)
 
-### Version 1.5 ###
+## Version 1.5 ##
 
 - Load in fatfree-core as a library
 - Use composer autoloader
