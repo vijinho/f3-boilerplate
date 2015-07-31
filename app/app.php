@@ -112,17 +112,21 @@ function Run()
             ob_end_flush();
         });
 
-        // clean ALL incoming user input by default, lower-case input vars
+        // clean ALL incoming user input by default
         foreach (array('GET', 'POST') as $var) {
             $input = $f3->get($var);
             if (is_array($input) && count($input)) {
+                $input = $validator->xss_clean($validator->sanitize($input));
                 $cleaned = array();
+                $request = array();
                 foreach ($input as $k => $v) {
                     $k = strtolower(trim($f3->clean($k)));
                     $v = $f3->clean($v);
                     $cleaned[$k] = $v;
+                    $request[$k] = $v;
                 }
                 $f3->set($var, $cleaned);
+                $f3->set('REQUEST', array_merge($f3->get('COOKIE', array()), $request));
             }
         }
 
@@ -153,7 +157,7 @@ function Run()
     }
 
     $f3->run();
-    
+
     // terminate application
     Main::finish($f3);
 }
