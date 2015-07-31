@@ -130,6 +130,22 @@ function Run()
             }
         }
 
+        // get the access token and set it in REQUEST.access_token
+        foreach ($f3->get('SERVER') as $k => $header) {
+            if (stristr($k, 'authorization') !== false) {
+                if (preg_match('/Bearer\s+(?P<access_token>.+)$/i', $header, $matches)) {
+                    $token = $matches['access_token'];
+                    break;
+                }
+            }
+        }
+        if (empty($token)) {
+            $token = $f3->get('REQUEST.access_token');
+        }
+        $token = base64_decode($token);
+        $f3->set('REQUEST.access_token', $token);
+
+
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
             function ($f3, $args) {
