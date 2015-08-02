@@ -155,6 +155,23 @@ class Api
         $this->db = \Registry::get('db');
         $this->response = Helpers\Response::instance();
         $params = $f3->get('PARAMS');
+
+        // get the access token and set it in REQUEST.access_token
+        foreach ($f3->get('SERVER') as $k => $header) {
+            if (stristr($k, 'authorization') !== false) {
+                if (preg_match('/Bearer\s+(?P<access_token>.+)$/i', $header, $matches)) {
+                    $token = $matches['access_token'];
+                    break;
+                }
+            }
+        }
+        if (empty($token)) {
+            $token = $f3->get('REQUEST.access_token');
+        }
+        if (!empty($token)) {
+            $token = base64_decode($token);
+            $f3->set('REQUEST.access_token', $token);
+        }
     }
 
     /**
@@ -329,7 +346,7 @@ class Api
         if (empty($token)) {
             $token = $f3->get('GET.access_token');
         }
-        
+
         return $token;
     }
 
