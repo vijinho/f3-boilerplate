@@ -102,11 +102,40 @@ function Run()
             while (ob_get_level()) {
                 ob_end_clean();
             }
-            if ($f3->get('ERROR.code') == '404') {
+            if ($f3->get('ERROR.code') == '404' && stristr($f3->get('PATH'), '/api') == false) {
                 include_once 'templates/www/error/404.phtml';
             } else {
                 $debug = $f3->get('DEBUG');
-                include_once $debug < 3 ? 'templates/www/error/error.phtml' :  'templates/www/error/debug.phtml';
+                if (stristr($f3->get('PATH'), '/api') !== false) {
+                    $response = Helpers\Response::instance();
+                    $data = array(
+                        'service' => 'API',
+                        'version' => 1,
+                        'time' => time(),
+                        'method' => $f3->get('VERB')
+                    );
+                    $e = $f3->get('ERROR');
+                    $data['error'] = array(
+                        'code' => substr($f3->snakecase(str_replace(' ', '', $e['status'])),1),
+                        'description' => $e['code'] . ' ' . $e['text']
+                    );
+                    if ($debug == 3) {
+                        // show the $e['trace'] but it's in HTML!
+                    }
+                    $params = array('http_status' => $e['code']);
+                    $return = $f3->get('REQUEST.return');
+                    switch ($return) {
+                        case 'xml':
+                        $response->xml($data, $params);
+                        break;
+
+                        default:
+                        case 'json':
+                        $response->json($data, $params);
+                    }
+                } else {
+                    include_once $debug < 3 ? 'templates/www/error/error.phtml' :  'templates/www/error/debug.phtml';
+                }
             }
             // http://php.net/manual/en/function.ob-end-flush.php
             ob_end_flush();

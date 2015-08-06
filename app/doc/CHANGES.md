@@ -8,6 +8,7 @@
 - Log php errors to log file
 - Api controller example can perform a basic authentication against a db
 - Api controller can fetch any Bearer access token in the incoming request (e.g for OAuth)
+- Show /api/ HTTP errors as JSON/XML
 
 ## Version 1.5 ##
 
