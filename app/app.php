@@ -145,7 +145,6 @@ function Run()
         foreach (array('GET', 'POST') as $var) {
             $input = $f3->get($var);
             if (is_array($input) && count($input)) {
-                $input = $validator->xss_clean($validator->sanitize($input));
                 $cleaned = array();
                 $request = array();
                 foreach ($input as $k => $v) {
