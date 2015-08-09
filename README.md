@@ -8,7 +8,8 @@ Skeleton PHP Fatfree-framework MVC website codebase.
 
 - [Get Composer](https://getcomposer.org/) - `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin -filename=composer`
 - Run `composer update`
-- Setup webserver config
+- Setup webserver config from [app/config/webserver](app/config/webserver)
+- OR run with php in-built webserver from [www](www): `php -S http://127.0.0.1:8080` and browse to [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
 ### Configuration
   - Copy `app/config/config.ini.example` to `config.ini`
