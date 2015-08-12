@@ -61,6 +61,6 @@ class Time extends \Prefab
             $zone = '';
         }
 
-        return gmdate('D, d M Y H:i:s', $unixtime).' '.$zone;
+        return trim(gmdate('D, d M Y H:i:s', $unixtime).' '.$zone);
     }
 }
