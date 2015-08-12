@@ -1,5 +1,7 @@
 # f3-boilerplate
 
+![f3-boilerplate homepage screenshot](tmp/screenshot.png)
+
 Skeleton PHP Fatfree-framework MVC website codebase.
 
 ## Setup
