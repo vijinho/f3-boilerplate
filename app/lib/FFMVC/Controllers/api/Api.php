@@ -169,7 +169,6 @@ class Api
             $token = $f3->get('REQUEST.access_token');
         }
         if (!empty($token)) {
-            $token = base64_decode($token);
             $f3->set('REQUEST.access_token', $token);
         }
     }
