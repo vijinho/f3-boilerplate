@@ -50,7 +50,7 @@ class String extends \Prefab
         $f3 = \Base::instance();
         $salt = $f3->get('application.salt');
         $hash = $f3->get('application.hash');
-        return substr(base64_encode(hash_hmac($hash, $string, $salt . $pepper,
-                    true)), 0, -1);
+        return base64_encode(hash_hmac($hash, $string, $salt . $pepper,
+                    true));
     }
 }
