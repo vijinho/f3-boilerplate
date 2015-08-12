@@ -17,48 +17,44 @@
 
     php_value date.timezone Europe/London
     php_value log_errors On
-    php_value error_log /vhosts/api.local/tmp/logs/php.log
-    php_value session.save_path /vhosts/api.local/tmp/sessions
-    php_value soap.wsdl_cache_dir /vhosts/api.local/tmp/cache
-    php_value include_path .:/vhosts/api.local/app/lib:/vhosts/api.local/lib/vendor
-    php_value session.save_path /vhosts/api.local/tmp/sessions
-    php_value upload_tmp_dir /vhosts/api.local/tmp/uploads
-    php_value soap.wsdl_cache_dir /vhosts/api.local/tmp/cache
-    php_value xcache.coveragedump_directory /vhosts/api.local/tmp/cache
-    php_value xcache.coredump_directory /vhosts/api.local/tmp
+    php_value include_path .:/vhosts/f3-boilerplate.local/app/lib
+    php_value error_log /vhosts/f3-boilerplate.local/tmp/logs/php.log
+    php_value upload_tmp_dir /vhosts/f3-boilerplate.local/tmp/uploads
+    php_value session.save_path /vhosts/f3-boilerplate.local/tmp/sessions
+    php_value soap.wsdl_cache_dir /vhosts/f3-boilerplate.local/tmp/cache
+#    php_value xcache.coveragedump_directory /vhosts/f3-boilerplate.local/tmp/cache
+#    php_value xcache.coredump_directory /vhosts/f3-boilerplate.local/tmp
 
-
-    php_value allow_url_fopen on
-    php_value default_charset utf-8
-    php_value short_open_tag Off
-    php_value expose_php Off
-    php_value zend.ze1_compatibility_mode off
-    php_value register_argc_argv Off
-    php_value register_globals Off
-    php_value always_populate_raw_post_data Off
+    php_value log_errors On
+    php_value display_errors Off
+    php_value html_errors Off
+    php_value display_startup_errors On
     php_value ignore_repeated_errors On
     php_value ignore_repeated_source On
+
+    php_value upload_max_filesize 32M
+    php_value memory_limit 128M
+    php_value post_max_size 32M
+
+    php_value default_socket_timeout 300
+    php_value max_execution_time 300
+    php_value max_input_time 300
+
+    php_value register_argc_argv Off
+
     php_value session.use_cookies 1
     php_value session.use_only_cookies 0
     php_value session.use_trans_sid 0
     php_value session.cookie_lifetime 86400
 
-    php_value upload_max_filesize 1024M
-    php_value memory_limit 1024M
-    php_value post_max_size 1024M
-
-    php_value sockets.use_system_read 1
-    php_value default_socket_timeout 3600
-    php_value max_execution_time 3600
-    php_value max_input_time 3600
-    php_value set_time_limit 3600
-
-    php_value display_errors Off
-    php_value html_errors Off
-    php_value php_error.force_disabled On
-    php_value php_error.autorun Off
-    php_value php_error.catch_ajax_errors Off
+    php_value short_open_tag On
+    php_value default_charset utf-8
+    php_value allow_url_fopen On
+    php_value expose_php Off
     php_value zlib.output_compression Off
+    php_value zend.ze1_compatibility_mode Off
+    php_value register_argc_argv Off
+    php_value register_globals Off
 
     # Link http://httpd.apache.org/docs/2.2/mod/mod_expires.html
 

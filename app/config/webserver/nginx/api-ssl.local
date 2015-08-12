@@ -76,30 +76,27 @@ server {
         fastcgi_param SERVER_PORT $server_port;
         fastcgi_param SERVER_NAME $server_name;
         fastcgi_param GATEWAY_INTERFACE CGI/1.1;
-        fastcgi_param PHP_VALUE "date.timezone=Europe/Stockholm
-error_log=/vhosts/api.local/logs/php.log
-session.save_path=/vhosts/api.local/tmp/sessions
-soap.wsdl_cache_dir=/vhosts/api.local/tmp/cache
-include_path=.:/vhosts/api.local/app/lib:/vhosts/api.local/lib/vendor
-session.save_path=/vhosts/api.local/tmp/sessions
-upload_tmp_dir=/vhosts/api.local/tmp/uploads
-soap.wsdl_cache_dir=/vhosts/api.local/tmp/cache
-xcache.coveragedump_directory=/vhosts/api.local/tmp/cache
-xcache.coredump_directory=/vhosts/api.local/tmp
+        fastcgi_param PHP_VALUE "date.timezone=Europe/London
+include_path=.:/vhosts/f3-boilerplate.local/app/lib
+error_log=/vhosts/f3-boilerplate.local/tmp/logs/php.log
+upload_tmp_dir=/vhosts/f3-boilerplate.local/tmp/uploads
+session.save_path=/vhosts/f3-boilerplate.local/tmp/sessions
+soap.wsdl_cache_dir=/vhosts/f3-boilerplate.local/tmp/cache
 
 log_errors=On
 display_errors=Off
-html_errors=On
+html_errors=Off
 display_startup_errors=On
-error_reporting=E_ALL ^ E_STRICT
+ignore_repeated_errors=On
+ignore_repeated_source=On
 
-upload_max_filesize=1024M
-memory_limit=1024M
-post_max_size=1024M
+upload_max_filesize=32M
+memory_limit=128M
+post_max_size=32M
 
-default_socket_timeout=3600
-max_execution_time=3600
-max_input_time=3600
+default_socket_timeout=300
+max_execution_time=300
+max_input_time=300
 
 register_argc_argv=Off
 
@@ -108,14 +105,14 @@ session.use_only_cookies=0
 session.use_trans_sid=0
 session.cookie_lifetime=86400
 
-short_open_tag=Off
+short_open_tag=On
 default_charset=utf-8
 allow_url_fopen=On
-always_populate_raw_post_data=Off
 expose_php=Off
-ignore_repeated_errors=On
-ignore_repeated_source=On
 zlib.output_compression=Off
+zend.ze1_compatibility_mode=Off
+register_argc_argv=Off
+register_globals=Off
 ";
 		expires  off; ## Do not cache dynamic content
 
