@@ -2,6 +2,8 @@
 
 namespace FFMVC\Models;
 
+use FFMVC\Helpers as Helpers;
+
 /**
  * Base Model Class.
  *
