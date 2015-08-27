@@ -1,4 +1,4 @@
-# Application Releases 
+# Application Releases
 
 ## Version 1.6
 
@@ -9,6 +9,7 @@
 - Api controller example can perform a basic authentication against a db
 - Api controller can fetch any Bearer access token in the incoming request (e.g for OAuth)
 - Show /api/ HTTP errors as JSON/XML
+- Set 'PageHash' as a unique HASH for each page
 
 ## Version 1.5 ##
 

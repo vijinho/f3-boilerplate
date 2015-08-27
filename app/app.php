@@ -147,21 +147,29 @@ function Run()
         });
 
         // clean ALL incoming user input by default
-        foreach (array('GET', 'POST') as $var) {
+	    $request = array();
+        foreach (array('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE') as $var) {
             $input = $f3->get($var);
             if (is_array($input) && count($input)) {
                 $cleaned = array();
-                $request = array();
                 foreach ($input as $k => $v) {
                     $k = strtolower(trim($f3->clean($k)));
                     $v = $f3->clean($v);
+                    if (empty($v)) {
+                    	continue;
+                    }
                     $cleaned[$k] = $v;
                     $request[$k] = $v;
                 }
+                ksort($cleaned);
                 $f3->set($var, $cleaned);
-                $f3->set('REQUEST', array_merge($f3->get('COOKIE', array()), $request));
             }
         }
+        ksort($request);
+        $f3->set('REQUEST', $request);
+        $f3->set('PageHash', md5(json_encode(array_merge($request, $_SERVER, $_ENV))));
+        unset($cleaned);
+        unset($request);
 
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
