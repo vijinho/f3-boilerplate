@@ -126,7 +126,8 @@ AddDefaultCharset utf-8
                      .json \
                      .rdf \
                      .rss \
-                     .xml
+                     .xml \
+                     .txt
 </IfModule>
 
 
@@ -209,18 +210,20 @@ AddDefaultCharset utf-8
 
     # All HTML pages
     Header set Content-Security-Policy "\
-default-src 'none';\
+default-src 'self';\
 font-src fonts.gstatic.com;\
-frame-src platform.twitter.com;\
+script-src 'self';\
+connect-src 'self';\
+img-src 'self';\
 img-src data: i.ytimg.com www.google-analytics.com;\
-script-src 'unsafe-inline' www.google-analytics.com ajax.googleapis.com platform.twitter.com;\
-style-src 'unsafe-inline' fonts.googleapis.com"
+script-src 'unsafe-inline' www.google-analytics.com ajax.googleapis.com;\
+style-src 'self' fonts.googleapis.com"
 
     # The 404 page
     <FilesMatch "404.html">
         # Replace previous set header
         Header set Content-Security-Policy "\
-default-src 'none';\
+default-src 'self';\
 style-src 'unsafe-inline'"
     </FilesMatch>
 

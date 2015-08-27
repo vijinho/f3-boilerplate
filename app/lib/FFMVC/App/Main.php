@@ -49,7 +49,6 @@ class Main extends \Prefab
         // setup outgoing email server for php mail command
         ini_set('SMTP', $f3->get('email.host'));
         ini_set('sendmail_from', $f3->get('email.from'));
-
         return $f3;
     }
 
@@ -64,10 +63,10 @@ class Main extends \Prefab
 
         if ($logger && $debug || $f3->get('application.environment') == 'development') {
             // log database transactions if level 3
-            $db = \Registry::get('db');    
-            if ($debug == 3 && 
+            $db = \Registry::get('db');
+            if ($debug == 3 &&
                 method_exists($logger, 'write') &&
-                method_exists($db, 'log')) 
+                method_exists($db, 'log'))
             {
                 $logger->write($db->log());
             }
