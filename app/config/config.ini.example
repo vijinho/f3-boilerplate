@@ -3,16 +3,8 @@ DEBUG=3
 TZ=Europe/Madrid
 LANGUAGE=es-ES
 
-;db.driver=sqlite
-;db.dsn=sqlite:/data/database.sqlite
+db.http_dsn=mysql://root:root@127.0.0.1:3306/mysql
 
-;db.http_dsn=mysql://root:root@127.0.0.1:3306/mysql
-;db.dsn=mysql:host=127.0.0.1;port=3306;dbname=mysql
-;db.username=root
-;db.password=root
-;db.sqlite.attached.otherdb=/full/path/to/db.sqlite
-
-; email/smtp settings
 email.host=smtp.example.org
 email.from=www@example.org
 

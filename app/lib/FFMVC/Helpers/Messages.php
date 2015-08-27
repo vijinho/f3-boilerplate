@@ -57,8 +57,10 @@ class Messages extends \Prefab
         if (PHP_SAPI !== 'cli') {
             $f3 = \Base::instance();
             // save persistent messages
+            $sessionify = $f3->get('sessionify_messages');
+            $messages = $f3->get('messages');
             $f3->set('SESSION.messages',
-                empty($f3->get('sessionify_messages')) ? null : $f3->get('messages'));
+                empty($sessionify) ? null : $messages);
         }
     }
 
@@ -76,7 +78,7 @@ class Messages extends \Prefab
         }
         $f3->set('messages', $messages);
     }
-    
+
     // return messages of given type or all TYPES, return false if none
     final public static function sum($type = null)
     {
@@ -114,7 +116,7 @@ class Messages extends \Prefab
                 return false;
             }
         }
-        
+
         // return false if there actually are no messages in the session
         $i = 0;
         foreach (self::$TYPES as $type) {

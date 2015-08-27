@@ -28,25 +28,29 @@ function Run()
     // setup database connection params
     // @see http://fatfreeframework.com/databases
     $db = null;
-    if (!empty($f3->get('db.driver') || $f3->get('db.dsn') || $f3->get('db.http_dsn'))) {
+    $driver = $f3->get('db.driver');
+    $dsn = $f3->get('db.dsn');
+    $http_dsn = $f3->get('db.http_dsn');
+    if (!empty($driver) || $dsn || $http_dsn) {
         if ($http_dsn = $f3->get('db.http_dsn')) {
-            if (preg_match('/^(?<driver>[^:]+):\/\/(?<username>[^:]+):(?<password>[^@]+)@(?<hostname>[^:]+):(?<port>[\d]+)?\/(?<database>.+)/', $http_dsn, $m)) {
-                $f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
-                    $m['driver'],
-                    $m['hostname'],
-                    $m['port'],
-                    $m['database']
-                ));
-                $f3->mset(array(
-                    'db.driver' => $m['driver'],
-                    'db.hostname' => $m['hostname'],
-                    'db.port' => $m['port'],
-                    'db.name' => $m['database'],
-                    'db.username' => $m['username'],
-                    'db.password' => $m['password'],
-                ));
-            }
-        } elseif (empty($f3->get('db.dsn'))) {
+        	$m = parse_url($http_dsn);
+        	$m['path'] = substr($m['path'], 1);
+        	$m['port'] = empty($m['port']) ? 3306 : $m['port'];
+			$f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
+				$m['scheme'],
+				$m['host'],
+				$m['port'],
+				$m['path']
+			));
+			$f3->mset(array(
+				'db.driver' => $m['scheme'],
+				'db.hostname' => $m['host'],
+				'db.port' => $m['port'],
+				'db.name' => $m['path'],
+				'db.username' => $m['user'],
+				'db.password' => $m['pass'],
+			));
+        } elseif (empty($dsn)) {
             $f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
                 $f3->get('db.driver'),
                 $f3->get('db.hostname'),
@@ -55,7 +59,8 @@ function Run()
             );
         }
 
-        if ($f3->get('db.driver') !== 'sqlite') {
+		$driver = $f3->get('db.driver');
+        if ($driver !== 'sqlite') {
             if ($dsn = $f3->get('db.dsn')) {
                 $db = new \DB\SQL(
                     $dsn,
