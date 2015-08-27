@@ -21,7 +21,7 @@
         "classmap": ["app/lib"]
     },
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.4.0",
         "bcosca/fatfree-core": "dev-master"
     },
     "suggest": {
