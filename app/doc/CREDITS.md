@@ -7,6 +7,7 @@
 * Christian Knuth -- https://github.com/ikkez
 * Stefano Ricci -- http://www.sharmpro.com
 * Patrick Müller -- http://patrickmueller.net
+* Andrew Williams -- https://github.com/andydwilliams
  
 # SOFTWARE PROJECTS
 
