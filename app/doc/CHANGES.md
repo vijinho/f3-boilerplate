@@ -10,6 +10,7 @@
 - Api controller can fetch any Bearer access token in the incoming request (e.g for OAuth)
 - Show /api/ HTTP errors as JSON/XML
 - Set 'PageHash' as a unique HASH for each page
+- Allow f3 to reference $_GET params on a command-line URL
 
 ## Version 1.5 ##
 
