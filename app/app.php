@@ -63,7 +63,8 @@ function Run()
 
 		$driver = $f3->get('db.driver');
         if ($driver !== 'sqlite') {
-            if ($dsn = $f3->get('db.dsn')) {
+            $dsn = $f3->get('db.dsn');
+            if (!empty($dsn)) {
                 $db = new \DB\SQL(
                     $dsn,
                     $f3->get('db.username'),

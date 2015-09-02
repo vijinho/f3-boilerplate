@@ -33,7 +33,7 @@ class Main extends \Prefab
         }
 
         // make sure directories are full, not relative path
-        foreach (['LOGS', 'TEMP', 'UPLOADS', 'LOCALES'] as $key) {
+        foreach (['LOGS', 'TEMP', 'UPLOADS'] as $key) {
             $dir = $f3->get($key);
             if (!empty($dir)) {
                 $dir = realpath($dir);
@@ -41,18 +41,21 @@ class Main extends \Prefab
             }
         }
 
-        $ui = $f3->get('UI');
-        if (!empty($ui)) {
-            $dirs = preg_split("/;/", $ui);
-            if (count($dirs)) {
-                foreach ($dirs as $k => $dir) {
-                    if (empty($dir)) {
-                        unset($dirs[$k]);
-                        continue;
+        // these take multiple paths
+        foreach (['LOCALES', 'UI'] as $key) {
+            $paths = $f3->get($key);
+            if (!empty($paths)) {
+                $dirs = $f3->split($paths);
+                if (count($dirs)) {
+                    foreach ($dirs as $k => $dir) {
+                        if (empty($dir)) {
+                            unset($dirs[$k]);
+                            continue;
+                        }
+                        $dirs[$k] = realpath($dir) . '/';
                     }
-                    $dirs[$k] = realpath($dir) . '/';
+                    $f3->set($key, join(';', $dirs));
                 }
-                $f3->set('UI', join(';', $dirs));
             }
         }
 
