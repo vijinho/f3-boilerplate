@@ -11,6 +11,7 @@
 - Show /api/ HTTP errors as JSON/XML
 - Set 'PageHash' as a unique HASH for each page
 - Allow f3 to reference $_GET params on a command-line URL
+- Make sure f3 environment variable paths in config are full filepaths, not relative
 
 ## Version 1.5 ##
 

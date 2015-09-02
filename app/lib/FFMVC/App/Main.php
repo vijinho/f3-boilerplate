@@ -32,6 +32,24 @@ class Main extends \Prefab
             $f3->config('config/config.ini');
         }
 
+        // make sure directories are full, not relative path
+        foreach (['LOGS', 'TEMP', 'UPLOADS', 'LOCALES'] as $key) {
+            $dir = $f3->get($key);
+            if (!empty($dir)) {
+                $dir = realpath($dir);
+                $f3->set($key, $dir);
+            }
+        }
+
+        $templates = $f3->get('UI');
+        if (!empty($templates)) {
+            $dirs = preg_split("/;/", $templates);
+            foreach ($dirs as $k => $dir) {
+                $dirs[$k] = realpath($dir);
+            }
+            $f3->set('UI', join(';', array_values($dirs)));
+        }
+
         $debug = $f3->get('debug');
 
         if (empty($logger)) {
