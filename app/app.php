@@ -14,8 +14,6 @@ use FFMVC\Helpers as Helpers;
  */
 function Run()
 {
-    chdir(realpath(dirname(__FILE__)));
-
     // @see http://fatfreeframework.com/quick-reference#autoload
     $f3 = require_once 'lib/bcosca/fatfree-core/base.php';
     $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree-core/;lib/');
