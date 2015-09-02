@@ -4,6 +4,26 @@
 
 Skeleton PHP Fatfree-framework MVC website codebase.
 
+## Is this project for you?
+
+I wrote this project for myself, but if you are thinking to use it, thinking on the points below will help you decide.
+
+* You need a stable project that can be easily adapted and altered to suit whatever your web development needs are.
+* You need to write some boilerplate code to add project structure and initialise some commons tasks like config, logging, database connections, set up environments for production and development etc
+* You need to use namepspaces in your project
+* You need to quickly and easily integrate composer classes into a project structure to get up and running ASAP.
+* You need to have your project configuration split up into different files for the main configuration as have a local override file.
+* You need to make sure that ALL script input is normalised and cleaned.
+* You want to implement a website using the Fat-Free Framework
+* You want to use f3 features like minify css and js and have these routes set up and ready-to-use.
+* You want to manage your routes in a separate config file.
+* You would like to have your script log how long it took to run and how much memory it used after executing when in 'development' mode.
+* You would like to see a real-life example of how to effectively use and display markdown files in a real-world project.
+* You may want to run f3 on the command-line
+* You may want the ability to setup your database connections in the http format - dbms://user:host@server:port/databasename
+* You may want to easily have a way to attach multiple sqlite databases together.
+* You may wish to write an API based on REST/XML responses and would like a starting point for to how to implement it.
+
 ## Setup
 
 ### Composer and Webserver
@@ -46,8 +66,8 @@ sudo chmod -fR 777 tmp data
  * `app/lib/FFMVC/Models` - MVC Models
  * `app/lib/FFMVC/Controllers` - MVC Controllers
  * `app/lib/FFMVC/Controllers/Api` - MVC Rest API Controllers
- * `app/lib/FFMVC/Helpers` - Useful static helper functions and utility libraries specific to the project
- * `app/lib/FFMVC/CLI` - Command line script controller lib
+ * `app/lib/FFMVC/Helpers` - Auxillary helper functions and utility libraries specific to the project
+ * `app/lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
  * `app/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function
  * `app/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
  * `app/templates/www/error/404.phtml` - 'friendly' file not found page
