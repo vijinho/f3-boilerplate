@@ -41,9 +41,10 @@ class Main extends \Prefab
             }
         }
 
-        $templates = $f3->get('UI');
-        if (!empty($templates)) {
-            $dirs = preg_split("/;/", $templates);
+
+        $ui = $f3->get('UI');
+        if (!empty($ui)) {
+            $dirs = preg_split("/;/", $ui);
             foreach ($dirs as $k => $dir) {
                 $dirs[$k] = realpath($dir);
             }
