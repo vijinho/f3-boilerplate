@@ -49,6 +49,19 @@ class Main extends \Prefab
         // setup outgoing email server for php mail command
         ini_set('SMTP', $f3->get('email.host'));
         ini_set('sendmail_from', $f3->get('email.from'));
+
+        // set default error handler output for CLI mode
+        if (PHP_SAPI == 'cli') {
+            $f3->set('ONERROR',
+                function($f3) {
+                    $e = $f3->get('ERROR');
+                    printf("Error %d: %s\n%s\n\n%s\n",
+                        $e['code'], $e['status'], $e['text'], $e['trace']
+                    );
+                }
+            );
+        }
+
         return $f3;
     }
 
