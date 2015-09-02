@@ -14,6 +14,8 @@ use FFMVC\Helpers as Helpers;
  */
 function Run()
 {
+    chdir(realpath(dirname(__FILE__)));
+
     // @see http://fatfreeframework.com/quick-reference#autoload
     $f3 = require_once 'lib/bcosca/fatfree-core/base.php';
     $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree-core/;lib/');
@@ -188,7 +190,7 @@ function Run()
         $f3->route('GET /minify/@type',
             function ($f3, $args) {
                     $type = $args['type'];
-                    $path = $f3->get('UI').$type.'/';
+                    $path = realpath(dirname(__FILE__) . '/../www/');
                     $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
                     echo \Web::instance()->minify($files, null, true, $path);
             },

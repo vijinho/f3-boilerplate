@@ -37,22 +37,26 @@ class Main extends \Prefab
             $dir = $f3->get($key);
             if (!empty($dir)) {
                 $dir = realpath($dir);
-                $f3->set($key, $dir);
+                $f3->set($key, $dir . '/');
             }
         }
-
 
         $ui = $f3->get('UI');
         if (!empty($ui)) {
             $dirs = preg_split("/;/", $ui);
-            foreach ($dirs as $k => $dir) {
-                $dirs[$k] = realpath($dir);
+            if (count($dirs)) {
+                foreach ($dirs as $k => $dir) {
+                    if (empty($dir)) {
+                        unset($dirs[$k]);
+                        continue;
+                    }
+                    $dirs[$k] = realpath($dir) . '/';
+                }
+                $f3->set('UI', join(';', $dirs));
             }
-            $f3->set('UI', join(';', array_values($dirs)));
         }
 
         $debug = $f3->get('debug');
-
         if (empty($logger)) {
             $logfile = $f3->get('application.logfile');
             if (!empty($logfile)) {
