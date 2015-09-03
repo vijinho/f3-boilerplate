@@ -86,6 +86,18 @@ class Main extends \Prefab
                     );
                 }
             );
+            // fix for f3 not populating $_GET on a command line URL
+            $querystring = preg_split("/&/", substr($_SERVER['REQUEST_URI'], 1 + strpos($_SERVER['REQUEST_URI'] . '&', '?')));
+            if (!empty($querystring) && count($querystring)) {
+                foreach ($querystring as $pair) {
+                    if (count($pair) !== 2) {
+                        continue;
+                    }
+                    list($k, $v) = preg_split("/=/", $pair);
+                    $_GET[$k] = $v;
+                }
+                $f3->set('GET', $_GET);
+            }
         }
 
         return $f3;
