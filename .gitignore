@@ -9,6 +9,7 @@
 *.tmp
 *.bak
 *.old
+*.log
 tmp/cache
 tmp/sessions
 tmp/uploads
