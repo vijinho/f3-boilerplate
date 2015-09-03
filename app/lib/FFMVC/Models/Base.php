@@ -13,7 +13,6 @@ use FFMVC\Helpers as Helpers;
  */
 abstract class Base extends \Prefab
 {
-
     /**
      * @var object database class
      */
@@ -48,6 +47,4 @@ abstract class Base extends \Prefab
             $this->logger = &$f3->ref('logger');
         }
     }
-
-
 }

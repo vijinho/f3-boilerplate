@@ -220,12 +220,12 @@ class Api
         $return = $f3->get('GET.return');
         switch ($return) {
             case 'xml':
-            $this->response->xml($data, $this->params);
-            break;
+                $this->response->xml($data, $this->params);
+                break;
 
             default:
-            case 'json':
-            $this->response->json($data, $this->params);
+                case 'json':
+                $this->response->json($data, $this->params);
         }
     }
 
@@ -274,7 +274,7 @@ class Api
                 $error['state'] = $state;
             }
             switch ($code) {
-                case 'invalid_client': // as per-spec
+                case 'invalid_client':
                     $this->params['http_status'] = 401;
                     break;
                 default:
@@ -294,16 +294,11 @@ class Api
     public function authorize($f3, $params)
     {
         try {
+            return $this->basicAuthenticate($f3, $params);
         } catch (\Exception $e) {
             // set failure message for user
-            switch ($e->getCode()) {
-
-            }
-
-            return false;
+            throw($e);
         }
-
-        return true;
     }
 
     /**
@@ -318,7 +313,8 @@ class Api
             'id' => 'login',
             'pw' => 'password'
         ));
-        return $auth->basic(function() use ($auth, $f3) {
+        return $auth->basic(function () use ($auth, $f3) {
+
         });
     }
 
@@ -351,13 +347,13 @@ class Api
     }
 
 
-// unknown catch-all api method
+    // unknown catch-all api method
     public function unknown($f3, $params)
     {
         $this->failure(4998, 'Unknown API Request', 400);
     }
 
-// set relative URL
+    // set relative URL
     protected function rel($path)
     {
         $f3 = \Base::instance();
@@ -366,7 +362,7 @@ class Api
         return;
     }
 
-// set canonical URL
+    // set canonical URL
     protected function href($path = null)
     {
         $f3 = \Base::instance();
@@ -379,7 +375,7 @@ class Api
         return;
     }
 
-// route /api
+    // route /api
     public function api($f3, $params)
     {
         $this->params['http_methods'] = 'GET,HEAD';
@@ -387,4 +383,14 @@ class Api
     }
 }
 
-class ApiException extends \Exception {}
+class ApiException extends \Exception
+{
+}
+
+class ApiClientException extends ApiException
+{
+}
+
+class ApiServerException extends ApiException
+{
+}

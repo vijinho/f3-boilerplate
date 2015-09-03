@@ -4,7 +4,6 @@ namespace FFMVC\Controllers;
 
 use FFMVC\Helpers as Helpers;
 
-
 /**
  * Index Controller Class.
  *
