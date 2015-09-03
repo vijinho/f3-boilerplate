@@ -18,7 +18,7 @@ class Api
      *
      * @var version
      */
-    protected $version = 1;
+    protected $version;
 
     /**
      * response errors
@@ -154,6 +154,7 @@ class Api
         $f3 = \Base::instance();
         $this->db = \Registry::get('db');
         $this->response = Helpers\Response::instance();
+        $this->version = $f3->get('application.version');
         $params = $f3->get('PARAMS');
 
         // get the access token and set it in REQUEST.access_token
