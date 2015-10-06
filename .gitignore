@@ -17,3 +17,5 @@ logs
 app/lib/autoload.php
 app/lib/bcosca
 app/lib/composer
+app/application.log
+app/lib/FFMVC

@@ -553,6 +553,7 @@ FileETag None
 
 
 RewriteEngine On
+
 RewriteRule ^(tmp)\/|\.ini$ - [R=404]
 RewriteRule ^(.*\.(css|js))$ min/index.php?f=$1&debug=0 [L,NC]
 RewriteCond %{REQUEST_FILENAME} !-l

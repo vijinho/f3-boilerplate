@@ -51,6 +51,9 @@ sudo chmod -fR 777 tmp data
 
 ## Description of Project Layout
 
+*Note:* The files that were in `app/lib/FFMVC` have now been split-out into their own repository https://github.com/vijinho/FFMVC 
+They can then be included in your own project by adding the same lines in your `composer.json` as used in mine here.
+
  * `www` - website and public doc root (aka `public_html` or `htdocs` etc)
  * `www/index.php` - start website application here
  * `app/lib/` - all library files/classes
