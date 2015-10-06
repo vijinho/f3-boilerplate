@@ -13,8 +13,6 @@ namespace FFMVC\App;
  */
 class Main extends \Prefab
 {
-    const APP_VERSION = '1.6';
-
     /**
      * setup the base application environment.
      *
@@ -78,16 +76,15 @@ class Main extends \Prefab
 
         // set default error handler output for CLI mode
         if (PHP_SAPI == 'cli') {
-            $f3->set('ONERROR',
-                function($f3) {
+            $f3->set('ONERROR', function ($f3) {
                     $e = $f3->get('ERROR');
                     printf("Error %d: %s\n%s\n\n%s\n",
                         $e['code'], $e['status'], $e['text'], $e['trace']
                     );
-                }
-            );
+            });
             // fix for f3 not populating $_GET on the command line
-            $querystring = preg_split("/&/", substr($_SERVER['REQUEST_URI'], 1 + strpos($_SERVER['REQUEST_URI'] . '&', '?')));
+            $uri = $f3->get('SERVER.REQUEST_URI');
+            $querystring = preg_split("/&/", substr($uri, 1 + strpos($uri . '&', '?')));
             if (!empty($querystring) && count($querystring)) {
                 foreach ($querystring as $pair) {
                     if (count($pair) == 0) {
@@ -119,8 +116,7 @@ class Main extends \Prefab
             $db = \Registry::get('db');
             if ($debug == 3 &&
                 method_exists($logger, 'write') &&
-                method_exists($db, 'log'))
-            {
+                method_exists($db, 'log')) {
                 $logger->write($db->log());
             }
             $execution_time = round(microtime(true) - $f3->get('TIME'), 3);

@@ -22,7 +22,7 @@ class Test extends Api
         }
     }
 
-// route /api
+    // route /api
     public function request($f3, $params)
     {
         $this->params['http_methods'] = 'GET,HEAD';

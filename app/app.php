@@ -33,33 +33,33 @@ function Run()
     $http_dsn = $f3->get('db.http_dsn');
     if (!empty($driver) || $dsn || $http_dsn) {
         if ($http_dsn = $f3->get('db.http_dsn')) {
-        	$m = parse_url($http_dsn);
-        	$m['path'] = substr($m['path'], 1);
-        	$m['port'] = empty($m['port']) ? 3306 : $m['port'];
-			$f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
-				$m['scheme'],
-				$m['host'],
-				$m['port'],
-				$m['path']
-			));
-			$f3->mset(array(
-				'db.driver' => $m['scheme'],
-				'db.hostname' => $m['host'],
-				'db.port' => $m['port'],
-				'db.name' => $m['path'],
-				'db.username' => $m['user'],
-				'db.password' => $m['pass'],
-			));
+            $m = parse_url($http_dsn);
+            $m['path'] = substr($m['path'], 1);
+            $m['port'] = empty($m['port']) ? 3306 : $m['port'];
+            $f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
+                $m['scheme'],
+                $m['host'],
+                $m['port'],
+                $m['path']
+            ));
+            $f3->mset(array(
+                'db.driver' => $m['scheme'],
+                'db.hostname' => $m['host'],
+                'db.port' => $m['port'],
+                'db.name' => $m['path'],
+                'db.username' => $m['user'],
+                'db.password' => $m['pass'],
+            ));
         } elseif (empty($dsn)) {
             $f3->set('db.dsn', sprintf('%s:host=%s;port=%d;dbname=%s',
                 $f3->get('db.driver'),
                 $f3->get('db.hostname'),
                 $f3->get('db.port'),
-                $f3->get('db.name'))
-            );
+                $f3->get('db.name')
+            ));
         }
 
-		$driver = $f3->get('db.driver');
+        $driver = $f3->get('db.driver');
         if ($driver !== 'sqlite') {
             $dsn = $f3->get('db.dsn');
             if (!empty($dsn)) {
@@ -103,52 +103,52 @@ function Run()
         // web start
         // custom error handler if debugging
         $f3->set('ONERROR',
-            function() use ($f3) {
-                // recursively clear existing output buffers:
-            while (ob_get_level()) {
-                ob_end_clean();
-            }
-            if ($f3->get('ERROR.code') == '404' && stristr($f3->get('PATH'), '/api') == false) {
-                include_once 'templates/www/error/404.phtml';
-            } else {
-                $debug = $f3->get('DEBUG');
-                if (stristr($f3->get('PATH'), '/api') !== false) {
-                    $response = Helpers\Response::instance();
-                    $data = array(
-                        'service' => 'API',
-                        'version' => 1,
-                        'time' => time(),
-                        'method' => $f3->get('VERB')
-                    );
-                    $e = $f3->get('ERROR');
-                    $data['error'] = array(
-                        'code' => substr($f3->snakecase(str_replace(' ', '', $e['status'])),1),
-                        'description' => $e['code'] . ' ' . $e['text']
-                    );
-                    if ($debug == 3) {
-                        // show the $e['trace'] but it's in HTML!
-                    }
-                    $params = array('http_status' => $e['code']);
-                    $return = $f3->get('REQUEST.return');
-                    switch ($return) {
-                        case 'xml':
-                        $response->xml($data, $params);
-                        break;
-
-                        default:
-                        case 'json':
-                        $response->json($data, $params);
-                    }
-                } else {
-                    include_once $debug < 3 ? 'templates/www/error/error.phtml' :  'templates/www/error/debug.phtml';
+            function () use ($f3) {
+                    // recursively clear existing output buffers:
+                while (ob_get_level()) {
+                    ob_end_clean();
                 }
-            }
-            // http://php.net/manual/en/function.ob-end-flush.php
-            ob_end_flush();
+                if ($f3->get('ERROR.code') == '404' && stristr($f3->get('PATH'), '/api') == false) {
+                    include_once 'templates/www/error/404.phtml';
+                } else {
+                    $debug = $f3->get('DEBUG');
+                    if (stristr($f3->get('PATH'), '/api') !== false) {
+                        $response = Helpers\Response::instance();
+                        $data = array(
+                            'service' => 'API',
+                            'version' => 1,
+                            'time' => time(),
+                            'method' => $f3->get('VERB')
+                        );
+                        $e = $f3->get('ERROR');
+                        $data['error'] = array(
+                            'code' => substr($f3->snakecase(str_replace(' ', '', $e['status'])), 1),
+                            'description' => $e['code'] . ' ' . $e['text']
+                        );
+                        if ($debug == 3) {
+                            // show the $e['trace'] but it's in HTML!
+                        }
+                        $params = array('http_status' => $e['code']);
+                        $return = $f3->get('REQUEST.return');
+                        switch ($return) {
+                            case 'xml':
+                                $response->xml($data, $params);
+                                break;
+
+                            default:
+                                case 'json':
+                                $response->json($data, $params);
+                        }
+                    } else {
+                        include_once $debug < 3 ? 'templates/www/error/error.phtml' :  'templates/www/error/debug.phtml';
+                    }
+                }
+                // http://php.net/manual/en/function.ob-end-flush.php
+                ob_end_flush();
         });
 
         // clean ALL incoming user input by default
-	    $request = array();
+        $request = array();
         foreach (array('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE') as $var) {
             $input = $f3->get($var);
             if (is_array($input) && count($input)) {
@@ -157,7 +157,7 @@ function Run()
                     $k = strtolower(trim($f3->clean($k)));
                     $v = $f3->clean($v);
                     if (empty($v)) {
-                    	continue;
+                        continue;
                     }
                     $cleaned[$k] = $v;
                     $request[$k] = $v;

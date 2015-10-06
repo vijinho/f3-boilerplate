@@ -3,15 +3,24 @@ DEBUG=3
 TZ=Europe/Madrid
 LANGUAGE=es-ES
 
-db.http_dsn=mysql://root:root@127.0.0.1:3306/mysql
+[application]
+logfile=app.log
+environment=development
+salt=MY_SALT
 
-email.host=smtp.example.org
-email.from=www@example.org
+;http://php.net/manual/en/function.hash-hmac.php
+hash=sha256
+salt=YOUR_SALT
 
-analytics.enabled = true
-analytics.code=UA-EXAMPLE-CODE
-analytics.domain=example.org
+[db]
+http_dsn=mysql://root:root@127.0.0.1:3306/mysql
 
-application.logfile=app.log
-application.environment=development
-application.salt=MY_SALT
+[email]
+host=smtp.example.org
+from=www@example.org
+
+[analytics]
+enabled=false
+code=UA-EXAMPLE-CODE
+domain=example.org
+

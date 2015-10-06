@@ -12,7 +12,6 @@ namespace FFMVC\Helpers;
  */
 class String extends \Prefab
 {
-
     /**
      * generate random string
      *

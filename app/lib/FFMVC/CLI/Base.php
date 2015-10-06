@@ -4,7 +4,6 @@ namespace FFMVC\CLI;
 
 use FFMVC\Helpers as Helpers;
 
-
 /**
  * Base CLI Controller Class.
  *
@@ -12,7 +11,6 @@ use FFMVC\Helpers as Helpers;
  */
 abstract class Base
 {
-
     /**
      * @var object database class
      */
@@ -50,6 +48,4 @@ abstract class Base
             $this->logger = &$f3->ref('logger');
         }
     }
-
-
 }
