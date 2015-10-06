@@ -2,6 +2,7 @@
 
 ## Version 1.6
 
+- Moved [app/lib/FFMVC](https://github.com/vijinho/FFMVC) file into their own repository now to include vio composer
 - Added messages helper to store/manage messages for displaying to the end-user
 - Output buffering enabled by default to display errors better
 - Added a string helper class for generating random strings and hashing
