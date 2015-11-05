@@ -13,8 +13,9 @@
 - Set 'PageHash' as a unique HASH for each page
 - Allow f3 to reference $_GET params on a command-line URL
 - Make sure f3 environment variable paths in config are full filepaths, not relative
+- [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
 
-## Version 1.5 ##
+## Version 1.5
 
 - Load in fatfree-core as a library
 - Use composer autoloader

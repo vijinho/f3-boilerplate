@@ -78,6 +78,9 @@ They can then be included in your own project by adding the same lines in your `
  * `app/templates/www/error/404.phtml` - 'friendly' file not found page
  * `app/templates/www/error/error.phtml` - 'friendly' error page
 
+### External Libraries
+ * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
+
 #### SSL (Optional)
 Runs by default on [api.local](http://api.local/)
 
