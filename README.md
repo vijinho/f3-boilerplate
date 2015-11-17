@@ -24,7 +24,7 @@ I wrote this project for myself, but if you are thinking to use it, thinking on 
 * You want to have your project configuration split up into different files for the main configuration as have a local override file.
 * You would like to have your script log how long it took to run and how much memory it used after executing when in 'development' mode.
 * You need to make sure that ALL script input is normalised and cleaned by default.
-* You want to use namepspaces in your project
+* You want to use namespaces in your project
 
 ## Setup
 
