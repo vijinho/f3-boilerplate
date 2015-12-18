@@ -93,6 +93,7 @@ ignore_repeated_source=On
 upload_max_filesize=32M
 memory_limit=128M
 post_max_size=32M
+always_populate_raw_post_data=-1
 
 default_socket_timeout=300
 max_execution_time=300
@@ -104,6 +105,7 @@ session.use_cookies=1
 session.use_only_cookies=0
 session.use_trans_sid=0
 session.cookie_lifetime=86400
+session.auto_start=0
 
 short_open_tag=On
 default_charset=utf-8

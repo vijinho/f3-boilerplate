@@ -14,6 +14,7 @@
 - Allow f3 to reference $_GET params on a command-line URL
 - Make sure f3 environment variable paths in config are full filepaths, not relative
 - [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
+- Do not auto-start sessions for /api URLs
 
 ## Version 1.5
 

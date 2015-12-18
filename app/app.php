@@ -101,6 +101,14 @@ function Run()
         $f3->config('config/routes-cli.ini');
     } else {
         // web start
+
+        // do not use sessions for api calls
+        if (stristr($f3->get('PATH'), '/api') !== false && session_status() !== PHP_SESSION_NONE) {
+            session_write_close();
+        } else {
+            session_start();
+        }
+
         // custom error handler if debugging
         $f3->set('ONERROR',
             function () use ($f3) {
