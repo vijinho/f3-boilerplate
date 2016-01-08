@@ -28,6 +28,10 @@ I wrote this project for myself, but if you are thinking to use it, thinking on 
 
 ## Setup
 
+There is a work-in-progress for a [Vagrant box](https://www.vagrantup.com/), using a forked version of [ScotchBox](https://box.scotch.io/) at https://github.com/vijinho/scotch-box/tree/f3-boilerplate
+
+https://github.com/vijinho/scotch-box/tree/f3-boilerplate
+
 ### Composer and Webserver
 
 - [Get Composer](https://getcomposer.org/) - `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin -filename=composer`
