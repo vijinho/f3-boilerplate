@@ -84,7 +84,7 @@ ignore_repeated_source=On
 upload_max_filesize=32M
 memory_limit=128M
 post_max_size=32M
-always_populate_raw_post_data=-1
+
 
 default_socket_timeout=300
 max_execution_time=300

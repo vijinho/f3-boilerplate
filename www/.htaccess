@@ -529,7 +529,7 @@ FileETag None
     php_value upload_max_filesize 32M
     php_value memory_limit 128M
     php_value post_max_size 32M
-    php_value always_populate_raw_post_data -1
+    
 
     php_value default_socket_timeout 300
     php_value max_execution_time 300
