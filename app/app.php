@@ -105,7 +105,7 @@ function Run()
         // do not use sessions for api calls
         if (stristr($f3->get('PATH'), '/api') !== false && session_status() !== PHP_SESSION_NONE) {
             session_write_close();
-        } else {
+        } else if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
 
