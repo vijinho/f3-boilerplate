@@ -24,7 +24,7 @@
             "type": "package",
             "package": {
                 "name": "FFMVC",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "source": {
                     "url": "https://github.com/vijinho/FFMVC.git",
                     "type": "git",
@@ -34,7 +34,7 @@
         }],
     "require": {
         "php": ">=5.5.0",
-        "FFMVC": "1.0.1",
+        "FFMVC": "1.0.2",
         "bcosca/fatfree-core": "dev-master",
         "league/climate": "^3.2"
     },
