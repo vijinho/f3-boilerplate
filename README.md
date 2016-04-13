@@ -28,7 +28,7 @@ I wrote this project for myself, but if you are thinking to use it, thinking on 
 
 ## Setup
 
-There is a work-in-progress for a [Vagrant box](https://www.vagrantup.com/), using a forked version of [ScotchBox](https://box.scotch.io/) at https://github.com/vijinho/scotch-box/tree/f3-boilerplate
+There is a work-in-progress for a [Vagrant box](https://www.vagrantup.com/), using a forked version of [ScotchBox](https://box.scotch.io/) but it is not ready yet.
 
 https://github.com/vijinho/scotch-box/tree/f3-boilerplate
 
