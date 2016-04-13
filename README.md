@@ -58,6 +58,10 @@ sudo chmod -fR 777 tmp data
 *Note:* The files that were in `app/lib/FFMVC` have now been split-out into their own repository https://github.com/vijinho/FFMVC 
 They can then be included in your own project by adding the same lines in your `composer.json` as used in mine here.
 
+## Core Files/Paths
+
+These are the core files which would occur across every project using f3-boilerplate and it shouldn't normally be necessary to fork this or change it much if forked.
+
  * `www` - website and public doc root (aka `public_html` or `htdocs` etc)
  * `www/index.php` - start website application here
  * `app/lib/` - all library files/classes
@@ -71,16 +75,21 @@ They can then be included in your own project by adding the same lines in your `
  * `app/config/vhost` - application virtual host configuration files (apache and nginx supported)
  * `app/app.php` - start fatfree by including this file and running FFMVC\App\Run();
  * `app/cli.php` - command-line specific bootstrap instructions
+ * `app/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function
+ * `app/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
+ * `app/templates/www/error/404.phtml` - 'friendly' file not found page
+ * `app/templates/www/error/error.phtml` - 'friendly' error page
+  
+## Supplemental Files/Paths
+
+These files are used as examples for the actual MVC structure files - these will almost certainly vary according to each different project's requirements and so should be forked and renamed according to your project implementation.  
+
  * `app/lib/FFMVC/App` - Base Application Classes
  * `app/lib/FFMVC/Models` - MVC Models
  * `app/lib/FFMVC/Controllers` - MVC Controllers
  * `app/lib/FFMVC/Controllers/Api` - MVC Rest API Controllers
  * `app/lib/FFMVC/Helpers` - Auxillary helper functions and utility libraries specific to the project
  * `app/lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
- * `app/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function
- * `app/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
- * `app/templates/www/error/404.phtml` - 'friendly' file not found page
- * `app/templates/www/error/error.phtml` - 'friendly' error page
 
 ### External Libraries
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
