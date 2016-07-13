@@ -11,12 +11,15 @@
     <?php /* <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS"> */ ?>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0,minimal-ui">
     <meta name="HandheldFriendly" content="True"/>
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 <?php if ($f3->get('application.environment') == 'production'): ?>
-    <link rel="stylesheet" href="/minify/css?files=/css/bootstrap.css,/css/style.css,/css/messages.css">
-<?php else: ?>
-    <link rel="stylesheet" href="/minify/css?files=/css/bootstrap.css,/css/style.css,/css/messages.css">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <?php else: ?>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
 <?php endif ?>
+    <link rel="stylesheet" href="/minify/css?files=/css/style.css,/css/messages.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

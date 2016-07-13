@@ -3,6 +3,8 @@ $title = 'Home';
 $f3->set('title', $title);
 ?>
 <?=\View::instance()->render('www/header.phtml'); ?>
+<?=\View::instance()->render('www/header-menu.phtml'); ?>
+
 <div class="container">
     <div class="row">
         <div class="eight columns">
@@ -109,4 +111,5 @@ if (!empty($db)) {
     </div>
   </div>
 
+<?=\View::instance()->render('www/footer-menu.phtml'); ?>
 <?=\View::instance()->render('www/footer.phtml'); ?>
