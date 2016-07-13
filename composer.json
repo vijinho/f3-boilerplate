@@ -36,7 +36,8 @@
         "php": ">=5.5.0",
         "FFMVC": "1.0.2",
         "bcosca/fatfree-core": "dev-master",
-        "league/climate": "^3.2"
+        "league/climate": "^3.2",
+        "robmorgan/phinx": "^0.6.2"
     },
     "suggest": {
         "php": ">=5.6.0"

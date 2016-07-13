@@ -93,6 +93,7 @@ These files are used as examples for the actual MVC structure files - these will
 
 ### External Libraries
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
+ * [Phinx](https://phinx.org) for database migrations
 
 #### SSL (Optional)
 API can run by default on [api.local](https://api.local/) for API and test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)
