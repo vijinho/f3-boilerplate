@@ -1,5 +1,10 @@
 # Application Releases
 
+# Version 2.0.0
+
+- Switched to [Semantic Versioning 2.0.0](http://semver.org)
+- CSS [Bootstrap](http://getbootstrap.com) by default now
+
 ## Version 1.6
 
 - Changes for PHP7

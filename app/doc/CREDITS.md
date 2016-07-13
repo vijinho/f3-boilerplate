@@ -12,4 +12,4 @@
 # SOFTWARE PROJECTS
 
 * Fat-Free Framework - http://fatfreeframework.com/
-* Skeleton CSS - http://getskeleton.com/
+* Bootstrap - http://getbootstrap.com

@@ -18,4 +18,4 @@
 
 # TECHNOLOGY COLOPHON
 
-* Skeleton CSS - http://getskeleton.com/
+* Bootstrap - http://getbootstrap.com
