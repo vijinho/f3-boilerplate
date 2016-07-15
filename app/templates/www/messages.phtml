@@ -1,12 +1,12 @@
 <?php
 $f3 = \Base::instance();
 // display all messages
-$messages = $messages = \FFMVC\Helpers\Messages::instance()->get();
+$messages = $messages = \FFCMS\Helpers\Messages::instance()->get();
 if (is_array($messages)):
     echo '<div id="messages">';
     foreach ($messages as $type => $msgs):
         foreach ($msgs as $message):
-            echo ('<span class="message_' . $type . '">' . $message . '</span>');
+            echo ('<div role="alert" class="alert alert-' . $type . '">' . $message . '</div>');
         endforeach;
     endforeach;
     echo '</div>';
