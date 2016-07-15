@@ -95,11 +95,12 @@ These files are used as examples for the actual MVC structure files - these will
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
 
 #### SSL (Optional)
-Runs by default on [api.local](https://api.local/)
+API can run by default on [api.local](https://api.local/) for API and test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)
 
-I recommend using [Let's Encrypt](https://letsencrypt.org) to generate a real live valid SSL certificate for production environments.
+Use [Let's Encrypt](https://letsencrypt.org) to generate a real live valid SSL certificate for production environments.
 
-#### Dummy certificate
+#### Dummy certificate (example)
+
 `openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=GB/ST=STATE/L=TOWN/O=Office/CN=api.local" -keyout api.key -out api.crt`
 
 Add to apache virtual host (and also see the api-ssl.local files in [app/config/webserver/](app/config/webserver/)
