@@ -3,6 +3,7 @@
 namespace FFMVC\App;
 
 use FFMVC\Helpers as Helpers;
+use FFMVC\Models as Models;
 
 /**
  * fat-free framework application
@@ -60,27 +61,14 @@ function Run()
         }
 
         $driver = $f3->get('db.driver');
-        if ($driver !== 'sqlite') {
-            $dsn = $f3->get('db.dsn');
-            if (!empty($dsn)) {
-                $db = new \DB\SQL(
-                    $dsn,
-                    $f3->get('db.username'),
-                    $f3->get('db.password')
-                );
-            }
-        } else {
-            $dsn = $f3->get('db.dsn');
-            $dsn = substr($dsn, 0, strpos($dsn, '/')).realpath('../').substr($dsn, strpos($dsn, '/'));
-            $db = new \DB\SQL($dsn);
-            // attach any other sqlite databases - this example uses the full pathname to the db
-            if ($f3->exists('db.sqlite.attached')) {
-                $attached = $f3->get('db.sqlite.attached');
-                $st = $db->prepare('ATTACH :filename AS :dbname');
-                foreach ($attached as $dbname => $filename) {
-                    $st->execute(array(':filename' => $filename, ':dbname' => $dbname));
-                }
-            }
+        $dsn = $f3->get('db.dsn');
+        if (!empty($dsn)) {
+            $db = new \DB\SQL(
+                $dsn,
+                $f3->get('db.username'),
+                $f3->get('db.password'),
+                [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
+            );
         }
     }
     \Registry::set('db', $db);
@@ -130,7 +118,7 @@ function Run()
                         );
                         $e = $f3->get('ERROR');
                         $data['error'] = array(
-                            'code' => substr($f3->snakecase(str_replace(' ', '', $e['status'])), 1),
+                            'code' => substr($f3->snakecase(str_replace(' ', '', $e['status'])), 0),
                             'description' => $e['code'] . ' ' . $e['text']
                         );
                         if ($debug == 3) {
@@ -180,6 +168,40 @@ function Run()
         unset($cleaned);
         unset($request);
 
+        // get the access token and basic auth and set it in REQUEST.access_token
+        foreach ($f3->get('SERVER') as $k => $header) {
+            if (stristr($k, 'authorization') !== false) {
+                if (preg_match('/Bearer\s+(?P<access_token>.+)$/i', $header, $matches)) {
+                    $token = $matches['access_token'];
+                } elseif (preg_match('/Basic\s+(?P<data>.+)$/i', $header, $matches)) {
+                    $data = preg_split('/:/', base64_decode($matches['data']));
+                    $f3->mset(array(
+                        'SERVER.PHP_AUTH_USER' => $data[0],
+                        'SERVER.PHP_AUTH_PW' => $data[1],
+                        'REQUEST.PHP_AUTH_USER' => $data[0],
+                        'REQUEST.PHP_AUTH_PW' => $data[1]
+                    ));
+                }
+            }
+        }
+        if (empty($token)) {
+            $token = $f3->get('REQUEST.access_token');
+        }
+        if (!empty($token)) {
+            // check there is a valid user id for the token
+            if (preg_match('/^(?P<user_id>.+)\-.+$/i', $token, $matches)) {
+                if (!empty($matches['user_id'])) {
+                    $f3->mset(array(
+                        'REQUEST.access_token' => $token,
+                        'REQUEST.user_id' => $matches['user_id'],
+                    ));
+                }
+            } else {
+                // developer access token
+                $f3->set('REQUEST.access_token', $token);
+            }
+        }
+
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
             function ($f3, $args) {
@@ -202,6 +224,11 @@ function Run()
             }
             echo \View::instance()->render('www/footer.phtml');
         }, $f3->get('doc.ttl'));
+
+
+        // global validator
+        $validator = new Helpers\Validator();
+        \Registry::set('validator', $validator);
 
         $f3->config('config/routes.ini');
     }

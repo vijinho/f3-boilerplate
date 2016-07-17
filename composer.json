@@ -37,6 +37,8 @@
         "FFMVC": "1.0.2",
         "bcosca/fatfree-core": "dev-master",
         "league/climate": "^3.2",
+        "fzaninotto/faker": "^1.6",
+        "wixel/gump": "dev-master",
         "robmorgan/phinx": "^0.6.2"
     },
     "suggest": {

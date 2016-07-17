@@ -92,8 +92,11 @@ These files are used as examples for the actual MVC structure files - these will
  * `app/lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
 
 ### External Libraries
- * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
  * [Phinx](https://phinx.org) for database migrations
+ * [Climate](http://climate.thephpleague.com/) is used for the CLI utility
+ * methods.
+ * [Wixel GUMP](https://github.com/Wixel/GUMP) for data validation
+
 
 #### SSL (Optional)
 API can run by default on [api.local](https://api.local/) for API and test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)
