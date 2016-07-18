@@ -519,21 +519,21 @@ FileETag None
 </IfModule>
 
 <IfModule mod_php5.c>
-    php_value log_errors On
+    php_value log_errors Off
     php_value display_errors Off
     php_value html_errors Off
-    php_value display_startup_errors On
+    php_value display_startup_errors Off
     php_value ignore_repeated_errors On
     php_value ignore_repeated_source On
 
-    php_value upload_max_filesize 32M
-    php_value memory_limit 128M
-    php_value post_max_size 32M
+    php_value upload_max_filesize 256M
+    php_value memory_limit 1024M
+    php_value post_max_size 256M
     
 
-    php_value default_socket_timeout 300
-    php_value max_execution_time 300
-    php_value max_input_time 300
+    php_value default_socket_timeout 900
+    php_value max_execution_time 900
+    php_value max_input_time 900
 
     php_value register_argc_argv Off
 
