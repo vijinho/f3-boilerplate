@@ -96,6 +96,8 @@ These files are used as examples for the actual MVC structure files - these will
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility
  * methods.
  * [Wixel GUMP](https://github.com/Wixel/GUMP) for data validation
+ * [PHPMailer](https://github.com/PHPMailer/PHPMailer) - replaces f3's less
+ * versatile SMTP class
 
 
 #### SSL (Optional)

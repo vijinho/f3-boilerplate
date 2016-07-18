@@ -18,7 +18,8 @@
         "vendor-dir": "app/lib"
     },
     "autoload": {
-        "classmap": ["app/lib"]
+        "classmap": ["app/lib"],
+        "exclude-from-classmap": ["app/lib/bcosca/fatfree-core/smtp.php", "app/lib/bcosca/fatfree-core/./smtp.php"]
     },
     "repositories": [{
             "type": "package",
@@ -39,7 +40,8 @@
         "league/climate": "^3.2",
         "fzaninotto/faker": "^1.6",
         "wixel/gump": "dev-master",
-        "robmorgan/phinx": "^0.6.2"
+        "robmorgan/phinx": "^0.6.2",
+        "phpmailer/phpmailer": "~5.2"
     },
     "suggest": {
         "php": ">=5.6.0"
