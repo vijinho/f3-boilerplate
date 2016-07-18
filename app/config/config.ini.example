@@ -15,9 +15,25 @@ salt=YOUR_SALT
 [db]
 http_dsn=mysql://root:root@127.0.0.1:3306/mysql
 
+; docs/*.md files viewer cache timeout setting (seconds)
+doc.ttl=5
+
+; time in seconds to cache any errors which occur
+error.ttl=5
+
+; minifier setting (seconds)
+minify.ttl=20
+
 [email]
-host=smtp.example.org
+sendmail=true
+timeout=15
+host=127.0.0.1
+port=1025
+;username=
+;password=
 from=www@example.org
+from_name="Website Support"
+;bcc=you@example.com
 
 [analytics]
 enabled=false
