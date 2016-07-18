@@ -22,10 +22,6 @@ function Run()
     // initialise application
     Main::start($f3);
 
-    // user feedback messages helper, inisialise so methods can be called statically
-    $messages = Helpers\Messages::instance();
-    $messages->init();
-
     // setup database connection params
     // @see http://fatfreeframework.com/databases
     $db = null;
@@ -99,7 +95,12 @@ function Run()
             session_write_close();
         } else if (session_status() == PHP_SESSION_NONE) {
             session_start();
+            $f3->set('messages', $f3->get('SESSION.messages'));
         }
+
+        // user feedback messages helper, inisialise so methods can be called statically
+        $messages = Helpers\Messages::instance();
+        $messages->init();
 
         // custom error handler if debugging
         $f3->set('ONERROR',
