@@ -90,8 +90,12 @@ function Run()
     } else {
         // web start
 
+        // is the url under /api ?
+        $api = '/api' == substr($f3->get('PATH'), 0, 4);
+        $f3->set('api', $api);
+
         // do not use sessions for api calls
-        if (stristr($f3->get('PATH'), '/api') !== false && session_status() !== PHP_SESSION_NONE) {
+        if ($api && session_status() !== PHP_SESSION_NONE) {
             session_write_close();
         } else if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -108,7 +112,7 @@ function Run()
                     include_once 'templates/www/error/404.phtml';
                 } else {
                     $debug = $f3->get('DEBUG');
-                    if (stristr($f3->get('PATH'), '/api') !== false) {
+                    if ($api) {
                         $response = Helpers\Response::instance();
                         $data = array(
                             'service' => 'API',
