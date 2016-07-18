@@ -20,6 +20,12 @@ $f3->set('title', $title);
     <pre>
         <?=$e['trace'] ?>
     </pre>
+
+    <h2>F3 Hive</h2>
+    <pre>
+        <?php var_dump($f3->hive()) ?>
+    </pre>
+
 <?php endif ?>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>

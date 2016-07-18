@@ -16,12 +16,17 @@ We're sorry but an error occurred.
 <?php if ($f3->get('application.environment') !== 'production'): ?>
 <h2>Error Context</h2>
 <pre>
-<?=$e['text'] ?>    
+<?=$e['text'] ?>
 </pre>
 
 <h2>Error Trace</h2>
 <pre>
     <?=nl2br($e['trace']) ?>
+</pre>
+
+<h2>F3 Hive</h2>
+<pre>
+    <?php var_dump($f3->hive()) ?>
 </pre>
 <?php endif ?>
 
