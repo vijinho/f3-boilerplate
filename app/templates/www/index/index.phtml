@@ -7,22 +7,31 @@ $f3->set('title', $title);
 
 <div class="container">
     <div class="row">
-        <div class="eight columns">
+        <div class="col-md-12">
 
-            <h1>f3-boilerplate</h1>
+            <h1><?=$title ?></h1>
 
             <?=\View::instance()->render('www/messages.phtml'); ?>
+
+            <hr>
+
+            <h1>f3-boilerplate</h1>
 
             <p>This project is by <a href="http://about.me/vijay.mahrra">Vijay Mahrra</a> and it is built on, and serves as, an example of the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
             <h2>Documentation</h2>
+            <?php
+            $files = glob($f3->get('HOME') . '/app/doc/*.md');
+            if (!empty($files)):
+            ?>
             <ul>
-                <li><a href="/doc/CHANGES">CHANGES</a></li>
-                <li><a href="/doc/TODO">TODO</a></li>
-                <li><a href="/doc/ROADMAP">ROADMAP</a></li>
-                <li><a href="/doc/LICENSE">LICENSE</a></li>
-                <li><a href="/doc/CREDITS">CREDITS</a></li>
+                <?php foreach ($files as $f):
+                    $f = basename($f, '.md');
+                    ?>
+                    <li><a href="/doc/<?=$f ?>"><?=$f ?></a></li>
+                <?php endforeach ?>
             </ul>
+            <?php endif ?>
 
             <h2>Installation</h2>
 
@@ -50,8 +59,8 @@ if (!empty($db)) {
         $db = \Registry::get('db');
         $result = $db->exec('SHOW TABLES');
         print "Database: Connection OK.\n";
-    } catch (Exception $ex) {
-        print "Database failure!\n" . print_r($ex,1);
+    } catch (\Exception $e) {
+        print "Database failure!\n" . print_r($e,1);
     }
 }
 ?>
