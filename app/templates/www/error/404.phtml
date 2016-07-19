@@ -1,8 +1,9 @@
 <?php
 $f3 = \Base::instance();
 $e = $f3->get('ERROR');
-$title = 'Error:' . $e['code'];
+$title = 'Error: ' . $e['code'];
 $f3->set('title', $title);
+$debug = $f3->get('DEBUG');
 ?>
 <?=\View::instance()->render('www/header.phtml'); ?>
 
@@ -11,18 +12,32 @@ $f3->set('title', $title);
 <p><em><?=$e['status'] ?></em><br/></p>
 
 <?php if ($f3->get('application.environment') !== 'production'): ?>
-    <h2>Error Context</h2>
-    <pre>
+
+    <?php if ($debug > 0): ?>
+
+        <h2>Error Context</h2>
+        <pre>
         <?=$e['text'] ?>
-    </pre>
+        </pre>
 
-    <h2>Error Trace</h2>
-    <?=nl2br($e['trace']) ?>
+    <?php endif ?>
 
-    <h2>F3 Hive</h2>
-    <pre>
-        <?php print_r($f3->hive()) ?>
-    </pre>
+    <?php if ($debug > 1): ?>
+
+        <h2>Error Trace</h2>
+        <?=nl2br($e['trace']) ?>
+
+    <?php endif ?>
+
+    <?php if ($debug > 2): ?>
+
+        <h2>F3 Hive</h2>
+        <pre>
+            <?php print_r($f3->hive()) ?>
+        </pre>
+
+    <?php endif ?>
+        
 <?php endif ?>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>
