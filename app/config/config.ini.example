@@ -1,5 +1,5 @@
 [globals]
-DEBUG=3
+DEBUG=4
 TZ=Europe/Madrid
 LANGUAGE=es-ES
 

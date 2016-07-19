@@ -97,6 +97,14 @@ function Run()
         $messages = Helpers\Messages::instance();
         $messages->init();
 
+        // Use https://github.com/filp/whoops if debug level is 4
+        $debug = $f3->get('DEBUG');
+        if ($debug == 4) {
+            $whoops = new \Whoops\Run;
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+            $whoops->register();
+        }
+
         // custom error handler if debugging
         $f3->set('ONERROR',
             function () use ($f3) {

@@ -41,7 +41,8 @@
         "fzaninotto/faker": "^1.6",
         "wixel/gump": "dev-master",
         "robmorgan/phinx": "^0.6.2",
-        "phpmailer/phpmailer": "~5.2"
+        "phpmailer/phpmailer": "~5.2",
+        "filp/whoops": "^2.1"
     },
     "suggest": {
         "php": ">=5.6.0"

@@ -92,6 +92,7 @@ These files are used as examples for the actual MVC structure files - these will
  * `app/lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
 
 ### External Libraries
+ * [Whoops](https://github.com/filp/whoops) for nicer error handling if level of DEBUG=4
  * [Phinx](https://phinx.org) for database migrations
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility
  * methods.
