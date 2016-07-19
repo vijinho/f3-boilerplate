@@ -17,15 +17,12 @@ $f3->set('title', $title);
     </pre>
 
     <h2>Error Trace</h2>
-    <pre>
-        <?=$e['trace'] ?>
-    </pre>
+    <?=nl2br($e['trace']) ?>
 
     <h2>F3 Hive</h2>
     <pre>
-        <?php var_dump($f3->hive()) ?>
+        <?php print_r($f3->hive()) ?>
     </pre>
-
 <?php endif ?>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>

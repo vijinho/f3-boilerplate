@@ -20,13 +20,11 @@ We're sorry but an error occurred.  Our best muppets are on the case.
 </pre>
 
 <h2>Error Trace</h2>
-<pre>
-    <?=nl2br($e['trace']) ?>
-</pre>
+<?=nl2br($e['trace']) ?>
 
 <h2>F3 Hive</h2>
 <pre>
-    <?php var_dump($f3->hive()) ?>
+    <?php print_r($f3->hive()) ?>
 </pre>
 <?php endif ?>
 
