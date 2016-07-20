@@ -151,7 +151,7 @@ function Run()
                 }
             }
             // http://php.net/manual/en/function.ob-end-flush.php
-            ob_end_flush();
+            @ob_end_flush();
         });
 
         // clean ALL incoming user input by default
