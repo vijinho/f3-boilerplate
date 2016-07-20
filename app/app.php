@@ -227,17 +227,16 @@ function Run()
         }, $f3->get('minify.ttl')
         );
 
-        $f3->route('GET /doc/@page',
-            function ($f3, $params) {
-            $filename = 'doc/' . strtoupper($params['page']) . '.md';
-            echo \View::instance()->render('www/header.phtml');
+        $f3->route('GET /doc/@page', function ($f3, $params) {
+            $filename = 'doc/'.strtoupper($params['page']).'.md';
             if (!file_exists($filename)) {
-                echo '<h1>Documentation Error</h1><p>No such document exists!</p>';
+                $html = '<h1>Documentation Error</h1><p>No such document exists!</p>';
                 $f3->status(404);
             } else {
-                echo \Markdown::instance()->convert($f3->read($filename));
+                $html = \Markdown::instance()->convert($f3->read($filename));
             }
-            echo \View::instance()->render('www/footer.phtml');
+            $f3->set('html', $html);
+            echo \View::instance()->render('www/template.phtml');
         }, $f3->get('doc.ttl'));
 
 
