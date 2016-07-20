@@ -99,7 +99,7 @@ function Run()
 
         // Use https://github.com/filp/whoops if debug level is 4
         $debug = $f3->get('DEBUG');
-        if ($debug == 4) {
+        if ($api && $debug == 4) {
             $whoops = new \Whoops\Run;
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
             $whoops->register();
@@ -180,6 +180,13 @@ function Run()
             md5(json_encode(array_merge($request, $_SERVER, $_ENV))));
         unset($cleaned);
         unset($request);
+
+        // check csrf value if present, set input csrf to boolean true/false if matched session csrf
+        $csrf = $f3->get('REQUEST.csrf');
+        if (!$api && !empty($csrf)) {
+            $f3->set('csrf', $csrf == $f3->get('SESSION.csrf'));
+            $f3->clear('SESSION.csrf');
+        }
 
         // get the access token and basic auth and set it in REQUEST.access_token
         foreach ($f3->get('SERVER') as $k => $header) {
