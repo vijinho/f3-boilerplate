@@ -90,12 +90,12 @@ function Run()
             session_write_close();
         } else if (session_status() == PHP_SESSION_NONE) {
             session_start();
-            $f3->set('messages', $f3->get('SESSION.messages'));
+            $f3->set('notifications', $f3->get('SESSION.notifications'));
         }
 
-        // user feedback messages helper, inisialise so methods can be called statically
-        $messages = Helpers\Messages::instance();
-        $messages->init();
+        // user feedback notifications helper, inisialise so methods can be called statically
+        $notifications = Helpers\Notifications::instance();
+        $notifications->init();
 
         // Use https://github.com/filp/whoops if debug level is 4
         $debug = $f3->get('DEBUG');
