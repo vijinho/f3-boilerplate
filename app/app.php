@@ -5,6 +5,7 @@ namespace FFMVC\App;
 use FFMVC\Helpers as Helpers;
 use FFMVC\Models as Models;
 
+
 /**
  * fat-free framework application
  * execute with call to FFMVC\App\Run();.
@@ -17,58 +18,65 @@ function Run()
 {
     // @see http://fatfreeframework.com/quick-reference#autoload
     $f3 = require_once 'lib/bcosca/fatfree-core/base.php';
-    $f3->set('AUTOLOAD', __dir__ . ';bcosca/fatfree-core/;lib/');
+    $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree-core/;lib/');
 
     // initialise application
     Main::start($f3);
 
+        // default cacheable data time in seconds from config
+    $ttl = $f3->get('app.ttl');
+
     // setup database connection params
     // @see http://fatfreeframework.com/databases
     $db = null;
-    $driver = $f3->get('db.driver');
-    $dsn = $f3->get('db.dsn');
-    $http_dsn = $f3->get('db.http_dsn');
-    if (!empty($driver) || $dsn || $http_dsn) {
-        if ($http_dsn = $f3->get('db.http_dsn')) {
-            $m = parse_url($http_dsn);
-            $m['path'] = substr($m['path'], 1);
-            $m['port'] = empty($m['port']) ? 3306 : $m['port'];
-            $f3->set('db.dsn',
-                sprintf('%s:host=%s;port=%d;dbname=%s', $m['scheme'],
-                    $m['host'], $m['port'], $m['path']
-            ));
-            $f3->mset(array(
-                'db.driver' => $m['scheme'],
-                'db.hostname' => $m['host'],
-                'db.port' => $m['port'],
-                'db.name' => $m['path'],
-                'db.username' => $m['user'],
-                'db.password' => $m['pass'],
-            ));
-        } elseif (empty($dsn)) {
-            $f3->set('db.dsn',
-                sprintf('%s:host=%s;port=%d;dbname=%s', $f3->get('db.driver'),
-                    $f3->get('db.hostname'), $f3->get('db.port'),
-                    $f3->get('db.name')
-            ));
-        }
 
-        $driver = $f3->get('db.driver');
-        $dsn = $f3->get('db.dsn');
-        if (!empty($dsn)) {
-            $db = new \DB\SQL(
-                $dsn, $f3->get('db.username'), $f3->get('db.password'),
-                [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
-            );
-        }
+    // set http-style dsn variables
+    $httpDSN = $f3->get('db.http_dsn');
+    if (!empty($httpDSN)) {
+        $m = parse_url($httpDSN);
+
+        $m['path'] = substr($m['path'], 1);
+        $m['port'] = empty($m['port']) ? 3306 : (int) $m['port'];
+
+        $dsn = sprintf('%s:host=%s;port=%d;dbname=%s',
+            $m['scheme'], $m['host'], $m['port'], $m['path']
+        );
+        $f3->set('db.dsn', $dsn, $ttl);
+
+        $f3->mset([
+            'db.driver' => $m['scheme'],
+            'db.host'   => $m['host'],
+            'db.port'   => $m['port'],
+            'db.name'   => $m['path'],
+            'db.user'   => $m['user'],
+            'db.pass'   => $m['pass'],
+        ]);
     }
-    \Registry::set('db', $db);
 
-    // cli start
+    // if dsn is still not set, set the dsn from hive vars
+    $dsn = $f3->get('db.dsn');
+    if (empty($dsn)) {
+        $dsn = sprintf('%s:host=%s;port=%d;dbname=%s',
+            $f3->get('db.driver'), $f3->get('db.host'), $f3->get('db.port'), $f3->get('db.name')
+        );
+    }
+
+    // finally if we have enough settings instantiate db
+    $driver = $f3->get('db.driver');
+    if (!empty($driver) && !empty($dsn)) {
+        $db = new \DB\SQL(
+            $dsn,
+            $f3->get('db.user'),
+            $f3->get('db.pass'),
+            [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
+        );
+        \Registry::set('db', $db, $ttl);
+    }
+        // cli start
     if (PHP_SAPI == 'cli') {
-        $f3->route('GET /doc/@page',
-            function ($f3, $params) {
-            $filename = 'doc/' . strtoupper($params['page']) . '.md';
+
+        $f3->route('GET /doc/@page', function ($f3, $params) {
+            $filename = 'doc/'.strtoupper($params['page']).'.md';
             if (!file_exists($filename)) {
                 die("Documentation Error!\n\nNo such document exists!\n");
             } else {
@@ -79,8 +87,10 @@ function Run()
         // @see http://fatfreeframework.com/routing-engine
         //load routes from ini file
         $f3->config('config/routes-cli.ini');
+
     } else {
         // web start
+
         // is the url under /api ?
         $api = '/api' == substr($f3->get('PATH'), 0, 4);
         $f3->set('api', $api);
@@ -91,15 +101,17 @@ function Run()
         } else if (session_status() == PHP_SESSION_NONE) {
             session_start();
             $f3->set('notifications', $f3->get('SESSION.notifications'));
+            $f3->set('uuid', $f3->get('SESSION.uuid'));
         }
 
-        // user feedback notifications helper, inisialise so methods can be called statically
+        // user feedback messages helper, inisialise so methods can be called statically
         $notifications = Helpers\Notifications::instance();
         $notifications->init();
 
         // Use https://github.com/filp/whoops if debug level is 4
         $debug = $f3->get('DEBUG');
-        if ($api && $debug == 4) {
+
+        if (!$api && $debug == 4) {
             $whoops = new \Whoops\Run;
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
             $whoops->register();
@@ -108,34 +120,45 @@ function Run()
         // custom error handler if debugging
         $f3->set('ONERROR',
             function () use ($f3) {
+
             // recursively clear existing output buffers:
             while (ob_get_level()) {
                 ob_end_clean();
             }
+
             $api = !empty($f3->get('api'));
+
             if (!$api && $f3->get('ERROR.code') == '404') {
                 include_once 'templates/www/error/404.phtml';
             } else {
+
                 $debug = $f3->get('DEBUG');
+
                 if ($api) {
                     $response = Helpers\Response::instance();
+
                     $data = array(
                         'service' => 'API',
                         'version' => 1,
                         'time' => time(),
                         'method' => $f3->get('VERB')
                     );
+
                     $e = $f3->get('ERROR');
+
                     $data['error'] = array(
                         'code' => substr($f3->snakecase(str_replace(' ', '',
                                     $e['status'])), 0),
                         'description' => $e['code'] . ' ' . $e['text']
                     );
+
                     if ($debug == 3) {
                         // show the $e['trace'] but it's in HTML!
                     }
+
                     $params = array('http_status' => $e['code']);
                     $return = $f3->get('REQUEST.return');
+
                     switch ($return) {
                         case 'xml':
                             $response->xml($data, $params);
@@ -156,11 +179,13 @@ function Run()
 
         // clean ALL incoming user input by default
         $request = array();
-        foreach (array('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE') as
-                $var) {
+
+        foreach (array('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE') as $var) {
             $input = $f3->get($var);
+
             if (is_array($input) && count($input)) {
                 $cleaned = array();
+
                 foreach ($input as $k => $v) {
                     $k = strtolower(trim($f3->clean($k)));
                     $v = $f3->clean($v);
@@ -170,33 +195,42 @@ function Run()
                     $cleaned[$k] = $v;
                     $request[$k] = $v;
                 }
+
                 ksort($cleaned);
                 $f3->set($var, $cleaned);
             }
         }
+
         ksort($request);
         $f3->set('REQUEST', $request);
-        $f3->set('PageHash',
-            md5(json_encode(array_merge($request, $_SERVER, $_ENV))));
+        $f3->set('PageHash', md5(json_encode(array_merge($request, $_SERVER, $_ENV))));
         unset($cleaned);
         unset($request);
 
         // check csrf value if present, set input csrf to boolean true/false if matched session csrf
-        $csrf = $f3->get('REQUEST.csrf');
-        if (!$api && !empty($csrf)) {
-            $f3->set('csrf', $csrf == $f3->get('SESSION.csrf'));
-            $f3->clear('SESSION.csrf');
+        if (!empty($f3->get('app.csrf_enabled'))) {
+
+            $csrf = $f3->get('REQUEST.csrf');
+
+            if (!$api && !empty($csrf)) {
+                $f3->set('csrf', $csrf == $f3->get('SESSION.csrf'));
+                $f3->clear('SESSION.csrf');
+            }
         }
 
         // get the access token and basic auth and set it in REQUEST.access_token
         foreach ($f3->get('SERVER') as $k => $header) {
+
             if (stristr($k, 'authorization') !== false) {
-                if (preg_match('/Bearer\s+(?P<access_token>.+)$/i', $header,
-                        $matches)) {
+
+                if (preg_match('/Bearer\s+(?P<access_token>.+)$/i', $header, $matches)) {
+
                     $token = $matches['access_token'];
-                } elseif (preg_match('/Basic\s+(?P<data>.+)$/i', $header,
-                        $matches)) {
+
+                } elseif (preg_match('/Basic\s+(?P<data>.+)$/i', $header, $matches)) {
+
                     $data = preg_split('/:/', base64_decode($matches['data']));
+
                     $f3->mset(array(
                         'SERVER.PHP_AUTH_USER' => $data[0],
                         'SERVER.PHP_AUTH_PW' => $data[1],
@@ -206,18 +240,23 @@ function Run()
                 }
             }
         }
+
         if (empty($token)) {
             $token = $f3->get('REQUEST.access_token');
         }
+
         if (!empty($token)) {
+
             // check there is a valid user id for the token
-            if (preg_match('/^(?P<user_id>.+)\-.+$/i', $token, $matches)) {
-                if (!empty($matches['user_id'])) {
+            if (preg_match('/^(?P<uuid>.+)\-.+$/i', $token, $matches)) {
+
+                if (!empty($matches['uuid'])) {
                     $f3->mset(array(
                         'REQUEST.access_token' => $token,
-                        'REQUEST.user_id' => $matches['user_id'],
+                        'REQUEST.uuid' => $matches['uuid'],
                     ));
                 }
+
             } else {
                 // developer access token
                 $f3->set('REQUEST.access_token', $token);
@@ -227,29 +266,29 @@ function Run()
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
             function ($f3, $args) {
-            $type = $args['type'];
-            $path = realpath(dirname(__FILE__) . '/../www/');
-            $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
-            echo \Web::instance()->minify($files, null, true, $path);
-        }, $f3->get('minify.ttl')
+                $type = $args['type'];
+                $path = realpath(dirname(__FILE__) . '/../www/');
+                $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
+                echo \Web::instance()->minify($files, null, true, $path);
+            },
+            $f3->get('app.ttl_minify')
         );
 
         $f3->route('GET /doc/@page', function ($f3, $params) {
+
             $filename = 'doc/'.strtoupper($params['page']).'.md';
+
             if (!file_exists($filename)) {
                 $html = '<h1>Documentation Error</h1><p>No such document exists!</p>';
                 $f3->status(404);
             } else {
                 $html = \Markdown::instance()->convert($f3->read($filename));
             }
+
             $f3->set('html', $html);
-            echo \View::instance()->render('www/template.phtml');
-        }, $f3->get('doc.ttl'));
+            echo \View::instance()->render('www/markdown-template.phtml');
 
-
-        // global validator
-        $validator = new Helpers\Validator();
-        \Registry::set('validator', $validator);
+        }, $f3->get('app.ttl_doc'));
 
         $f3->config('config/routes.ini');
     }
@@ -259,4 +298,3 @@ function Run()
     // terminate application
     Main::finish($f3);
 }
-

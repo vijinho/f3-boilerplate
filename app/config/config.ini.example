@@ -1,36 +1,29 @@
 [globals]
 DEBUG=4
-TZ=Europe/Madrid
-LANGUAGE=es-ES
+TZ=Europe/London
+LANGUAGE=en-GB
 
-[application]
-logfile=app.log
-environment=development
-salt=MY_SALT
-
-;http://php.net/manual/en/function.hash-hmac.php
+[app]
+environment=dev
 hash=sha256
-salt=YOUR_SALT
+salt=MY_SALT
+audit_log=true
+csrf_enabled=false
+ttl=5;
+ttl_doc=5
+ttl_err=5
+ttl_minify=30
 
 [db]
-http_dsn=mysql://root:root@127.0.0.1:3306/mysql
-
-; docs/*.md files viewer cache timeout setting (seconds)
-doc.ttl=5
-
-; time in seconds to cache any errors which occur
-error.ttl=5
-
-; minifier setting (seconds)
-minify.ttl=20
+http_dsn=mysql://root:root@127.0.0.1:3306/development_db
 
 [email]
 sendmail=true
 timeout=15
 host=127.0.0.1
 port=1025
-;username=
-;password=
+;user=
+;pass=
 from=www@example.org
 from_name="Website Support"
 ;bcc=you@example.com
