@@ -112,9 +112,9 @@ function Run()
         $debug = $f3->get('DEBUG');
 
         if (!$api && $debug == 4) {
-            $whoops = new \Whoops\Run;
-            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-            $whoops->register();
+            $w = new \Whoops\Run;
+            $w->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+            $w->register();
         }
 
         // custom error handler if debugging
@@ -137,33 +137,29 @@ function Run()
                 if ($api) {
                     $response = Helpers\Response::instance();
 
-                    $data = array(
+                    $data = [
                         'service' => 'API',
                         'version' => 1,
                         'time' => time(),
                         'method' => $f3->get('VERB')
-                    );
+                    ];
 
                     $e = $f3->get('ERROR');
 
-                    $data['error'] = array(
+                    $data['error'] = [
                         'code' => substr($f3->snakecase(str_replace(' ', '',
                                     $e['status'])), 0),
                         'description' => $e['code'] . ' ' . $e['text']
-                    );
+                    ];
 
                     if ($debug == 3) {
                         // show the $e['trace'] but it's in HTML!
                     }
 
-                    $params = array('http_status' => $e['code']);
+                    $params = ['http_status' => $e['code']];
                     $return = $f3->get('REQUEST.return');
 
                     switch ($return) {
-                        case 'xml':
-                            $response->xml($data, $params);
-                            break;
-
                         default:
                         case 'json':
                             $response->json($data, $params);
@@ -178,16 +174,16 @@ function Run()
         });
 
         // clean ALL incoming user input by default
-        $request = array();
-
-        foreach (array('GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE') as $var) {
+        $request = [];
+        $utf = \UTF::instance();
+        foreach (['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE'] as $var) {
             $input = $f3->get($var);
 
             if (is_array($input) && count($input)) {
-                $cleaned = array();
+                $cleaned = [];
 
                 foreach ($input as $k => $v) {
-                    $k = strtolower(trim($f3->clean($k)));
+                    $k = strtolower($utf->trim($f3->clean($k)));
                     $v = $f3->clean($v);
                     if (empty($v)) {
                         continue;
@@ -201,10 +197,9 @@ function Run()
             }
         }
 
+        unset($cleaned);
         ksort($request);
         $f3->set('REQUEST', $request);
-        $f3->set('PageHash', md5(json_encode(array_merge($request, $_SERVER, $_ENV))));
-        unset($cleaned);
         unset($request);
 
         // check csrf value if present, set input csrf to boolean true/false if matched session csrf
@@ -231,12 +226,12 @@ function Run()
 
                     $data = preg_split('/:/', base64_decode($matches['data']));
 
-                    $f3->mset(array(
+                    $f3->mset([
                         'SERVER.PHP_AUTH_USER' => $data[0],
                         'SERVER.PHP_AUTH_PW' => $data[1],
                         'REQUEST.PHP_AUTH_USER' => $data[0],
                         'REQUEST.PHP_AUTH_PW' => $data[1]
-                    ));
+                    ]);
                 }
             }
         }
@@ -251,10 +246,10 @@ function Run()
             if (preg_match('/^(?P<uuid>.+)\-.+$/i', $token, $matches)) {
 
                 if (!empty($matches['uuid'])) {
-                    $f3->mset(array(
+                    $f3->mset([
                         'REQUEST.access_token' => $token,
                         'REQUEST.uuid' => $matches['uuid'],
-                    ));
+                    ]);
                 }
 
             } else {
