@@ -6,6 +6,7 @@ $f3->set('title', $title);
 $debug = $f3->get('DEBUG');
 ?>
 <?=\View::instance()->render('www/header.phtml'); ?>
+<link rel="stylesheet" href="/css/code.css">
 
 <h1><?=$title ?></h1>
 
@@ -14,7 +15,7 @@ $debug = $f3->get('DEBUG');
 We're sorry but an error occurred.  Our best muppets are on the case.
 </p>
 
-<?php if ($f3->get('application.environment') !== 'production'): ?>
+<?php if ($f3->get('app.env') !== 'production'): ?>
     <?php if ($debug > 0): ?>
 
         <h2>Error Context</h2>
@@ -35,7 +36,7 @@ We're sorry but an error occurred.  Our best muppets are on the case.
 
         <h2>F3 Hive</h2>
         <pre>
-            <?php print_r($f3->hive()) ?>
+            <?php $f3->dump($f3->hive()) ?>
         </pre>
 
     <?php endif ?>

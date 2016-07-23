@@ -6,12 +6,13 @@ $f3->set('title', $title);
 $debug = $f3->get('DEBUG');
 ?>
 <?=\View::instance()->render('www/header.phtml'); ?>
+<link rel="stylesheet" href="/css/code.css">
 
 <h1>Error: <?=$e['code'] ?></h1>
 
 <p><em><?=$e['status'] ?></em><br/></p>
 
-<?php if ($f3->get('application.environment') !== 'production'): ?>
+<?php if ($f3->get('app.env') !== 'production'): ?>
 
     <?php if ($debug > 0): ?>
 
@@ -33,11 +34,11 @@ $debug = $f3->get('DEBUG');
 
         <h2>F3 Hive</h2>
         <pre>
-            <?php print_r($f3->hive()) ?>
+            <?php $f3->dump($f3->hive()) ?>
         </pre>
 
     <?php endif ?>
-        
+
 <?php endif ?>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>
