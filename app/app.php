@@ -134,7 +134,10 @@ function Run()
 
                 $debug = $f3->get('DEBUG');
 
-                if ($api) {
+                if (!$api) {
+                    include_once ($debug < 1 || 'production' == $f3->get('app.env')) ? 'templates/www/error/error.phtml'
+                                : 'templates/www/error/debug.phtml';
+                } else {
                     $response = Helpers\Response::instance();
 
                     $data = [
@@ -164,9 +167,6 @@ function Run()
                         case 'json':
                             $response->json($data, $params);
                     }
-                } else {
-                    include_once ($debug <= 0) ? 'templates/www/error/error.phtml'
-                                : 'templates/www/error/debug.phtml';
                 }
             }
             // http://php.net/manual/en/function.ob-end-flush.php
