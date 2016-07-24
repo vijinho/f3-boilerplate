@@ -1,5 +1,16 @@
 # Application Releases
 
+# Version 2.1.0
+
+- Added self-signed local SSL certificates in [app/config/webserver/ssl](app/config/webserver/ssl)
+- Using DEBUG=4 will use [Whoops](https://github.com/filp/whoops) for nicer error handling
+- Added code for CSRF check
+- Renamed Messages class to Notifications
+- Removed XML option in API 
+- Now using [Named Routes](https://fatfreeframework.com/base#NamedRoutes)
+- Now using [PHPMailer](https://github.com/PHPMailer/PHPMailer) as replacement for f3's SMTP mailer with extra config settings
+- Now using [Wixel GUMP](https://github.com/Wixel/GUMP) for data validation
+
 # Version 2.0.0
 
 - Switched to [Semantic Versioning 2.0.0](http://semver.org)
