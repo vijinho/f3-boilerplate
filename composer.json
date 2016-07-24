@@ -25,7 +25,7 @@
             "type": "package",
             "package": {
                 "name": "FFMVC",
-                "version": "1.0.2",
+                "version": "dev-master",
                 "source": {
                     "url": "https://github.com/vijinho/FFMVC.git",
                     "type": "git",
@@ -34,22 +34,22 @@
             }
         }],
     "require": {
-        "php": ">=5.5.0",
-        "FFMVC": "1.0.2",
+        "php": ">=5.6.0",
+        "FFMVC": "dev-master",
         "bcosca/fatfree-core": "dev-master",
-        "league/climate": "^3.2",
-        "fzaninotto/faker": "^1.6",
+        "league/climate": "dev-master",
+        "robmorgan/phinx": "dev-master",
+        "fzaninotto/faker": "dev-master",
         "wixel/gump": "dev-master",
-        "robmorgan/phinx": "^0.6.2",
-        "phpmailer/phpmailer": "~5.2",
-        "filp/whoops": "^2.1"
+        "phpmailer/phpmailer": "dev-master",
+        "filp/whoops": "dev-master"
     },
     "suggest": {
-        "php": ">=5.6.0"
+        "php": ">=7.0.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.6-dev"
+            "dev-master": "dev-master"
         }
     }
 }
