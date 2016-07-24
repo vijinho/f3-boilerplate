@@ -11,18 +11,17 @@ $f3->set('title', $title);
 
             <h1><?=$title ?></h1>
 
-            <p>This template view is the <tt>app/skin/index/index.phtml</tt> file as an overridden template to the 
+            <p>This template view is the <tt>app/skin/index/index.phtml</tt> file as an overridden template to the
             default in <tt>app/templates/index/index.phtml</tt></p>
 
             <?=\View::instance()->render('www/notifications.phtml'); ?>
 
             <hr>
 
-            <h1>f3-boilerplate</h1>
-
             <p>This project is by <a href="http://about.me/vijay.mahrra">Vijay Mahrra</a> and it is built on, and serves as, an example of the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
-            <h2>Documentation</h2>
+            <?=\Markdown::instance()->convert(nl2br($f3->read($f3->get('HOME') . '/README.md'))) ?>
+
             <?php
             $files = glob($f3->get('HOME') . '/app/doc/*.md');
             if (!empty($files)):
