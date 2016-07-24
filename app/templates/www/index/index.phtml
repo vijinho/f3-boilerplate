@@ -15,11 +15,10 @@ $f3->set('title', $title);
 
             <hr>
 
-            <h1>f3-boilerplate</h1>
-
             <p>This project is by <a href="http://about.me/vijay.mahrra">Vijay Mahrra</a> and it is built on, and serves as, an example of the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
-            <h2>Documentation</h2>
+            <?=\Markdown::instance()->convert(nl2br($f3->read($f3->get('HOME') . '/README.md'))) ?>
+
             <?php
             $files = glob($f3->get('HOME') . '/app/doc/*.md');
             if (!empty($files)):

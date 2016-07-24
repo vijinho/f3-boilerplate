@@ -30,15 +30,6 @@ $debug = $f3->get('DEBUG');
 
     <?php endif ?>
 
-    <?php if ($debug > 2): ?>
-
-        <h2>F3 Hive</h2>
-        <pre>
-            <?php $f3->dump($f3->hive()) ?>
-        </pre>
-
-    <?php endif ?>
-
 <?php endif ?>
 
 <?=\View::instance()->render('www/footer.phtml'); ?>

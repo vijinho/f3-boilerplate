@@ -16,7 +16,6 @@ We're sorry but an error occurred.
 </p>
 
 <?php if ($f3->get('app.env') !== 'production'): ?>
-
     <?php if ($debug > 0): ?>
 
         <h2>Error Context</h2>
@@ -30,15 +29,6 @@ We're sorry but an error occurred.
 
         <h2>Error Trace</h2>
         <?=nl2br($e['trace']) ?>
-
-    <?php endif ?>
-
-    <?php if ($debug > 2): ?>
-
-        <h2>F3 Hive</h2>
-        <pre>
-            <?php $f3->dump($f3->hive()) ?>
-        </pre>
 
     <?php endif ?>
 
