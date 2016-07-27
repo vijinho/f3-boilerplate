@@ -1,10 +1,10 @@
 server {
-    listen 80 default_server;
+    listen 80;
 	server_name api.local;
 
-	root /vhosts/api.local/www/;
-    access_log /vhosts/api.local/tmp/logs/access.log;
-    error_log /vhosts/api.local/tmp/logs/error.log error;
+	root /vhosts/src/api/www/;
+    access_log /vhosts/src/api/tmp/logs/access.log;
+    error_log /vhosts/src/api/tmp/logs/error.log error;
 	index index.php index.html index.htm;
 
     error_page 404 404.html;
@@ -49,7 +49,7 @@ server {
 
 	location ~ \.php$ {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
         fastcgi_param SERVER_SOFTWARE nginx/$nginx_version;
         fastcgi_param REQUEST_URI $request_uri;
         fastcgi_param DOCUMENT_URI $document_uri;
@@ -68,11 +68,10 @@ server {
         fastcgi_param SERVER_NAME $server_name;
         fastcgi_param GATEWAY_INTERFACE CGI/1.1;
         fastcgi_param PHP_VALUE "date.timezone=Europe/London
-include_path=.:/vhosts/f3-boilerplate.local/app/lib
-error_log=/vhosts/f3-boilerplate.local/tmp/logs/php.log
-upload_tmp_dir=/vhosts/f3-boilerplate.local/tmp/uploads
-session.save_path=/vhosts/f3-boilerplate.local/tmp/sessions
-soap.wsdl_cache_dir=/vhosts/f3-boilerplate.local/tmp/cache
+include_path=.:/vhosts/src/api/app/lib
+error_log=/vhosts/src/api/tmp/logs/php.log
+upload_tmp_dir=/vhosts/src/api/tmp/uploads
+session.save_path=/vhosts/src/api/tmp/sessions
 
 log_errors=On
 display_errors=Off
@@ -81,12 +80,12 @@ display_startup_errors=On
 ignore_repeated_errors=On
 ignore_repeated_source=On
 
-upload_max_filesize=32M
-memory_limit=128M
-post_max_size=32M
+upload_max_filesize=1024M
+memory_limit=1024M
+post_max_size=1024M
 
 
-default_socket_timeout=300
+default_socket_timeout=15
 max_execution_time=300
 max_input_time=300
 
@@ -103,9 +102,7 @@ default_charset=utf-8
 allow_url_fopen=On
 expose_php=Off
 zlib.output_compression=Off
-zend.ze1_compatibility_mode=Off
 register_argc_argv=Off
-register_globals=Off
 ";
 		expires  off; ## Do not cache dynamic content
 
