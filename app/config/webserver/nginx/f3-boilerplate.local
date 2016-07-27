@@ -1,10 +1,10 @@
 server {
-    listen 80;
-	server_name f3-boilerplate.local;
+    #listen 80;
+    server_name f3-boilerplate.local;
 
-	root /vhosts/src/f3-boilerplate/www/;
-    access_log /vhosts/src/f3-boilerplate/tmp/logs/access.log;
-    error_log /vhosts/src/f3-boilerplate/tmp/logs/error.log error;
+	root /home/vijay/src/f3-boilerplate/www/;
+    access_log /home/vijay/src/f3-boilerplate/tmp/logs/access.log;
+    error_log /home/vijay/src/f3-boilerplate/tmp/logs/error.log error;
 	index index.php index.html index.htm;
 
     error_page 404 404.html;
@@ -68,10 +68,10 @@ server {
         fastcgi_param SERVER_NAME $server_name;
         fastcgi_param GATEWAY_INTERFACE CGI/1.1;
         fastcgi_param PHP_VALUE "date.timezone=Europe/London
-include_path=.:/vhosts/src/f3-boilerplate/app/lib
-error_log=/vhosts/src/f3-boilerplate/tmp/logs/php.log
-upload_tmp_dir=/vhosts/src/f3-boilerplate/tmp/uploads
-session.save_path=/vhosts/src/f3-boilerplate/tmp/sessions
+include_path=.:/home/vijay/src/f3-boilerplate/app/lib
+error_log=/home/vijay/src/f3-boilerplate/tmp/logs/php.log
+upload_tmp_dir=/home/vijay/src/f3-boilerplate/tmp/uploads
+session.save_path=/home/vijay/src/f3-boilerplate/tmp/sessions
 
 log_errors=On
 display_errors=Off
