@@ -178,7 +178,6 @@ function Run()
         $utf = \UTF::instance();
         foreach (['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE'] as $var) {
             $input = $f3->get($var);
-
             if (is_array($input) && count($input)) {
                 $cleaned = [];
 
@@ -199,6 +198,11 @@ function Run()
 
         unset($cleaned);
         ksort($request);
+        // we don't want to include the session name in the request data
+        $session_name = strtolower(session_name());
+        if (array_key_exists($session_name, $request)) {
+            unset($request[$session_name]);
+        }
         $f3->set('REQUEST', $request);
         unset($request);
 
@@ -214,6 +218,7 @@ function Run()
         }
 
         // get the access token and basic auth and set it in REQUEST.access_token
+        $token = $f3->get('REQUEST.access_token');
         foreach ($f3->get('SERVER') as $k => $header) {
 
             if (stristr($k, 'authorization') !== false) {
@@ -235,27 +240,8 @@ function Run()
                 }
             }
         }
-
-        if (empty($token)) {
-            $token = $f3->get('REQUEST.access_token');
-        }
-
         if (!empty($token)) {
-
-            // check there is a valid user id for the token
-            if (preg_match('/^(?P<uuid>.+)\-.+$/i', $token, $matches)) {
-
-                if (!empty($matches['uuid'])) {
-                    $f3->mset([
-                        'REQUEST.access_token' => $token,
-                        'REQUEST.uuid' => $matches['uuid'],
-                    ]);
-                }
-
-            } else {
-                // developer access token
-                $f3->set('REQUEST.access_token', $token);
-            }
+            $f3->set('REQUEST.access_token', $token);
         }
 
         // @see http://fatfreeframework.com/optimization
