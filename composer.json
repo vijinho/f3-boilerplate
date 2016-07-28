@@ -46,10 +46,5 @@
     },
     "suggest": {
         "php": ">=7.0.0"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "master"
-        }
     }
 }
