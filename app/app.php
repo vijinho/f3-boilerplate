@@ -141,9 +141,6 @@ function Run()
                     $response = Helpers\Response::instance();
 
                     $data = [
-                        'service' => 'API',
-                        'version' => 1,
-                        'time' => time(),
                         'method' => $f3->get('VERB')
                     ];
 
@@ -206,17 +203,6 @@ function Run()
         $f3->set('REQUEST', $request);
         unset($request);
 
-        // check csrf value if present, set input csrf to boolean true/false if matched session csrf
-        if (!empty($f3->get('app.csrf_enabled'))) {
-
-            $csrf = $f3->get('REQUEST.csrf');
-
-            if (!$api && !empty($csrf)) {
-                $f3->set('csrf', $csrf == $f3->get('SESSION.csrf'));
-                $f3->clear('SESSION.csrf');
-            }
-        }
-
         // get the access token and basic auth and set it in REQUEST.access_token
         $token = $f3->get('REQUEST.access_token');
         foreach ($f3->get('SERVER') as $k => $header) {
@@ -244,34 +230,52 @@ function Run()
             $f3->set('REQUEST.access_token', $token);
         }
 
-        // @see http://fatfreeframework.com/optimization
-        $f3->route('GET /minify/@type',
-            function ($f3, $args) {
-                $type = $args['type'];
-                $path = realpath(dirname(__FILE__) . '/../www/');
-                $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
-                echo \Web::instance()->minify($files, null, true, $path);
-            },
-            $f3->get('app.ttl_minify')
-        );
+        // load api routes or regular routes
+        if (!empty($api)) {
+            $f3->config('config/routes-api.ini');
+        } else {
+            // these are website routes
+            //
+            // check csrf value if present, set input csrf to boolean true/false if matched session csrf
+            if (!empty($f3->get('app.csrf_enabled'))) {
 
-        $f3->route('GET /doc/@page', function ($f3, $params) {
+                $csrf = $f3->get('REQUEST.csrf');
 
-            $filename = 'doc/'.strtoupper($params['page']).'.md';
-
-            if (!file_exists($filename)) {
-                $html = '<h1>Documentation Error</h1><p>No such document exists!</p>';
-                $f3->status(404);
-            } else {
-                $html = \Markdown::instance()->convert($f3->read($filename));
+                if (!$api && !empty($csrf)) {
+                    $f3->set('csrf', $csrf == $f3->get('SESSION.csrf'));
+                    $f3->clear('SESSION.csrf');
+                }
             }
 
-            $f3->set('html', $html);
-            echo \View::instance()->render('www/markdown-template.phtml');
+            // @see http://fatfreeframework.com/optimization
+            $f3->route('GET /minify/@type',
+                function ($f3, $args) {
+                    $type = $args['type'];
+                    $path = realpath(dirname(__FILE__) . '/../www/');
+                    $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
+                    echo \Web::instance()->minify($files, null, true, $path);
+                },
+                $f3->get('app.ttl_minify')
+            );
 
-        }, $f3->get('app.ttl_doc'));
+            $f3->route('GET /doc/@page', function ($f3, $params) {
 
-        $f3->config('config/routes.ini');
+                $filename = 'doc/'.strtoupper($params['page']).'.md';
+
+                if (!file_exists($filename)) {
+                    $html = '<h1>Documentation Error</h1><p>No such document exists!</p>';
+                    $f3->status(404);
+                } else {
+                    $html = \Markdown::instance()->convert($f3->read($filename));
+                }
+
+                $f3->set('html', $html);
+                echo \View::instance()->render('www/markdown-template.phtml');
+
+            }, $f3->get('app.ttl_doc'));
+
+            $f3->config('config/routes.ini');
+        }
     }
 
     $f3->run();
