@@ -1,13 +1,13 @@
 <?php
 
-namespace FFCMS\App;
+namespace FFMVC\App;
 
-use FFCMS\{Helpers, Models};
+use FFMVC\{Helpers, Models};
 
 
 /**
  * fat-free framework application
- * execute with call to FFCMS\App\Run();.
+ * execute with call to FFMVC\App\Run();.
  *
  * @author Vijay Mahrra <vijay@yoyo.org>
  * @copyright (c) Copyright 2013 Vijay Mahrra
@@ -41,7 +41,7 @@ function Run()
     // set http-style dsn variables
     $params = $f3->get('db');
     if ($params) {
-        $db = \FFCMS\Helpers\DB::instance()->newDb(array_key_exists('http_dsn', $params) ? $params['http_dsn'] : $params);
+        $db = \FFMVC\Helpers\DB::instance()->newDb(array_key_exists('http_dsn', $params) ? $params['http_dsn'] : $params);
         \Registry::set('db', $db);
     }
 
