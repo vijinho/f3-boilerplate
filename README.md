@@ -6,6 +6,7 @@ Skeleton PHP7 Fatfree-framework MVC website codebase.
 
 **Project Goal:** Be a good and extremely flexible starting-point for implementing any kind of PHP project in F3.
 
+*PHP7 only now!* - see [doc/CHANGES](doc/CHANGES)
 
 ## Is this project for you?
 
