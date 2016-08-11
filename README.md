@@ -88,13 +88,10 @@ These files are used as examples for the actual MVC structure files - these will
  * `lib/FFMVC/Controllers/Api` - MVC Rest API Controllers
  * `lib/FFMVC/Helpers` - Auxillary helper functions and utility libraries specific to the project
  * `lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
- * `lib/FFMVC/Traits` - Traits inherited in classes
 
 ### External Libraries
  * [Whoops](https://github.com/filp/whoops) for nicer error handling if level of DEBUG=4
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
- * [Wixel GUMP](https://github.com/Wixel/GUMP) for data validation
- * [PHPMailer](https://github.com/PHPMailer/PHPMailer) - replaces f3's less versatile SMTP class
 
 #### SSL (Optional)
 API can run by default on [api.local](https://api.local/) for API and test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)

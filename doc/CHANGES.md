@@ -3,7 +3,6 @@
 # Version 2.2.0
 
 - *PHP7* only now!
-- Replace f3 smtp with PHPMailer (use Helper from FFMVC)
 - Fix bug for ONERROR handler
 - Use Whoops if DEBUG level = 4
 - Put Markdown doc into a page template
@@ -26,8 +25,6 @@
 - Renamed Messages class to Notifications
 - Removed XML option in API 
 - Now using [Named Routes](https://fatfreeframework.com/base#NamedRoutes)
-- Now using [PHPMailer](https://github.com/PHPMailer/PHPMailer) as replacement for f3's SMTP mailer with extra config settings
-- Now using [Wixel GUMP](https://github.com/Wixel/GUMP) for data validation
 
 # Version 2.0.0
 
@@ -37,7 +34,7 @@
 ## Version 1.6
 
 - Changes for PHP7
-- Moved [app/lib/FFMVC](https://github.com/vijinho/FFMVC) file into their own repository now to include vio composer
+- Moved [lib/FFMVC](https://github.com/vijinho/FFMVC) file into their own repository now to include vio composer
 - Added messages helper to store/manage messages for displaying to the end-user
 - Output buffering enabled by default to display errors better
 - Added a string helper class for generating random strings and hashing

@@ -18,8 +18,7 @@
         "vendor-dir": "lib"
     },
     "autoload": {
-        "classmap": ["app/lib", "lib"],
-        "exclude-from-classmap": ["lib/bcosca/fatfree-core/smtp.php", "lib/bcosca/fatfree-core/./smtp.php"]
+        "classmap": ["app/lib", "lib"]
     },
     "repositories": [{
             "type": "package",
@@ -38,8 +37,6 @@
         "FFMVC": "dev-master",
         "bcosca/fatfree-core": "dev-master",
         "league/climate": "dev-master",
-        "wixel/gump": "dev-master",
-        "phpmailer/phpmailer": "dev-master",
         "filp/whoops": "dev-master"
     },
     "suggest": {
