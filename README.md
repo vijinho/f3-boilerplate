@@ -94,19 +94,20 @@ These files are used as examples for the actual MVC structure files - these will
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
 
 #### SSL (Optional)
-API can run by default on [api.local](https://api.local/) for API and test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)
+
+Test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)
 
 Use [Let's Encrypt](https://letsencrypt.org) to generate a real live valid SSL certificate for production environments.
 
 #### Dummy certificate (example)
 
-`openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=GB/ST=STATE/L=TOWN/O=Office/CN=api.local" -keyout api.key -out api.crt`
+`openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=GB/ST=STATE/L=TOWN/O=Office/CN=f3-boilerplate.local" -keyout f3-boilerplate.key -out f3-boilerplate.crt`
 
-Add to apache virtual host (and also see the api-ssl.local files in [app/config/webserver/](app/config/webserver/)
+Add to apache virtual host (and also see the f3-boilerplate-ssl.local files in [app/config/webserver/](app/config/webserver/)
 
 ```
-    SSLCertificateFile ssl/api.crt
-    SSLCertificateKeyFile ssl/api.key
+    SSLCertificateFile ssl/f3-boilerplate.crt
+    SSLCertificateKeyFile ssl/f3-boilerplate.key
 ```
 [MAMP](https://www.mamp.info/) lets you add the SSL file in the Hosts/SSL tab.
 

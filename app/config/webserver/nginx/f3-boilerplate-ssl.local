@@ -1,19 +1,17 @@
 server {
     listen 443;
-    listen [::]:443 ipv6only=off;
-    server_name api.local;
+    #listen [::]:443 ipv6only=on;
+    server_name f3-boilerplate.local;
 
     ssl                  on;
-    ssl_certificate      ssl/api.crt;
-    ssl_certificate_key  ssl/api.key;
+    ssl_certificate      ssl/f3-boilerplate.local.crt;
+    ssl_certificate_key  ssl/f3-boilerplate.local.key;
     ssl_session_timeout  5m;
     ssl_protocols  SSLv2 SSLv3 TLSv1;
-    ssl_ciphers  HIGH:!aNULL:!MD5;
-    ssl_prefer_server_ciphers   on;
 
-	root /vhosts/f3-boilerplate/www/;
-    access_log /vhosts/f3-boilerplate/tmp/logs/access.log;
-    error_log /vhosts/f3-boilerplate/tmp/logs/error.log error;
+	root /var/www/f3-boilerplate/www/;
+    access_log /var/www/f3-boilerplate/tmp/logs/access.log;
+    error_log /var/www/f3-boilerplate/tmp/logs/error.log error;
 	index index.php index.html index.htm;
 
     error_page 404 404.html;
@@ -77,20 +75,20 @@ server {
         fastcgi_param SERVER_NAME $server_name;
         fastcgi_param GATEWAY_INTERFACE CGI/1.1;
         fastcgi_param PHP_VALUE "date.timezone=Europe/London
-include_path=.:/vhosts/f3-boilerplate/app/lib
-error_log=/vhosts/f3-boilerplate/tmp/logs/php.log
-upload_tmp_dir=/vhosts/f3-boilerplate/tmp/uploads
-session.save_path=/vhosts/f3-boilerplate/tmp/sessions
+include_path=.:/var/www/f3-boilerplate/lib
+error_log=/var/www/f3-boilerplate/tmp/logs/php.log
+upload_tmp_dir=/var/www/f3-boilerplate/tmp/uploads
+session.save_path=/var/www/f3-boilerplate/tmp/sessions
 
-log_errors=On
+log_errors=Off
 display_errors=Off
 html_errors=Off
-display_startup_errors=On
+display_startup_errors=Off
 ignore_repeated_errors=On
 ignore_repeated_source=On
 
 upload_max_filesize=1024M
-memory_limit=1024M
+memory_limit=256M
 post_max_size=1024M
 
 
