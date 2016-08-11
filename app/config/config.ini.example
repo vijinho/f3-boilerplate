@@ -7,7 +7,6 @@ LANGUAGE=en-GB
 environment=dev
 hash=sha256
 salt=MY_SALT
-audit_log=true
 csrf_enabled=false
 ttl=5;
 ttl_doc=5

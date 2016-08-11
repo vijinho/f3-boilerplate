@@ -1,0 +1,36 @@
+<?php $f3 = \Base::instance() ?>
+<?php
+$analytics = $f3->get('analytics');
+$analytics['enabled'] = $analytics['enabled'] && $f3->get('application.environment') == 'production';
+?>
+<?php if (!empty($analytics['enabled']) && !empty($analytics['code']) && !empty($analytics['domain'])): ?>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//website.google-analytics.com/analytics.js','ga');
+
+  ga('create', '<?=$analytics['code'] ?>', '<?=$analytics['domain'] ?>');
+  ga('send', 'pageview');
+</script>
+<?php endif ?>
+
+
+<?php if ($f3->get('application.environment') == 'production'): ?>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<?php endif; ?>
+
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<?php if ($f3->get('application.environment') == 'production'): ?>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="/minify/js?files=/js/site.js"></script>
+<?php else: ?>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/minify/js?files=/js/site.js"></script>
+<?php endif; ?>
+
+</body>
+</html>

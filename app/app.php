@@ -2,8 +2,7 @@
 
 namespace FFMVC\App;
 
-use FFMVC\Helpers as Helpers;
-use FFMVC\Models as Models;
+use FFMVC\{Helpers, Models};
 
 
 /**
@@ -17,66 +16,40 @@ use FFMVC\Models as Models;
 function Run()
 {
     // @see http://fatfreeframework.com/quick-reference#autoload
-    $f3 = require_once 'lib/bcosca/fatfree-core/base.php';
-    $f3->set('AUTOLOAD', __dir__.';bcosca/fatfree-core/;lib/');
+    $f3 = \Base::instance();
+    App::start();
+    $f3->set('UNLOAD', function() {
+        App::finish();
+    });
 
     // initialise application
-    Main::start($f3);
 
-        // default cacheable data time in seconds from config
-    $ttl = $f3->get('app.ttl');
-
-    // setup database connection params
-    // @see http://fatfreeframework.com/databases
-    $db = null;
+    // no logfile defined means no logging!
+    $logfile = $f3->get('app.logfile');
+    if (!empty($logfile)) {
+        // as long as the logger class supports method 'write' should be OK to use like this
+        $logger = new \Log($logfile);
+            // enable full logging if not production
+        if ('production' !== $f3->get('app.env')) {
+            ini_set('log_errors', 'On');
+            ini_set('error_log', $logfile);
+            ini_set('error_reporting', -1);
+        }
+        \Registry::set('logger', $logger);
+    }
 
     // set http-style dsn variables
-    $httpDSN = $f3->get('db.http_dsn');
-    if (!empty($httpDSN)) {
-        $m = parse_url($httpDSN);
-
-        $m['path'] = substr($m['path'], 1);
-        $m['port'] = empty($m['port']) ? 3306 : (int) $m['port'];
-
-        $dsn = sprintf('%s:host=%s;port=%d;dbname=%s',
-            $m['scheme'], $m['host'], $m['port'], $m['path']
-        );
-        $f3->set('db.dsn', $dsn, $ttl);
-
-        $f3->mset([
-            'db.driver' => $m['scheme'],
-            'db.host'   => $m['host'],
-            'db.port'   => $m['port'],
-            'db.name'   => $m['path'],
-            'db.user'   => $m['user'],
-            'db.pass'   => $m['pass'],
-        ]);
+    $params = $f3->get('db');
+    if ($params) {
+        $db = \FFMVC\Helpers\DB::instance()->newDb(array_key_exists('http_dsn', $params) ? $params['http_dsn'] : $params);
+        \Registry::set('db', $db);
     }
 
-    // if dsn is still not set, set the dsn from hive vars
-    $dsn = $f3->get('db.dsn');
-    if (empty($dsn)) {
-        $dsn = sprintf('%s:host=%s;port=%d;dbname=%s',
-            $f3->get('db.driver'), $f3->get('db.host'), $f3->get('db.port'), $f3->get('db.name')
-        );
-    }
-
-    // finally if we have enough settings instantiate db
-    $driver = $f3->get('db.driver');
-    if (!empty($driver) && !empty($dsn)) {
-        $db = new \DB\SQL(
-            $dsn,
-            $f3->get('db.user'),
-            $f3->get('db.pass'),
-            [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
-        );
-        \Registry::set('db', $db, $ttl);
-    }
         // cli start
     if (PHP_SAPI == 'cli') {
 
-        $f3->route('GET /doc/@page', function ($f3, $params) {
-            $filename = 'doc/'.strtoupper($params['page']).'.md';
+        $f3->route('GET /doc/@page', function ($f3, array $params) {
+            $filename = '../doc/'.strtoupper($params['page']).'.md';
             if (!file_exists($filename)) {
                 die("Documentation Error!\n\nNo such document exists!\n");
             } else {
@@ -102,6 +75,17 @@ function Run()
             session_start();
             $f3->set('notifications', $f3->get('SESSION.notifications'));
             $f3->set('uuid', $f3->get('SESSION.uuid'));
+
+            // initialise gettext
+            // override language from request
+            $language = $f3->get('REQUEST.language');
+            if (!empty($language)) {
+                $f3->set('SESSION.language', $language);
+            }
+            // get language from session if set
+            if (empty($language)) {
+                $language = $f3->get('SESSION.language');
+            }
         }
 
         // user feedback messages helper, inisialise so methods can be called statically
@@ -120,31 +104,49 @@ function Run()
         // custom error handler if debugging
         $f3->set('ONERROR',
             function () use ($f3) {
+            $logger = \Registry::get('logger');
+            if (is_object($logger)) {
+                $logger->write(print_r($f3->get('ERROR')));
+            }
 
             // recursively clear existing output buffers:
             while (ob_get_level()) {
                 ob_end_clean();
             }
 
+            $debug = $f3->get('DEBUG');
             $api = !empty($f3->get('api'));
+            $language = $f3->get('LANG');
+            $e = $f3->get('ERROR');
 
-            if (!$api && $f3->get('ERROR.code') == '404') {
-                include_once 'templates/www/error/404.phtml';
+            if (!$api && $e['code'] == '404') {
+                $error_template = 'templates/' . $language . '/website/www/error/404.phtml';
+                if (!file_exists($error_template)) {
+                    $error_template = 'templates/en/website/www/error/404.phtml';
+                }
+                include_once $error_template;
             } else {
 
-                $debug = $f3->get('DEBUG');
-
                 if (!$api) {
-                    include_once ($debug < 1 || 'production' == $f3->get('app.env')) ? 'templates/www/error/error.phtml'
-                                : 'templates/www/error/debug.phtml';
+
+                    $error_template = 'templates/' . $language . '/website/www/error/error.phtml';
+                    if (!file_exists($error_template)) {
+                        $error_template = 'templates/en/website/www/error/error.phtml';
+                    }
+
+                    $debug_template = 'templates/' . $language . '/website/www/error/error.phtml';
+                    if (!file_exists($debug_template)) {
+                        $debug_template = 'templates/en/website/www/error/debug.phtml';
+                    }
+
+                    include_once ('production' == $f3->get('app.env') && $debug < 1) ? $error_template
+                                : $debug_template;
                 } else {
                     $response = Helpers\Response::instance();
 
                     $data = [
                         'method' => $f3->get('VERB')
                     ];
-
-                    $e = $f3->get('ERROR');
 
                     $data['error'] = [
                         'code' => substr($f3->snakecase(str_replace(' ', '',
@@ -179,27 +181,25 @@ function Run()
                 $cleaned = [];
 
                 foreach ($input as $k => $v) {
-                    $k = strtolower($utf->trim($f3->clean($k)));
-                    $v = $f3->clean($v);
-                    if (empty($v)) {
-                        continue;
-                    }
-                    $cleaned[$k] = $v;
-                    $request[$k] = $v;
+                    $cleaned[strtolower($utf->trim($f3->clean($k)))] = $f3->recursive($v, function($v) use ($f3, $utf) {
+                        return $utf->trim($f3->clean($v));
+                    });
                 }
-
                 ksort($cleaned);
+                $request = array_merge_recursive($request, $cleaned);
                 $f3->set($var, $cleaned);
             }
         }
 
         unset($cleaned);
-        ksort($request);
+
         // we don't want to include the session name in the request data
         $session_name = strtolower(session_name());
         if (array_key_exists($session_name, $request)) {
             unset($request[$session_name]);
         }
+
+        ksort($request);
         $f3->set('REQUEST', $request);
         unset($request);
 
@@ -247,20 +247,9 @@ function Run()
                 }
             }
 
-            // @see http://fatfreeframework.com/optimization
-            $f3->route('GET /minify/@type',
-                function ($f3, $args) {
-                    $type = $args['type'];
-                    $path = realpath(dirname(__FILE__) . '/../www/');
-                    $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
-                    echo \Web::instance()->minify($files, null, true, $path);
-                },
-                $f3->get('app.ttl_minify')
-            );
+            $f3->route('GET /doc/@page', function ($f3, array $params) {
 
-            $f3->route('GET /doc/@page', function ($f3, $params) {
-
-                $filename = 'doc/'.strtoupper($params['page']).'.md';
+                $filename = '../doc/'.strtoupper($params['page']).'.md';
 
                 if (!file_exists($filename)) {
                     $html = '<h1>Documentation Error</h1><p>No such document exists!</p>';
@@ -274,12 +263,14 @@ function Run()
 
             }, $f3->get('app.ttl_doc'));
 
-            $f3->config('config/routes.ini');
+            // load language-based routes, default english
+            $f3->config('config/routes-en.ini');
+            $file = 'config/routes-' . $language  . '.ini';
+            if (file_exists($file)) {
+                $f3->config($file);
+            }
         }
     }
 
     $f3->run();
-
-    // terminate application
-    Main::finish($f3);
 }

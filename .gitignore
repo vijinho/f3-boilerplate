@@ -15,16 +15,4 @@ tmp/sessions
 tmp/uploads
 logs
 /nbproject
-app/lib/autoload.php
-app/lib/bcosca
-app/lib/composer
-app/application.log
-app/lib/bin/
-app/lib/fzaninotto/
-app/lib/league/
-app/lib/phpmailer/
-app/lib/robmorgan/
-app/lib/seld/
-app/lib/symfony/
-app/lib/wixel/
-app/lib/FFMVC/
+lib/*

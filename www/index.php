@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace FFMVC\App;
 
-chdir(realpath(__DIR__ . '/../app'));
-
 if (session_status() == PHP_SESSION_NONE) {
-    ini_set('session.auto_start', 0);
+    ini_set('session.auto_start', 'Off');
+} else {
+    ini_set('session.lazy_write', 'On');
 }
-require_once 'lib/autoload.php'; // composer autoloader
-// @see https://github.com/vijinho/f3-boilerplate
+chdir(__DIR__ . '/../app');
+require_once '../lib/autoload.php'; // composer autoloader
 require_once 'app.php';
 Run();

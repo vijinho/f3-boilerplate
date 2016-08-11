@@ -1,0 +1,23 @@
+<?php
+$f3 = \Base::instance();
+$title = $f3->get('title');
+?>
+<?=\View::instance()->render('/header.phtml'); ?>
+<?=\View::instance()->render('/header-menu.phtml'); ?>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h1><?=$title ?></h1>
+
+            <?=\View::instance()->render('/notifications.phtml') ?>
+
+            <?=$f3->get('html') ?>
+
+        </div>
+    </div>
+</div>
+
+<?=\View::instance()->render('/footer-menu.phtml'); ?>
+<?=\View::instance()->render('/footer.phtml'); ?>

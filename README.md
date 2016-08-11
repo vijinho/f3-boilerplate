@@ -2,7 +2,7 @@
 
 ![f3-boilerplate homepage screenshot](tmp/screenshot.png)
 
-Skeleton PHP Fatfree-framework MVC website codebase.
+Skeleton PHP7 Fatfree-framework MVC website codebase.
 
 **Project Goal:** Be a good and extremely flexible starting-point for implementing any kind of PHP project in F3.
 
@@ -28,10 +28,6 @@ I wrote this project for myself, but if you are thinking to use it, thinking on 
 
 ## Setup
 
-There is a work-in-progress for a [Vagrant box](https://www.vagrantup.com/), using a forked version of [ScotchBox](https://box.scotch.io/) but it is not ready yet.
-
-https://github.com/vijinho/scotch-box/tree/f3-boilerplate
-
 ### Composer and Webserver
 
 - [Get Composer](https://getcomposer.org/) - `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin -filename=composer`
@@ -55,7 +51,7 @@ sudo chmod -fR 777 tmp data
 
 ## Description of Project Layout
 
-*Note:* The files that were in `app/lib/FFMVC` have now been split-out into their own repository https://github.com/vijinho/FFMVC 
+*Note:* The files that were in `lib/FFMVC` have now been split-out into their own repository https://github.com/vijinho/FFMVC 
 They can then be included in your own project by adding the same lines in your `composer.json` as used in mine here.
 
 ## Core Files/Paths
@@ -64,42 +60,42 @@ These are the core files which would occur across every project using f3-boilerp
 
  * `www` - website and public doc root (aka `public_html` or `htdocs` etc)
  * `www/index.php` - start website application here
- * `app/lib/` - all library files/classes
- * `app/lib/bcosca/fatfree-core` - [fatfree framework (core)](https://github.com/bcosca/fatfree-core) lives here
+ * `lib/` - all external library files/classes
+ * `app/lib` - local application libraries
+ * `lib/bcosca/fatfree-core` - [fatfree framework (core)](https://github.com/bcosca/fatfree-core) lives here
  * `tmp/cache` `tmp/sessions` `tmp/uploads` - temporary files
  * `tmp/logs` - application logfiles
  * `data` - website data storage
  * `app` - the website application lives outside the webroot for security `www/index.php` is the default file used by `.htaccess` for routing
- * `app/doc` - application documentation (markdown files)
+ * `doc` - application documentation (markdown files)
  * `app/config` - application configuration files
  * `app/config/vhost` - application virtual host configuration files (apache and nginx supported)
  * `app/app.php` - start fatfree by including this file and running FFMVC\App\Run();
  * `app/cli.php` - command-line specific bootstrap instructions
- * `app/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function
- * `app/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
- * `app/templates/www/error/404.phtml` - 'friendly' file not found page
- * `app/templates/www/error/error.phtml` - 'friendly' error page
+ * `app/en/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function
+ * `app/en/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
+ * `app/en/templates/www/error/404.phtml` - 'friendly' file not found page
+ * `app/en/templates/www/error/error.phtml` - 'friendly' error page
   
 ## Supplemental Files/Paths
 
 These files are used as examples for the actual MVC structure files - these will almost certainly vary according to each different project's requirements and so should be forked and renamed according to your project implementation.  
 
- * `app/lib/FFMVC/App` - Base Application Classes
- * `app/lib/FFMVC/Models` - MVC Models
- * `app/lib/FFMVC/Controllers` - MVC Controllers
- * `app/lib/FFMVC/Controllers/Api` - MVC Rest API Controllers
- * `app/lib/FFMVC/Helpers` - Auxillary helper functions and utility libraries specific to the project
- * `app/lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
+ * `lib/FFMVC/App` - Base Application Classes
+ * `lib/FFMVC/Models` - MVC Models
+ * `lib/FFMVC/Controllers` - MVC Controllers
+ * `lib/FFMVC/Controllers/Api` - MVC Rest API Controllers
+ * `lib/FFMVC/Helpers` - Auxillary helper functions and utility libraries specific to the project
+ * `lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
+ * `lib/FFMVC/Traits` - Traits inherited in classes
 
 ### External Libraries
  * [Whoops](https://github.com/filp/whoops) for nicer error handling if level of DEBUG=4
- * [Phinx](https://phinx.org) for database migrations
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility
  * methods.
  * [Wixel GUMP](https://github.com/Wixel/GUMP) for data validation
  * [PHPMailer](https://github.com/PHPMailer/PHPMailer) - replaces f3's less
  * versatile SMTP class
-
 
 #### SSL (Optional)
 API can run by default on [api.local](https://api.local/) for API and test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)

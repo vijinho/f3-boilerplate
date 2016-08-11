@@ -15,11 +15,11 @@
         }
     ],
     "config": {
-        "vendor-dir": "app/lib"
+        "vendor-dir": "lib"
     },
     "autoload": {
-        "classmap": ["app/lib"],
-        "exclude-from-classmap": ["app/lib/bcosca/fatfree-core/smtp.php", "app/lib/bcosca/fatfree-core/./smtp.php"]
+        "classmap": ["app/lib", "lib"],
+        "exclude-from-classmap": ["lib/bcosca/fatfree-core/smtp.php", "lib/bcosca/fatfree-core/./smtp.php"]
     },
     "repositories": [{
             "type": "package",
@@ -38,8 +38,6 @@
         "FFMVC": "dev-master",
         "bcosca/fatfree-core": "dev-master",
         "league/climate": "dev-master",
-        "robmorgan/phinx": "dev-master",
-        "fzaninotto/faker": "dev-master",
         "wixel/gump": "dev-master",
         "phpmailer/phpmailer": "dev-master",
         "filp/whoops": "dev-master"
