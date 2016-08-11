@@ -92,8 +92,7 @@ These files are used as examples for the actual MVC structure files - these will
 
 ### External Libraries
  * [Whoops](https://github.com/filp/whoops) for nicer error handling if level of DEBUG=4
- * [Climate](http://climate.thephpleague.com/) is used for the CLI utility
- * methods.
+ * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
  * [Wixel GUMP](https://github.com/Wixel/GUMP) for data validation
  * [PHPMailer](https://github.com/PHPMailer/PHPMailer) - replaces f3's less versatile SMTP class
 
