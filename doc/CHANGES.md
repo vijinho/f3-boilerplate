@@ -1,5 +1,23 @@
 # Application Releases
 
+# Version 2.2.0
+
+- *PHP7* only now!
+- Replace f3 smtp with PHPMailer (use Helper from FFMVC)
+- Fix bug for ONERROR handler
+- Use Whoops if DEBUG level = 4
+- Put Markdown doc into a page template
+- Rename messages to notifications
+- Improve debug output view
+- Ignore session name when cleaning input
+- Updated nginx config
+- Removed unused theme files
+- Using alias in route
+- Templates can now use a language path 
+- Gettext is now supported
+- /api routes are in a separate routes file
+- Various refactoring
+
 # Version 2.1.0
 
 - Added self-signed local SSL certificates in [app/config/webserver/ssl](app/config/webserver/ssl)
