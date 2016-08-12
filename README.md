@@ -6,7 +6,7 @@ Skeleton PHP7 Fatfree-framework MVC website codebase.
 
 **Project Goal:** Be a good and extremely flexible starting-point for implementing any kind of PHP project in F3.
 
-*PHP7 only now!* - see [doc/CHANGES](doc/CHANGES)
+*PHP7 only now!* - see [CHANGELOG.md](CHANGELOG.md)
 
 ## Is this project for you?
 
@@ -68,7 +68,7 @@ These are the core files which would occur across every project using f3-boilerp
  * `tmp/logs` - application logfiles
  * `data` - website data storage
  * `app` - the website application lives outside the webroot for security `www/index.php` is the default file used by `.htaccess` for routing
- * `doc` - application documentation (markdown files)
+ * `docs` - application documentation (markdown files)
  * `app/config` - application configuration files
  * `app/config/vhost` - application virtual host configuration files (apache and nginx supported)
  * `app/app.php` - start fatfree by including this file and running FFMVC\App\Run();

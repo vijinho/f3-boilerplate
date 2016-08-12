@@ -18,17 +18,17 @@ $f3->set('title', $title);
 
             <p>This project is by <a href="http://about.me/vijay.mahrra">Vijay Mahrra</a> and it is built on, and serves as, an example of the <a href="http://fatfreeframework.com/home">Fat-Free Framework</a></p>
 
-            <?=\Markdown::instance()->convert(nl2br($f3->read($f3->get('HOME') . '/README.md'))) ?>
+            <?=\Markdown::instance()->convert(nl2br($f3->read($f3->get('HOMEDIR') . '/README.md'))) ?>
 
             <?php
-            $files = glob($f3->get('HOME') . '/app/doc/*.md');
+            $files = glob($f3->get('HOMEDIR') . '/docs/*.md');
             if (!empty($files)):
             ?>
             <ul>
                 <?php foreach ($files as $f):
                     $f = basename($f, '.md');
                     ?>
-                    <li><a href="/doc/<?=$f ?>"><?=$f ?></a></li>
+                    <li><a href="/docs/<?=$f ?>"><?=$f ?></a></li>
                 <?php endforeach ?>
             </ul>
             <?php endif ?>

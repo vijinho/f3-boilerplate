@@ -85,8 +85,8 @@ function Run()
         // load cli routes and finish
     if (PHP_SAPI == 'cli') {
 
-        $f3->route('GET /doc/@page', function ($f3, array $params) {
-            $filename = '../doc/'.strtoupper($params['page']).'.md';
+        $f3->route('GET /docs/@page', function ($f3, array $params) {
+            $filename = '../docs/'.strtoupper($params['page']).'.md';
             if (!file_exists($filename)) {
                 die("Documentation Error!\n\nNo such document exists!\n");
             } else {
@@ -264,9 +264,9 @@ function Run()
         }
     }
 
-    $f3->route('GET /doc/@page', function ($f3, array $params) {
+    $f3->route('GET /docs/@page', function ($f3, array $params) {
 
-        $filename = '../doc/'.strtoupper($params['page']).'.md';
+        $filename = '../docs/'.strtoupper($params['page']).'.md';
 
         if (!file_exists($filename)) {
             $html = '<h1>Documentation Error</h1><p>No such document exists!</p>';
@@ -276,7 +276,7 @@ function Run()
         }
 
         $f3->set('html', $html);
-        echo \View::instance()->render('www/markdown-template.phtml');
+        echo \View::instance()->render('templates/en/website/markdown-template.phtml');
 
     }, $f3->get('app.ttl_doc'));
 

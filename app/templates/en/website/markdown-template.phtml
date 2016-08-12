@@ -1,0 +1,18 @@
+<?php $f3 = \Base::instance();
+$title = 'Documentation';
+$f3->set('title', $title);
+?>
+<?=\View::instance()->render('/header.phtml'); ?>
+<?=\View::instance()->render('/header-menu.phtml'); ?>
+<?=\View::instance()->render('/notifications.phtml'); ?>
+
+<div class="container">
+
+    <h1><?=$title ?></h1>
+
+    <?=$f3->get('html') ?>
+
+</div>
+
+<?=\View::instance()->render('/footer-menu.phtml'); ?>
+<?=\View::instance()->render('/footer.phtml'); ?>

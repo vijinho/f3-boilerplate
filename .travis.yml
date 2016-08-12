@@ -1,0 +1,7 @@
+language: php
+php:
+  - "7.0"
+
+env:
+  - COMPOSER_OPTS=""
+  - COMPOSER_OPTS="--prefer-lowest"
