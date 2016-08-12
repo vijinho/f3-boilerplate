@@ -24,17 +24,12 @@ function Run()
 
     // initialise application
 
+    // single instances to registry
+
     // no logfile defined means no logging!
     $logfile = $f3->get('app.logfile');
     if (!empty($logfile)) {
-        // as long as the logger class supports method 'write' should be OK to use like this
         $logger = new \Log($logfile);
-            // enable full logging if not production
-        if ('production' !== $f3->get('app.env')) {
-            ini_set('log_errors', 'On');
-            ini_set('error_log', $logfile);
-            ini_set('error_reporting', -1);
-        }
         \Registry::set('logger', $logger);
     }
 
@@ -56,6 +51,7 @@ function Run()
         }
     } else if (session_status() == PHP_SESSION_NONE) {
         session_start();
+        // this is an array so not in registry
         $f3->set('notifications', $f3->get('SESSION.notifications'));
         $f3->set('uuid', $f3->get('SESSION.uuid')); // logged-in user id
 
@@ -72,6 +68,7 @@ function Run()
         }
     }
 
+    // enable gettext if set
     if (!empty($f3->get('app.gettext'))) {
         // will now fall back to client browser language
         $language = empty($language) ? substr($f3->get('LANGUAGE'), 0, 2) : $language;
@@ -85,7 +82,7 @@ function Run()
         textdomain($domain);
     }
 
-        // cli start
+        // load cli routes and finish
     if (PHP_SAPI == 'cli') {
 
         $f3->route('GET /doc/@page', function ($f3, array $params) {
@@ -249,15 +246,13 @@ function Run()
         $f3->set('REQUEST.access_token', $token);
     }
 
-    // load api routes or regular routes
+    // load /api/* routes and finish
     if (!empty($api)) {
         $f3->config('config/routes-api.ini');
         $f3->run();
         $f3->halt();
     }
 
-    // these are website routes
-    //
     // check csrf value if present, set input csrf to boolean true/false if matched session csrf
     if (!empty($f3->get('app.csrf_enabled'))) {
 
