@@ -52,7 +52,7 @@ sudo chmod -fR 777 tmp data
 
 ## Description of Project Layout
 
-*Note:* The files that were in `lib/FFMVC` have now been split-out into their own repository https://github.com/vijinho/FFMVC 
+*Note:* The files that were in `lib/FFMVC` have now been split-out into their own repository https://github.com/vijinho/FFMVC
 They can then be included in your own project by adding the same lines in your `composer.json` as used in mine here.
 
 ## Core Files/Paths
@@ -77,7 +77,7 @@ These are the core files which would occur across every project using f3-boilerp
  * `app/en/templates/error/debug.phtml` - debug error page (if DEBUG=3)
  * `app/en/templates/error/404.phtml` - 'friendly' file not found page
  * `app/en/templates/error/error.phtml` - 'friendly' error page
-  
+
 ## Supplemental Files/Paths
 
 These files are used as examples for the actual MVC structure files - these will almost certainly vary according to each different project's requirements and so should be forked and renamed according to your project implementation.  
@@ -109,6 +109,25 @@ Add to apache virtual host (and also see the f3-boilerplate-ssl.local files in [
     SSLCertificateKeyFile ssl/f3-boilerplate.key
 ```
 [MAMP](https://www.mamp.info/) lets you add the SSL file in the Hosts/SSL tab.
+
+## Running from the CLI
+
+From the base folder run:
+
+```
+php app/lib/App/CLI.php /
+```
+
+The output will be:
+
+```
+CLI Script
+FFCMS\CLI\Index::index
+Hello World!
+Finished.
+Script executed in 0.048 seconds.
+Memory used 2.29 MB.
+```
 
 --
 http://about.me/vijay.mahrra
