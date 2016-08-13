@@ -265,7 +265,7 @@ function Run()
         }
 
         $f3->set('html', $html);
-        echo \View::instance()->render('www/markdown-template.phtml');
+        echo \View::instance()->render('/markdown-template.phtml');
 
     }, $f3->get('app.ttl_doc'));
 
