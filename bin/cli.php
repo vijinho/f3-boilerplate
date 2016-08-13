@@ -1,1 +1,1 @@
-../app/lib/App/cli.php
+../app/lib/App/CLI.php

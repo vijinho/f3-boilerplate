@@ -12,5 +12,5 @@ if (session_status() == PHP_SESSION_NONE) {
 // the app folder is where the app home and files are
 chdir(__DIR__ . '/../app');
 require_once '../lib/autoload.php'; // composer autoloader
-require_once 'lib/App/app.php';
+require_once 'lib/App/App.php';
 Run();
