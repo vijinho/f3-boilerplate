@@ -6,6 +6,13 @@ Skeleton PHP7 Fatfree-framework MVC website codebase.
 
 **Project Goal:** Be a good and extremely flexible starting-point for implementing any kind of PHP project in F3.
 
+## Usage
+
+- Clone the project
+- Change the `app/config/default.ini` and `config.ini.example` files to suit
+  your project - create your local setup `config.ini` file from this.
+- Change the files in `app/lib/App` and the associated routes in `app/config/routes-*.ini` to suit.
+
 *PHP7 only now!* - see [CHANGELOG.md](CHANGELOG.md)
 
 ## Is this project for you?
