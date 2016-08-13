@@ -135,7 +135,7 @@ function Run()
         if (!$api && $e['code'] == '404') {
             $error_template = 'templates/' . $language . '/website/error/404.phtml';
             if (!file_exists($error_template)) {
-                $error_template = 'templates/en/website/www/error/404.phtml';
+                $error_template = 'templates/en/website/error/404.phtml';
             }
             include_once $error_template;
         } else {
