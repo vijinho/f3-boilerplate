@@ -64,22 +64,23 @@ They can then be included in your own project by adding the same lines in your `
 
 ## Core Files/Paths
 
-These are the core files which would occur across every project using f3-boilerplate and it shouldn't normally be necessary to fork this or change it much if forked.
-
+ *  `lib/bcosca/fatfree-core` - [fatfree framework (core)](https://github.com/bcosca/fatfree-core) lives here
  * `www` - website and public doc root (aka `public_html` or `htdocs` etc)
- * `www/index.php` - start website application here
+ * `www/index.php` - start website application here - is the default file used by `.htaccess` for routing
+ * `app` - the website application lives outside the webroot for security
+ * `app/lib/App/App.php` - start fatfree project by including this file and executing Run();
  * `lib/` - all external library files/classes
- * `app/lib` - local application libraries
- * `lib/bcosca/fatfree-core` - [fatfree framework (core)](https://github.com/bcosca/fatfree-core) lives here
+ * `app/lib` - local application-specific libraries
+ * `app/lib/App/Controllers` - MVC Controllers
+ * `app/lib/App/Controllers/API` - MVC Rest API Controllers
+ * `app/lib/App/CLI` - Controllers for when executing in a command-line environemnt
  * `tmp/cache` `tmp/sessions` `tmp/uploads` - temporary files
  * `tmp/logs` - application logfiles
- * `data` - website data storage
- * `app` - the website application lives outside the webroot for security `www/index.php` is the default file used by `.htaccess` for routing
+ * `data` - website data storage folder
  * `docs` - application documentation (markdown files)
  * `app/config` - application configuration files
  * `app/config/vhost` - application virtual host configuration files (apache and nginx supported)
- * `app/app.php` - start fatfree by including this file and running FFMVC\App\Run();
- * `bin/cli.php` - symlink to command-line runner in `app/lib/App/cli.php' which uses routes in `app/config/routes-cli.ini`
+ * `bin/cli.php` - symlink to command-line runner in `app/lib/App/CLI.php' which uses routes in `app/config/routes-cli.ini`
  * `app/en/templates/error/` - these files are standard php includes, not f3 templates, used by the error handler function
  * `app/en/templates/error/debug.phtml` - debug error page (if DEBUG=3)
  * `app/en/templates/error/404.phtml` - 'friendly' file not found page
@@ -89,11 +90,8 @@ These are the core files which would occur across every project using f3-boilerp
 
 These files are used as examples for the actual MVC structure files - these will almost certainly vary according to each different project's requirements and so should be forked and renamed according to your project implementation.  
 
- * `lib/FFMVC/app.php` - Base Application Class to start/shutdown app
+ * `lib/FFMVC/App.php` - Base Application Class to start/shutdown app
  * `lib/FFMVC/App/Helpers` - Auxillary helper functions and utility libraries specific to the project
- * `app/lib/App/Controllers` - MVC Controllers
- * `app/lib/App/Controllers/API` - MVC Rest API Controllers
- * `app/lib/App/CLI` - Controllers for when executing in a command-line environemnt
 
 ### External Libraries
  * [Whoops](https://github.com/filp/whoops) for nicer error handling if level of DEBUG=4
@@ -101,8 +99,7 @@ These files are used as examples for the actual MVC structure files - these will
 
 #### SSL (Optional)
 
-Test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)
-
+Test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/) 
 Use [Let's Encrypt](https://letsencrypt.org) to generate a real live valid SSL certificate for production environments.
 
 #### Dummy certificate (example)
