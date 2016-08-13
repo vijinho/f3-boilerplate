@@ -1,5 +1,11 @@
 # Application Releases
 
+# Version 2.3.0
+
+- Move MVC classes from FFMVC repo to app/lib/App/ folder to make FFMVC more
+  generic as an include for other projects
+- Move app.php to app/lib/App/ folder
+
 # Version 2.2.0
 
 - *PHP7* only now!

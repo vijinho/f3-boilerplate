@@ -1,25 +1,24 @@
 <?php
 
-namespace FFMVC\App;
+namespace App;
 
-use FFMVC\{Helpers, Models};
-
+use FFMVC\Helpers;
 
 /**
  * fat-free framework application
- * execute with call to FFMVC\App\Run();.
+ * execute with call to \App\Run();
  *
  * @author Vijay Mahrra <vijay@yoyo.org>
- * @copyright (c) Copyright 2013 Vijay Mahrra
+ * @copyright (c) Copyright 2013-2016 Vijay Mahrra
  * @license GPLv3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
 function Run()
 {
     // @see http://fatfreeframework.com/quick-reference#autoload
     $f3 = \Base::instance();
-    App::start();
-    $f3->set('UNLOAD', function() {
-        App::finish();
+    \FFMVC\App::start();
+    $f3->set('UNLOAD', function () {
+        \FFMVC\App::finish();
     });
 
     // initialise application
@@ -49,7 +48,7 @@ function Run()
         if (session_status() !== PHP_SESSION_NONE) {
             session_write_close();
         }
-    } else if (session_status() == PHP_SESSION_NONE) {
+    } elseif (session_status() == PHP_SESSION_NONE) {
         session_start();
         // this is an array so not in registry
         $f3->set('notifications', $f3->get('SESSION.notifications'));
@@ -84,7 +83,6 @@ function Run()
 
         // load cli routes and finish
     if (PHP_SAPI == 'cli') {
-
         $f3->route('GET /docs/@page', function ($f3, array $params) {
             $filename = '../docs/'.strtoupper($params['page']).'.md';
             if (!file_exists($filename)) {
@@ -98,8 +96,7 @@ function Run()
         //load routes from ini file
         $f3->config('config/routes-cli.ini');
         $f3->run();
-        $f3->halt();
-
+        return;
     }
 
     // web start
@@ -142,9 +139,7 @@ function Run()
             }
             include_once $error_template;
         } else {
-
             if (!$api) {
-
                 $error_template = 'templates/' . $language . '/website/www/error/error.phtml';
                 if (!file_exists($error_template)) {
                     $error_template = 'templates/en/website/www/error/error.phtml';
@@ -197,7 +192,7 @@ function Run()
             $cleaned = [];
 
             foreach ($input as $k => $v) {
-                $cleaned[strtolower($utf->trim($f3->clean($k)))] = $f3->recursive($v, function($v) use ($f3, $utf) {
+                $cleaned[strtolower($utf->trim($f3->clean($k)))] = $f3->recursive($v, function ($v) use ($f3, $utf) {
                     return $utf->trim($f3->clean($v));
                 });
             }
@@ -222,15 +217,10 @@ function Run()
     // get the access token and basic auth and set it in REQUEST.access_token
     $token = $f3->get('REQUEST.access_token');
     foreach ($f3->get('SERVER') as $k => $header) {
-
         if (stristr($k, 'authorization') !== false) {
-
             if (preg_match('/Bearer\s+(?P<access_token>.+)$/i', $header, $matches)) {
-
                 $token = $matches['access_token'];
-
             } elseif (preg_match('/Basic\s+(?P<data>.+)$/i', $header, $matches)) {
-
                 $data = preg_split('/:/', base64_decode($matches['data']));
 
                 $f3->mset([
@@ -250,12 +240,11 @@ function Run()
     if (!empty($api)) {
         $f3->config('config/routes-api.ini');
         $f3->run();
-        $f3->halt();
+        return;
     }
 
     // check csrf value if present, set input csrf to boolean true/false if matched session csrf
     if (!empty($f3->get('app.csrf_enabled'))) {
-
         $csrf = $f3->get('REQUEST.csrf');
 
         if (!$api && !empty($csrf)) {
@@ -276,7 +265,7 @@ function Run()
         }
 
         $f3->set('html', $html);
-        echo \View::instance()->render('templates/en/website/markdown-template.phtml');
+        echo \View::instance()->render('www/markdown-template.phtml');
 
     }, $f3->get('app.ttl_doc'));
 

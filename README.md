@@ -82,12 +82,11 @@ These are the core files which would occur across every project using f3-boilerp
 
 These files are used as examples for the actual MVC structure files - these will almost certainly vary according to each different project's requirements and so should be forked and renamed according to your project implementation.  
 
- * `lib/FFMVC/App` - Base Application Classes
- * `lib/FFMVC/Models` - MVC Models
- * `lib/FFMVC/Controllers` - MVC Controllers
- * `lib/FFMVC/Controllers/Api` - MVC Rest API Controllers
- * `lib/FFMVC/Helpers` - Auxillary helper functions and utility libraries specific to the project
- * `lib/FFMVC/CLI` - Controllers for when executing in a command-line environemnt
+ * `lib/FFMVC/app.php` - Base Application Class to start/shutdown app
+ * `lib/FFMVC/App/Helpers` - Auxillary helper functions and utility libraries specific to the project
+ * `app/lib/App/Controllers` - MVC Controllers
+ * `app/lib/App/Controllers/API` - MVC Rest API Controllers
+ * `app/lib/App/CLI` - Controllers for when executing in a command-line environemnt
 
 ### External Libraries
  * [Whoops](https://github.com/filp/whoops) for nicer error handling if level of DEBUG=4
