@@ -88,7 +88,7 @@ They can then be included in your own project by adding the same lines in your `
 
 ## Supplemental Files/Paths
 
-These files are used as examples for the actual MVC structure files - these will almost certainly vary according to each different project's requirements and so should be forked and renamed according to your project implementation.  
+Used for bootstrapping the application and generic enough to be separate from the main project.
 
  * `lib/FFMVC/App.php` - Base Application Class to start/shutdown app
  * `lib/FFMVC/App/Helpers` - Auxillary helper functions and utility libraries specific to the project
