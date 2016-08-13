@@ -24,11 +24,9 @@ I wrote this project for myself, but if you are thinking to use it, thinking on 
 * You need to quickly and easily integrate composer classes into a project structure to get up and running ASAP.
 * You need to write some boilerplate code to add project structure and initialise some commons tasks like config, logging, database connections, set up environments for production and development etc
 * You may want the ability to setup your database connections in the http format - dbms://user:host@server:port/databasename
-* You may want to easily have a way to attach multiple sqlite databases together to use with f3.
 * You are thinking to run f3 on the command-line and want to see how it could be done.
-* You are thinking to write an API based on REST/XML responses and would like a starting point for to how to implement it in f3.
+* You are thinking to write an API based on REST responses and would like a starting point for to how to implement it in f3.
 * You would like to see a real-life example of f3 features for render markdown, display geo-location, database connectivity.
-* You want to use f3 features like minify css and js and have these routes set up and ready-to-use.
 * You want to have your project configuration split up into different files for the main configuration as have a local override file.
 * You would like to have your script log how long it took to run and how much memory it used after executing when in 'development' mode.
 * You need to make sure that ALL script input is normalised and cleaned by default.
