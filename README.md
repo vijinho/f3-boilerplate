@@ -73,10 +73,10 @@ These are the core files which would occur across every project using f3-boilerp
  * `app/config/vhost` - application virtual host configuration files (apache and nginx supported)
  * `app/app.php` - start fatfree by including this file and running FFMVC\App\Run();
  * `bin/cli.php` - symlink to command-line runner in `app/lib/App/cli.php' which uses routes in `app/config/routes-cli.ini`
- * `app/en/templates/www/error/` - these files are standard php includes, not f3 templates, used by the error handler function
- * `app/en/templates/www/error/debug.phtml` - debug error page (if DEBUG=3)
- * `app/en/templates/www/error/404.phtml` - 'friendly' file not found page
- * `app/en/templates/www/error/error.phtml` - 'friendly' error page
+ * `app/en/templates/error/` - these files are standard php includes, not f3 templates, used by the error handler function
+ * `app/en/templates/error/debug.phtml` - debug error page (if DEBUG=3)
+ * `app/en/templates/error/404.phtml` - 'friendly' file not found page
+ * `app/en/templates/error/error.phtml` - 'friendly' error page
   
 ## Supplemental Files/Paths
 
