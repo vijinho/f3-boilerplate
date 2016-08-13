@@ -133,21 +133,21 @@ function Run()
         $e = $f3->get('ERROR');
 
         if (!$api && $e['code'] == '404') {
-            $error_template = 'templates/' . $language . '/website/www/error/404.phtml';
+            $error_template = 'templates/' . $language . '/website/error/404.phtml';
             if (!file_exists($error_template)) {
                 $error_template = 'templates/en/website/www/error/404.phtml';
             }
             include_once $error_template;
         } else {
             if (!$api) {
-                $error_template = 'templates/' . $language . '/website/www/error/error.phtml';
+                $error_template = 'templates/' . $language . '/website/error/error.phtml';
                 if (!file_exists($error_template)) {
-                    $error_template = 'templates/en/website/www/error/error.phtml';
+                    $error_template = 'templates/en/website/error/error.phtml';
                 }
 
-                $debug_template = 'templates/' . $language . '/website/www/error/error.phtml';
+                $debug_template = 'templates/' . $language . '/website/error/error.phtml';
                 if (!file_exists($debug_template)) {
-                    $debug_template = 'templates/en/website/www/error/debug.phtml';
+                    $debug_template = 'templates/en/website/error/debug.phtml';
                 }
 
                 include_once ('production' == $f3->get('app.env') && $debug < 1) ? $error_template
