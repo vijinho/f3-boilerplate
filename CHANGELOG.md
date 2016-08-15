@@ -1,5 +1,9 @@
 # Application Releases
 
+# Version 2.4.0
+
+- Use [Dice](https://r.je/dice.html) for injecting database and log object dependencies
+
 # Version 2.3.0
 
 - Move MVC classes from FFMVC repo to app/lib/App/ folder to make FFMVC more
