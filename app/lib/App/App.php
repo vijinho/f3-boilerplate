@@ -113,7 +113,7 @@ class App
             function () use ($f3) {
             $logger = \Registry::get('logger');
             if (is_object($logger)) {
-                $logger->write(print_r($f3->get('ERROR')));
+                $logger->write(print_r($f3->get('ERROR')), $f3->get('app.logdate'));
             }
 
             // recursively clear existing output buffers:

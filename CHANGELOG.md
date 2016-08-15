@@ -1,5 +1,9 @@
 # Application Releases
 
+# Version 2.4.1
+
+- add log date/time formatting
+
 # Version 2.4.0
 
 - Use [Dice](https://r.je/dice.html) for injecting database and log object dependencies
