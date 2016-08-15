@@ -92,12 +92,14 @@ Used for bootstrapping the application and generic enough to be separate from th
  * `lib/FFMVC/App/Helpers` - Auxillary helper functions and utility libraries specific to the project
 
 ### External Libraries
+
+ * [DICE](https://github.com/Level-2/Dice) dependency injection container
  * [Whoops](https://github.com/filp/whoops) for nicer error handling if level of DEBUG=4
  * [Climate](http://climate.thephpleague.com/) is used for the CLI utility methods.
 
 #### SSL (Optional)
 
-Test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/) 
+Test certificates in [app/config/webserver/ssl/](app/config/webserver/ssl/)
 Use [Let's Encrypt](https://letsencrypt.org) to generate a real live valid SSL certificate for production environments.
 
 #### Dummy certificate (example)

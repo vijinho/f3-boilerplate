@@ -34,10 +34,11 @@
         }],
     "require": {
         "php": ">=5.6.0",
-        "FFMVC": "dev-master",
         "bcosca/fatfree-core": "dev-master",
+        "level-2/dice": "dev-master",
+        "filp/whoops": "dev-master",
         "league/climate": "dev-master",
-        "filp/whoops": "dev-master"
+        "FFMVC": "dev-master"
     },
     "suggest": {
         "php": ">=7.0.0"
