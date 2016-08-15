@@ -43,7 +43,7 @@ function boot()
 
     // run the main application
     require_once 'lib/App/App.php';
-    $app = $dice->create('\App\App');
+    $app = $dice->create('App\\App');
     $app->Main();
 }
 
