@@ -14,12 +14,7 @@ use FFMVC\Helpers;
  */
 function Run()
 {
-    // @see http://fatfreeframework.com/quick-reference#autoload
     $f3 = \Base::instance();
-    \FFMVC\App::start();
-    $f3->set('UNLOAD', function () {
-        \FFMVC\App::finish();
-    });
 
     // initialise application
 

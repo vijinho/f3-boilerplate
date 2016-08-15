@@ -12,5 +12,14 @@ if (session_status() == PHP_SESSION_NONE) {
 // the app folder is where the app home and files are
 chdir(__DIR__ . '/../app');
 require_once '../lib/autoload.php'; // composer autoloader
+
+// bootstrap iniitial environment
+$f3 = \Base::instance();
+\FFMVC\App::start();
+$f3->set('UNLOAD', function () {
+    \FFMVC\App::finish();
+});
+
+// load application
 require_once 'lib/App/App.php';
 Run();
