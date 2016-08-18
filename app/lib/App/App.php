@@ -263,6 +263,17 @@ class App
 
         }, $f3->get('app.ttl_doc'));
 
+        // @see http://fatfreeframework.com/optimization
+        $f3->route('GET /minify/@type',
+            function ($f3, $args) {
+                    $type = $args['type'];
+                    $path = realpath(dirname(__FILE__) . '/../www/');
+                    $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
+                    echo \Web::instance()->minify($files, null, true, $path);
+            },
+            $f3->get('minify.ttl')
+        );
+        
         // load language-based routes, default english
         $f3->config('config/routes-en.ini');
         $file = 'config/routes-' . $language  . '.ini';
