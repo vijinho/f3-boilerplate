@@ -371,7 +371,7 @@ class API
         $f3 = \Base::instance();
 
         // if forcing access to https die
-        if ('http' == $f3->get('SCHEME') && !empty($f3->get('app.api_https'))) {
+        if ('http' == $f3->get('SCHEME') && !empty($f3->get('api.https'))) {
             $this->failure('api_connection_error', "Connection only allowed via HTTPS!", 400);
             $this->setOAuthError('unauthorized_client');
             return;

@@ -9,7 +9,7 @@ Skeleton PHP7 Fatfree-framework MVC website codebase.
 ## Usage
 
 - Clone the project
-- Change the `app/config/default.ini` and `config.ini.example` files to suit
+- Change the `app/config/default.ini` and `config.example.ini` files to suit
   your project - create your local setup `config.ini` file from this.
 - Change the files in `app/lib/App` and the associated routes in `app/config/routes-*.ini` to suit.
 
@@ -42,7 +42,7 @@ I wrote this project for myself, but if you are thinking to use it, thinking on 
 - OR run with php in-built webserver from [www](www): `php -S http://127.0.0.1:8080` and browse to [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
 ### Configuration
-  - Copy `app/config/config.ini.example` to `config.ini`
+  - Copy `app/config/config.example.ini` to `config.ini`
   - Edit `app/config/config.ini `and add anything extra from `default.ini` for overrides
   - In the top level folder `run composer install`
 

@@ -1,5 +1,9 @@
 # Application Releases
 
+# Version 2.5.0
+
+- Refactored .ini settings and defaults into different hive sections
+
 # Version 2.4.1
 
 - add log date/time formatting
@@ -26,7 +30,7 @@
 - Updated nginx config
 - Removed unused theme files
 - Using alias in route
-- Templates can now use a language path 
+- Templates can now use a language path
 - Gettext is now supported
 - /api routes are in a separate routes file
 - Various refactoring
@@ -37,7 +41,7 @@
 - Using DEBUG=4 will use [Whoops](https://github.com/filp/whoops) for nicer error handling
 - Added code for CSRF check
 - Renamed Messages class to Notifications
-- Removed XML option in API 
+- Removed XML option in API
 - Now using [Named Routes](https://fatfreeframework.com/base#NamedRoutes)
 
 # Version 2.0.0

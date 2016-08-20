@@ -113,7 +113,7 @@ class App
             function () use ($f3) {
             $logger = \Registry::get('logger');
             if (is_object($logger)) {
-                $logger->write(print_r($f3->get('ERROR')), $f3->get('app.logdate'));
+                $logger->write(print_r($f3->get('ERROR')), $f3->get('log.date'));
             }
 
             // recursively clear existing output buffers:
@@ -181,10 +181,10 @@ class App
         $request = [];
         $utf = \UTF::instance();
         foreach (['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE'] as $var) {
+            $f3->copy($var, $var . '_UNCLEAN');
             $input = $f3->get($var);
             if (is_array($input) && count($input)) {
                 $cleaned = [];
-
                 foreach ($input as $k => $v) {
                     $cleaned[strtolower($utf->trim($f3->clean($k)))] = $f3->recursive($v, function ($v) use ($f3, $utf) {
                         return $utf->trim($f3->clean($v));
@@ -205,6 +205,7 @@ class App
         }
 
         ksort($request);
+        $f3->copy('REQUEST', 'REQUEST_UNCLEAN');
         $f3->set('REQUEST', $request);
         unset($request);
 
@@ -238,7 +239,7 @@ class App
         }
 
         // check csrf value if present, set input csrf to boolean true/false if matched session csrf
-        if (!empty($f3->get('app.csrf_enabled'))) {
+        if (!empty($f3->get('security.csrf'))) {
             $csrf = $f3->get('REQUEST.csrf');
 
             if (!$api && !empty($csrf)) {
@@ -261,7 +262,7 @@ class App
             $f3->set('html', $html);
             echo \View::instance()->render('/markdown-template.phtml');
 
-        }, $f3->get('app.ttl_doc'));
+        }, $f3->get('ttl.doc'));
 
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
@@ -271,9 +272,9 @@ class App
                     $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
                     echo \Web::instance()->minify($files, null, true, $path);
             },
-            $f3->get('minify.ttl')
+            $f3->get('ttl.minify')
         );
-        
+
         // load language-based routes, default english
         $f3->config('config/routes-en.ini');
         $file = 'config/routes-' . $language  . '.ini';

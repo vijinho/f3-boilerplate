@@ -38,7 +38,7 @@ function boot()
     ]]);
 
     // logging for application
-    $logfile = $f3->get('app.logfile');
+    $logfile = $f3->get('log.file');
     $dice->addRule('Log', ['shared' => true, 'constructParams' => [$logfile]]);
 
     // run the main application
