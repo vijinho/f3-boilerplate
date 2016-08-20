@@ -46,6 +46,9 @@ I wrote this project for myself, but if you are thinking to use it, thinking on 
   - Edit `app/config/config.ini `and add anything extra from `default.ini` for overrides
   - In the top level folder `run composer install`
 
+### Database
+  - Create a database dumpfile to auto-import in `data/db/sql/create.sql` (set ini option for db.create=true)
+
 ### Folders & Permissions
 Setup empty website folders as follows:
 
@@ -83,6 +86,7 @@ They can then be included in your own project by adding the same lines in your `
  * `app/en/templates/error/debug.phtml` - debug error page (if DEBUG=3)
  * `app/en/templates/error/404.phtml` - 'friendly' file not found page
  * `app/en/templates/error/error.phtml` - 'friendly' error page
+ * `tests` - unit tests see [docs/TESTING.md](docs/TESTING.md])
 
 ## Supplemental Files/Paths
 

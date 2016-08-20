@@ -3,6 +3,8 @@
 # Version 2.5.0
 
 - Refactored .ini settings and defaults into different hive sections
+- Option to auto-insert database dump added
+- Initial test script added to setup f3 tests and environment
 
 # Version 2.4.1
 

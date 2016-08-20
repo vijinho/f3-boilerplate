@@ -30,6 +30,10 @@ function boot()
     // load dependency injection container
     $dice = new \Dice\Dice;
 
+    // logging for application
+    $logfile = $f3->get('log.file');
+    $dice->addRule('Log', ['shared' => true, 'constructParams' => [$logfile]]);
+
     // database connection used by app
     $dbConfig = $f3->get('db');
     $dice->addRule('DB\\SQL', ['shared' => true, 'constructParams' => [
@@ -39,9 +43,8 @@ function boot()
         [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
     ]]);
 
-    // logging for application
-    $logfile = $f3->get('log.file');
-    $dice->addRule('Log', ['shared' => true, 'constructParams' => [$logfile]]);
+    // auto-create database if options set
+    \App\Setup::database($dice);
 
     // run the main application
     require_once 'lib/App/App.php';
