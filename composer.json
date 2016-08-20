@@ -20,25 +20,13 @@
     "autoload": {
         "classmap": ["app/lib", "lib"]
     },
-    "repositories": [{
-            "type": "package",
-            "package": {
-                "name": "FFMVC",
-                "version": "dev-master",
-                "source": {
-                    "url": "https://github.com/vijinho/FFMVC.git",
-                    "type": "git",
-                    "reference": "dev-master"
-                }
-            }
-        }],
     "require": {
         "php": ">=5.6.0",
         "bcosca/fatfree-core": "dev-master",
         "level-2/dice": "dev-master",
         "filp/whoops": "dev-master",
         "league/climate": "dev-master",
-        "FFMVC": "dev-master"
+        "vijinho/ffmvc": "dev-dev-master"
     },
     "suggest": {
         "php": ">=7.0.0"
