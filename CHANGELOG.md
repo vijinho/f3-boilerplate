@@ -1,5 +1,10 @@
 # Application Releases
 
+# Version 2.5.1
+
+- Add a base Models/DB class which can be extended to another class and auto
+  set default table based on class name
+
 # Version 2.5.0
 
 - Refactored .ini settings and defaults into different hive sections
