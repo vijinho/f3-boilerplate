@@ -152,9 +152,13 @@ class API
      */
     protected $OAuthError = null;
 
-    /**
-     * initialize.
-     */
+     /**
+      * init
+      *
+      * @param \Base $f3
+      * @param array $params
+      * @return void
+      */
     public function __construct(\Base $f3, array $params = [])
     {
         $this->db = \Registry::get('db');
@@ -163,10 +167,14 @@ class API
         $this->loggerObject = \Registry::get('logger');
     }
 
-    /**
-     * compile and send the json response.
-     */
-    public function afterRoute($f3, $params)
+     /**
+      * compile and send the json response.
+      *
+      * @param \Base $f3
+      * @param array $params
+      * @return void
+      */
+    public function afterRoute(\Base $f3, array $params = [])
     {
         $this->params['headers'] = empty($this->params['headers']) ? [] : $this->params['headers'];
         $this->params['headers'] = [
@@ -229,9 +237,7 @@ class API
      * Set the RFC-compliant OAuth Error to return.
      *
      * @param type $code  of error code from RFC
-     *
      * @throws Models\APIServerException
-     *
      * @return the OAuth error array
      */
     public function setOAuthError($code)
@@ -374,8 +380,13 @@ class API
         return true;
     }
 
-    // unknown catch-all api method
-    public function unknown($f3, $params)
+    /**
+     * unknown catch-all api method
+     * @param \Base $f3
+     * @param array $params
+     * @return void
+     */
+    public function unknown(\Base $f3, array $params = [])
     {
         $this->setOAuthError('invalid_request');
         $this->failure('api_connection_error', 'Unknown API Request', 400);

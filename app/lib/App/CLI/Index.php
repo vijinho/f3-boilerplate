@@ -18,7 +18,7 @@ class Index extends Base
      * @param array $params
      * @return void
      */
-    public function index($f3, array $params)
+    public function index(\Base $f3, array $params = [])
     {
         $cli = $this->cli;
         $cli->shoutBold(__METHOD__);
@@ -32,7 +32,7 @@ class Index extends Base
      * @param array $params
      * @return void
      */
-    public function running($f3, array $params)
+    public function running(\Base $f3, array $params = [])
     {
         $cli = $this->cli;
         $cli->shoutBold(__METHOD__);

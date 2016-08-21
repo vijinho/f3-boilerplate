@@ -32,8 +32,10 @@ abstract class Base
 
 
     /**
-     * initialize.
-     */
+    * @param \Base $f3
+    * @param array $params
+    * @return void
+    */
     public function __construct(\Base $f3, array $params = [])
     {
         if (PHP_SAPI !== 'cli') {
@@ -50,7 +52,7 @@ abstract class Base
      * @param array $params
      * @return void
      */
-    public function beforeRoute($f3, array $params)
+    public function beforeRoute(\Base $f3, array $params = [])
     {
         $cli = $this->cli;
         $cli->blackBoldUnderline("CLI Script");
@@ -62,7 +64,7 @@ abstract class Base
      * @param array $params
      * @return void
      */
-    public function afterRoute($f3, array $params)
+    public function afterRoute(\Base $f3, array $params = [])
     {
         $cli = $this->cli;
         $cli->shout('Finished.');
