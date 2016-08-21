@@ -14,13 +14,14 @@ use FFMVC\Helpers as Helpers;
 class Index extends Base
 {
     /**
+     * Main homepage controller
      *
-     *
+     * @alias home - f3 route alias
      * @param \Base $f3
      * @param array $params
      * @return void
      */
-    public function index($f3, array $params)
+    public function index(\Base $f3, array $params = [])
     {
         Helpers\Notifications::instance()->add("Hello world!", "success");
         echo \View::instance()->render('index/index.phtml');
