@@ -20,7 +20,9 @@ class Test extends API
      */
     public function request($f3, array $params)
     {
-        $this->params['http_methods'] = 'GET,HEAD';
+        if (!$this->validateAccess()) {
+            //return;
+        }
         $this->data += [
             'name' => 'globals',
             'description' => 'Global Variables',
