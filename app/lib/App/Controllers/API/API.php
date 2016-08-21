@@ -155,29 +155,12 @@ class API
     /**
      * initialize.
      */
-    public function __construct($params)
+    public function __construct(\Base $f3, array $params = [])
     {
-        $f3 = \Base::instance();
         $this->db = \Registry::get('db');
-        $this->version = $f3->get('app.version');
-
-        if (!array_key_exists('responseObject', $params)) {
-            $this->responseObject = Helpers\Response::instance();
-        }
-
-        if (!array_key_exists('loggerObject', $params)) {
-            $this->loggerObject = \Registry::get('logger');
-        }
-
-        // inject class members
-        foreach ($params as $k => $v) {
-            $this->$k = $v;
-        }
-
-        // finally execute init method if exists
-        if (method_exists($this, 'init')) {
-            return $this->init($f3, $params);
-        }
+        $this->version = $f3->get('api.version');
+        $this->responseObject = Helpers\Response::instance();
+        $this->loggerObject = \Registry::get('logger');
     }
 
     /**
@@ -296,7 +279,7 @@ class API
      *
      * @return bool success/failure
      */
-    public function basicAuthenticateLoginPassword()
+    public function basicAuthenticateLoginPassword(): boolean
     {
         $f3 = \Base::instance();
 
@@ -318,7 +301,7 @@ class API
      * @param string $clientSecret the client secret to check
      * @return bool success/failure
      */
-    public function authenticateClientIdSecret($clientId, $clientSecret)
+    public function authenticateClientIdSecret($clientId, $clientSecret): boolean
     {
         if (empty($clientId) || empty($clientSecret)) {
             return false;
@@ -333,37 +316,16 @@ class API
      *
      * @return bool success/failure
      */
-    public function basicAuthenticateClientIdSecret()
+    public function basicAuthenticateClientIdSecret(): boolean
     {
         $f3 = \Base::instance();
         return $this->authenticateClientIdSecret($f3->get('REQUEST.PHP_AUTH_USER'), $f3->get('REQUEST.PHP_AUTH_PW'));
     }
 
     /**
-     * Basic Authentication for developer email:token
-     * Check that the credentials match the database.
-     *
-     * @return bool success/failure
-     */
-    protected function basicAuthenticateLoginToken($f3, $params)
-    {
-    }
-
-    /**
      * Validate the provided access token or get the bearer token from the incoming http request
-     * do $f3->set('access_token') if OK.
-     *
-     * Or login using app token with HTTP Auth using one of
-     *
-     * email:password
-     * email:access_token
-     *
-     * Or by URL query string param - ?access_token=$access_token
-     *
-     * Sets hive vars: user[] (mandatory), api_app[] (optional) and user_scopes[], user_groups[]
      *
      * @param array $params optional params
-     *
      * @return boolean true/false on valid access credentials
      */
     protected function validateAccess(array $params = [])
@@ -377,16 +339,11 @@ class API
             return;
         }
 
+        $userAuthenticated = false;
         $token = $f3->get('REQUEST.access_token');
         if (!empty($token)) {
-            // fetch token and check expiry
-/*
-            if (time() > $expiry) {
-                $this->failure('authentication_error', "The token expired!", 401);
-                $this->setOAuthError('invalid_grant');
-                return false;
-            }
-*/
+            // fetch token and check
+            //$userAuthenticated = true;
         }
 
         // login with client_id and client_secret in request
@@ -394,7 +351,7 @@ class API
         $clientSecret = $f3->get('REQUEST.client_secret');
         if (!empty($clientId) && !empty($clientSecret)
                 && $this->authenticateClientIdSecret($clientId, $clientSecret)) {
-            $appLogin = true;
+            $userAuthenticated = true;
         }
 
         // check if login via http basic auth
@@ -402,16 +359,15 @@ class API
         if (!empty($phpAuthUser)) {
             // try to login as email:password
             if ($this->basicAuthenticateLoginPassword()) {
+                $userAuthenticated = true;
             } elseif ($this->basicAuthenticateClientIdSecret()) {
-                $appLogin = true; // client_id:client_secret
+                $userAuthenticated = true;
             }
         }
 
-        $userAuthenticated = false;
         if (!$userAuthenticated) {
             $this->failure('authentication_error', "Not possible to authenticate the request.", 400);
             $this->setOAuthError('invalid_credentials');
-
             return false;
         }
 
