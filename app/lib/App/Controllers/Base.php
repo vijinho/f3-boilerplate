@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use FFMVC\Helpers;
-
 /**
  * Base Controller Class.
  *
@@ -14,24 +12,13 @@ use FFMVC\Helpers;
 abstract class Base
 {
     /**
-     * initialize.
+     * Base WWW Controller
+     *
+     * @param \Base $f3
+     * @param array $params
+     * @return void
      */
-    public function __construct($params = [])
+    public function __construct(\Base $f3, array $params = [])
     {
-        $f3 = \Base::instance();
-
-        if (!array_key_exists('loggerObject', $params)) {
-            $this->loggerObject = \Registry::get('logger');
-        }
-
-        if (!array_key_exists('notificationObject', $params)) {
-            $this->notificationObject = Helpers\Notifications::instance();
-        }
-
-        // inject class members
-        foreach ($params as $k => $v) {
-            $this->$k = $v;
-        }
     }
-
 }

@@ -13,7 +13,12 @@ use App\{Traits, Controllers, Models, Mappers};
 abstract class Base
 {
     /**
-     * @var object database class
+     * @var \Log log class
+     */
+    protected $logger;
+
+    /**
+     * @var \DB\SQL database class
      */
     protected $db;
 
@@ -29,36 +34,15 @@ abstract class Base
     /**
      * initialize.
      */
-    public function __construct($params = [])
+    public function __construct(\Base $f3, array $params = [])
     {
         if (PHP_SAPI !== 'cli') {
             exit("This controller can only be executed in CLI mode.");
         }
 
-        $f3 = \Base::instance();
-
-        // inject class members based on params
-        foreach ($params as $k => $v) {
-            $this->$k = $v;
-        }
-
-        // if we have none of the following setup, use defaults
-        if (empty($this->db)) {
-            $this->db = \Registry::get('db');
-        }
-
-        if (empty($this->notificationObject)) {
-            $this->notificationObject = Helpers\Notifications::instance();
-        }
-
-        if (empty($this->logObject)) {
-            $this->logObject = \Registry::get('logger');
-        }
-
-        if (empty($this->cli)) {
-            $this->cli = new \League\CLImate\CLImate;
-            $this->cli->clear();
-        }
+        $this->db = \Registry::get('db');
+        $this->logger = \Registry::get('logger');
+        $this->cli = new \League\CLImate\CLImate;
     }
 
     /**
