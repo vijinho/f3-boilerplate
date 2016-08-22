@@ -5,14 +5,17 @@ php:
   - "7.0"
 
 env:
-  - COMPOSER_OPTS=""
-  - COMPOSER_OPTS="--prefer-lowest"
+  - COMPOSER_FLAGS="--prefer-lowest"
 
 script: phpunit
 
 before_script:
     - travis_retry composer self-update
     - travis_retry composer update --no-interaction --prefer-source --prefer-stable ${COMPOSER_FLAGS}
+
+#after_script:
+#    - wget https://scrutinizer-ci.com/ocular.phar
+#    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 install:
   - alias composer=composer\ -n && composer selfupdate
