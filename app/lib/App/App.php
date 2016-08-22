@@ -265,7 +265,7 @@ class App
 
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
-            function ($f3, $args) {
+            function ($f3) {
                     $path = realpath(dirname(__FILE__) . '/../www/');
                     $files = str_replace('../', '', $f3->get('GET_UNCLEAN.files')); // close potential hacking attempts
                     echo \Web::instance()->minify($files, null, true, $path);

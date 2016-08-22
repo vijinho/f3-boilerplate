@@ -230,11 +230,11 @@ class API
     /**
      * Get OAuth Error Type.
      *
-     * @param type $type
+     * @param string $type
      *
      * @return mixed array error type or boolean false
      */
-    protected function getOAuthErrorType($type)
+    protected function getOAuthErrorType(string $type)
     {
         return array_key_exists($type, $this->OAuthErrorTypes) ? $this->OAuthErrorTypes[$type] : false;
     }
