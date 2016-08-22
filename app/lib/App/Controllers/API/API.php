@@ -338,7 +338,7 @@ class API
      * Validate the provided access token or get the bearer token from the incoming http request
      *
      * @param array $params optional params
-     * @return boolean true/false on valid access credentials
+     * @return null|boolean true/false on valid access credentials
      */
     protected function validateAccess(array $params = [])
     {
