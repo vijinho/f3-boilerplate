@@ -1,7 +1,9 @@
 # f3-boilerplate
 
 ![Travis CI](https://travis-ci.org/vijinho/f3-boilerplate.svg?branch=dev-master)
-
+[![Build Status](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/badges/build.png?b=dev-master)](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/build-status/dev-master)
+[![Code Coverage](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/badges/coverage.png?b=dev-master)](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/?branch=dev-master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/badges/quality-score.png?b=dev-master)](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/?branch=dev-master)
 
 ![f3-boilerplate homepage screenshot](tmp/screenshot.png)
 
