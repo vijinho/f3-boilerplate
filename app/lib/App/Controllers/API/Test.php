@@ -2,8 +2,6 @@
 
 namespace App\Controllers\API;
 
-use FFMVC\Helpers as Helpers;
-
 /**
  * API Test Controller Class.
  *
@@ -20,21 +18,21 @@ class Test extends API
      */
     public function request($f3, array $params)
     {
-        if (!$this->validateAccess()) {
+        if (empty($this->validateAccess())) {
             //return;
         }
         $this->data += [
-            'name' => 'globals',
+            'name'        => 'globals',
             'description' => 'Global Variables',
-            'globals' => [
-                'SERVER' => $f3->get('SERVER'),
-                'ENV' => $f3->get('ENV'),
-                'COOKIE' => $f3->get('COOKIE'),
+            'globals'     => [
+                'SERVER'  => $f3->get('SERVER'),
+                'ENV'     => $f3->get('ENV'),
+                'COOKIE'  => $f3->get('COOKIE'),
                 'SESSION' => $f3->get('SESSION'),
                 'REQUEST' => $f3->get('REQUEST'),
-                'GET' => $f3->get('GET'),
-                'POST' => $f3->get('POST'),
-                'FILES' => $f3->get('FILES'),
+                'GET'     => $f3->get('GET'),
+                'POST'    => $f3->get('POST'),
+                'FILES'   => $f3->get('FILES'),
             ],
         ];
     }

@@ -64,6 +64,13 @@ class API
     protected $responseObject;
 
     /**
+     * logger object.
+     *
+     * @var response
+     */
+    protected $loggerObject;
+
+    /**
      * db.
      *
      * @var db
@@ -157,7 +164,6 @@ class API
       *
       * @param \Base $f3
       * @param array $params
-      * @return void
       */
     public function __construct(\Base $f3, array $params = [])
     {
@@ -236,11 +242,11 @@ class API
     /**
      * Set the RFC-compliant OAuth Error to return.
      *
-     * @param type $code  of error code from RFC
+     * @param string $code  of error code from RFC
      * @throws Models\APIServerException
      * @return the OAuth error array
      */
-    public function setOAuthError($code)
+    public function setOAuthError(string $code)
     {
         $error = $this->getOAuthErrorType($code);
         if (empty($error)) {

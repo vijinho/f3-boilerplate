@@ -36,8 +36,8 @@ class App
         // is the url under /api ?
         $api = '/api' == substr($f3->get('PATH'), 0, 4);
         $f3->set('api', $api);
+        $language = $f3->get('REQUEST.language');
 
-        // do not use sessions for api calls
         if (PHP_SAPI == 'cli' ||  $api) {
             if (session_status() !== PHP_SESSION_NONE) {
                 session_write_close();
@@ -49,8 +49,6 @@ class App
             $f3->set('uuid', $f3->get('SESSION.uuid')); // logged-in user id
 
             // initialise gettext
-            // override language from request
-            $language = $f3->get('REQUEST.language');
             if (!empty($language)) {
                 $f3->set('SESSION.language', $language);
             }
@@ -78,9 +76,10 @@ class App
             // load cli routes and finish
         if (PHP_SAPI == 'cli') {
             $f3->route('GET /docs/@page', function ($f3, array $params) {
-                $filename = '../docs/'.strtoupper($params['page']).'.md';
+                $filename = '../docs/' . strtoupper($params['page']) . '.md';
                 if (!file_exists($filename)) {
-                    die("Documentation Error!\n\nNo such document exists!\n");
+                    echo "Documentation Error!\n\nNo such document exists!\n";
+                    return;
                 } else {
                     echo $f3->read($filename);
                 }
@@ -103,9 +102,9 @@ class App
         $debug = $f3->get('DEBUG');
 
         if (!$api && $debug == 4) {
-            $w = new \Whoops\Run;
-            $w->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-            $w->register();
+            $whoops = new \Whoops\Run;
+            $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+            $whoops->register();
         }
 
         // custom error handler if debugging
@@ -150,13 +149,13 @@ class App
                     $response = Helpers\Response::instance();
 
                     $data = [
-                        'method' => $f3->get('VERB')
+                        'method' => $f3->get('VERB'),
                     ];
 
                     $data['error'] = [
                         'code' => substr($f3->snakecase(str_replace(' ', '',
                                     $e['status'])), 0),
-                        'description' => $e['code'] . ' ' . $e['text']
+                        'description' => $e['code'] . ' ' . $e['text'],
                     ];
 
                     if ($debug == 3) {
@@ -179,7 +178,7 @@ class App
 
         // clean ALL incoming user input by default
         $request = [];
-        $utf = \UTF::instance();
+        $utf     = \UTF::instance();
         foreach (['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE'] as $var) {
             $f3->copy($var, $var . '_UNCLEAN');
             $input = $f3->get($var);
@@ -219,10 +218,10 @@ class App
                     $data = preg_split('/:/', base64_decode($matches['data']));
 
                     $f3->mset([
-                        'SERVER.PHP_AUTH_USER' => $data[0],
-                        'SERVER.PHP_AUTH_PW' => $data[1],
+                        'SERVER.PHP_AUTH_USER'  => $data[0],
+                        'SERVER.PHP_AUTH_PW'    => $data[1],
                         'REQUEST.PHP_AUTH_USER' => $data[0],
-                        'REQUEST.PHP_AUTH_PW' => $data[1]
+                        'REQUEST.PHP_AUTH_PW'   => $data[1],
                     ]);
                 }
             }
@@ -250,7 +249,7 @@ class App
 
         $f3->route('GET /docs/@page', function ($f3, array $params) {
 
-            $filename = '../docs/'.strtoupper($params['page']).'.md';
+            $filename = '../docs/' . strtoupper($params['page']) . '.md';
 
             if (!file_exists($filename)) {
                 $html = '<h1>Documentation Error</h1><p>No such document exists!</p>';
@@ -267,9 +266,8 @@ class App
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
             function ($f3, $args) {
-                    $type = $args['type'];
                     $path = realpath(dirname(__FILE__) . '/../www/');
-                    $files = str_replace('../', '', $_GET['files']); // close potential hacking attempts
+                    $files = str_replace('../', '', $f3->get('GET_UNCLEAN.files')); // close potential hacking attempts
                     echo \Web::instance()->minify($files, null, true, $path);
             },
             $f3->get('ttl.minify')
@@ -277,7 +275,7 @@ class App
 
         // load language-based routes, default english
         $f3->config('config/routes-en.ini');
-        $file = 'config/routes-' . $language  . '.ini';
+        $file = 'config/routes-' . $language . '.ini';
         if (file_exists($file)) {
             $f3->config($file);
         }

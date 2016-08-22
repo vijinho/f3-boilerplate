@@ -2,8 +2,6 @@
 
 namespace App\CLI;
 
-use FFMVC\Helpers;
-
 /**
  * Index CLI Class.
  *
@@ -22,7 +20,7 @@ class Index extends Base
     {
         $cli = $this->cli;
         $cli->shoutBold(__METHOD__);
-        $cli->shout("Hello World!");
+        $cli->shout('Hello World!');
     }
 
     /**
@@ -39,19 +37,16 @@ class Index extends Base
 
         // use process id for log notifications
         $mypid = getmypid();
-        $pid = $mypid['PID'];
-        $msg = $pid . ': Starting...';
+        $pid   = $mypid['PID'];
+        $msg   = $pid . ': Starting...';
         $cli->shout($msg);
-        $this->log($msg);
 
         // check if already running, quit if so
-        exec("ps auxww | grep -i index/running | grep -v grep", $ps);
+        exec('ps auxww | grep -i index/running | grep -v grep', $ps);
 
         if (1 < count($ps)) {
             $msg = $pid . ': Already running! Quitting.';
             $cli->shout($msg);
-            $this->log($ps[0]);
-            $this->log($msg);
             return false;
         }
 

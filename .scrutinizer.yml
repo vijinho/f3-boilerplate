@@ -131,7 +131,7 @@ tools:
                 - naming
                 - design
             naming_rules:
-                short_variable: { minimum: 2 }
+                short_variable: { minimum: 3 }
         filter:
             excluded_paths:
                 - 'docs/*'
