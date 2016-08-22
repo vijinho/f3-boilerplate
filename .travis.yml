@@ -1,7 +1,23 @@
 language: php
+
 php:
   - "7.0"
 
 env:
   - COMPOSER_OPTS=""
   - COMPOSER_OPTS="--prefer-lowest"
+
+script: phpunit
+
+before_script:
+    - travis_retry composer self-update
+    - travis_retry composer install --no-interaction --prefer-dist
+
+install:
+  - alias composer=composer\ -n && composer selfupdate
+  - composer validate
+  - composer --prefer-source install
+
+cache:
+  directories:
+    - $HOME/.composer/cache
