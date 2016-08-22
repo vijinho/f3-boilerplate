@@ -1,5 +1,8 @@
 # f3-boilerplate
 
+![Travis CI](https://travis-ci.org/vijinho/f3-boilerplate.svg?branch=dev-master)
+
+
 ![f3-boilerplate homepage screenshot](tmp/screenshot.png)
 
 Skeleton PHP7 Fatfree-framework MVC website codebase.
