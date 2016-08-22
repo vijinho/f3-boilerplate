@@ -38,6 +38,9 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     php_code_coverage:
         enabled: false
@@ -46,6 +49,9 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # The PSR-1 and PSR-2 Coding Standards fixer for your code
     # http://cs.sensiolabs.org
@@ -58,6 +64,9 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files to detect and fix violations of a defined set of coding standards.
     # http://pear.php.net/package/PHP_CodeSniffer/
@@ -75,6 +84,9 @@ tools:
                 - 'docs/*'
                 - 'lib/*'
                 - 'tests/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # Analyzes the size and structure of a PHP project.
     # https://github.com/sebastianbergmann/phploc
@@ -83,6 +95,9 @@ tools:
         excluded_dirs:
             - lib
             - tests
+            - bin
+            - data
+            - www
 
     # Copy/Paste Detector
     # https://github.com/sebastianbergmann/phpcpd
@@ -99,6 +114,9 @@ tools:
         excluded_dirs:
             - tests
             - lib
+            - bin
+            - data
+            - www
 
     # PHP Mess Detector
     # It takes a given PHP source code base and look for several potential problems within that source.
@@ -118,6 +136,9 @@ tools:
                 - 'docs/*'
                 - 'lib/*'
                 - 'tests/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # Runs Scrutinizer's PHP Analyzer Tool
     # https://scrutinizer-ci.com/docs/tools/php/php-analyzer/config_reference
@@ -139,6 +160,9 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # Security Advisory Checker
     # https://security.sensiolabs.org

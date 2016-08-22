@@ -1,6 +1,6 @@
-[submodule "app/lib/bcosca/fatfree-core"]
-    path = app/lib/bcosca/fatfree-core
+[submodule "lib/bcosca/fatfree-core"]
+    path = lib/bcosca/fatfree-core
     url = https://github.com/bcosca/fatfree-core.git
-[submodule "app/lib/FFMVC"]
-    path = app/lib/FFMVC
+[submodule "lib/FFMVC"]
+    path = lib/FFMVC
     url = https://github.com/vijinho/FFMVC.git
