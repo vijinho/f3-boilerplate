@@ -155,7 +155,7 @@ class API
     /**
      * The OAuth Error to return if an OAuthError occurs.
      *
-     * @var array OAuthError
+     * @var bool|array OAuthError
      */
     protected $OAuthError = null;
 
