@@ -154,7 +154,7 @@ tools:
                 - naming
                 - design
             naming_rules:
-                short_variable: { minimum: 3 }
+                short_variable: { minimum: 2 }
         filter:
             excluded_paths:
                 - 'docs/*'
