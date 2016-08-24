@@ -103,7 +103,7 @@ tools:
     # Copy/Paste Detector
     # https://github.com/sebastianbergmann/phpcpd
     php_cpd:
-        enabled: true
+        enabled: false
         excluded_dirs:
             - lib
             - tests
