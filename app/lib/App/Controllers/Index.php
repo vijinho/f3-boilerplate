@@ -23,7 +23,7 @@ class Index extends Base
      */
     public function index(\Base $f3, array $params = [])
     {
-        Helpers\Notifications::instance()->add("Hello world!", "success");
+        Helpers\Notifications::instance()->add('Hello world!', 'success');
         echo \View::instance()->render('index/index.phtml');
     }
 }

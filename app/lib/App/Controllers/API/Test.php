@@ -13,10 +13,9 @@ class Test extends API
 {
     /**
      * @param \Base $f3
-     * @param array $params
      * @return void
      */
-    public function request($f3, array $params)
+    public function request($f3)
     {
         if (empty($this->validateAccess())) {
             //return;

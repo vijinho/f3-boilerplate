@@ -12,11 +12,9 @@ namespace App\CLI;
 class Index extends Base
 {
     /**
-     * @param \Base $f3
-     * @param array $params
      * @return void
      */
-    public function index(\Base $f3, array $params = [])
+    public function index()
     {
         $cli = $this->cli;
         $cli->shoutBold(__METHOD__);
@@ -26,11 +24,10 @@ class Index extends Base
     /**
      * example to test if already running
      * run cli.php '/index/running' in two different terminals
-     * @param \Base $f3
-     * @param array $params
+     *
      * @return void
      */
-    public function running(\Base $f3, array $params = [])
+    public function running()
     {
         $cli = $this->cli;
         $cli->shoutBold(__METHOD__);

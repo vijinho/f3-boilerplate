@@ -32,10 +32,9 @@ abstract class Base
 
 
     /**
-    * @param \Base $f3
-    * @param array $params
+    * init
     */
-    public function __construct(\Base $f3, array $params = [])
+    public function __construct()
     {
         if (PHP_SAPI !== 'cli') {
             exit("This controller can only be executed in CLI mode.");
@@ -51,7 +50,7 @@ abstract class Base
      * @param array $params
      * @return void
      */
-    public function beforeRoute(\Base $f3, array $params = [])
+    public function beforeRoute()
     {
         $cli = $this->cli;
         $cli->blackBoldUnderline("CLI Script");
@@ -63,7 +62,7 @@ abstract class Base
      * @param array $params
      * @return void
      */
-    public function afterRoute(\Base $f3, array $params = [])
+    public function afterRoute()
     {
         $cli = $this->cli;
         $cli->shout('Finished.');

@@ -162,10 +162,8 @@ class API
      /**
       * init
       *
-      * @param \Base $f3
-      * @param array $params
       */
-    public function __construct(\Base $f3, array $params = [])
+    public function __construct()
     {
         $this->db = \Registry::get('db');
         $this->version = $f3->get('api.version');
@@ -177,10 +175,9 @@ class API
       * compile and send the json response.
       *
       * @param \Base $f3
-      * @param array $params
       * @return void
       */
-    public function afterRoute(\Base $f3, array $params = [])
+    public function afterRoute(\Base $f3)
     {
         $this->params['headers'] = empty($this->params['headers']) ? [] : $this->params['headers'];
         $this->params['headers'] = [
@@ -293,8 +290,6 @@ class API
      */
     public function basicAuthenticateLoginPassword(): boolean
     {
-        $f3 = \Base::instance();
-
         $auth = new \Auth(new \DB\SQL\Mapper(\Registry::get('db'), 'users', ['email', 'password'], 30), [
             'id' => 'email',
             'pw' => 'password',
@@ -337,10 +332,9 @@ class API
     /**
      * Validate the provided access token or get the bearer token from the incoming http request
      *
-     * @param array $params optional params
      * @return null|boolean true/false on valid access credentials
      */
-    protected function validateAccess(array $params = [])
+    protected function validateAccess()
     {
         $f3 = \Base::instance();
 
@@ -388,11 +382,9 @@ class API
 
     /**
      * unknown catch-all api method
-     * @param \Base $f3
-     * @param array $params
      * @return void
      */
-    public function unknown(\Base $f3, array $params = [])
+    public function unknown()
     {
         $this->setOAuthError('invalid_request');
         $this->failure('api_connection_error', 'Unknown API Request', 400);
