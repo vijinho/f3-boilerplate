@@ -46,8 +46,6 @@ abstract class Base
     }
 
     /**
-     * @param \Base $f3
-     * @param array $params
      * @return void
      */
     public function beforeRoute()
@@ -59,10 +57,9 @@ abstract class Base
 
     /**
      * @param \Base $f3
-     * @param array $params
      * @return void
      */
-    public function afterRoute()
+    public function afterRoute($f3)
     {
         $cli = $this->cli;
         $cli->shout('Finished.');

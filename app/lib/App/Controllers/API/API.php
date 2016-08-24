@@ -161,9 +161,9 @@ class API
 
      /**
       * init
-      *
+      * @param \Base $f3
       */
-    public function __construct()
+    public function __construct($f3)
     {
         $this->db = \Registry::get('db');
         $this->version = $f3->get('api.version');
