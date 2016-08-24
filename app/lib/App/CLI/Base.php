@@ -2,7 +2,6 @@
 
 namespace App\CLI;
 
-use FFMVC\Helpers;
 use App\{Traits, Controllers, Models, Mappers};
 
 /**

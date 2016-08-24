@@ -16,6 +16,7 @@ class Setup
      * setup database
      *
      * @param \Dice\Dice dependency injector
+     * @param \Dice\Dice $dice
      * @return void
      */
     public static function database(&$dice)

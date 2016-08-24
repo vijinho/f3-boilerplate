@@ -2,8 +2,8 @@
 
 namespace App\Controllers\API;
 
-use FFMVC\Helpers as Helpers;
 use App\Models as Models;
+use FFMVC\Helpers as Helpers;
 
 /**
  * API Controller Class.
