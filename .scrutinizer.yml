@@ -1,6 +1,14 @@
 build:
     environment:
-        php: '5.6.0'
+        php: '7.0.0'
+
+#    tests:
+#        override:
+#            -
+#                command: 'phpunit --coverage-text --coverage-clover=coverage.clover testfile'
+#                coverage:
+#                    file: 'coverage.clover'
+#                    format: 'php-clover'
 
 before_commands:
     - "composer install --prefer-source"
@@ -10,11 +18,11 @@ filter:
         - docs/*
         - lib/*
         - tests/*
+        - examples/*
 
 checks:
     php:
         code_rating: true
-        duplication: true
         remove_extra_empty_lines: true
         remove_php_closing_tag: true
         remove_trailing_whitespace: true
@@ -29,7 +37,6 @@ checks:
         fix_identation_4spaces: true
         fix_doc_comments: true
 tools:
-
     external_code_coverage:
         enabled: false
         timeout: 1800
@@ -39,9 +46,7 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
-                - 'bin/*'
-                - 'data/*'
-                - 'www/*'
+                - 'examples/*'
 
     php_code_coverage:
         enabled: false
@@ -50,9 +55,7 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
-                - 'bin/*'
-                - 'data/*'
-                - 'www/*'
+                - 'examples/*'
 
     # The PSR-1 and PSR-2 Coding Standards fixer for your code
     # http://cs.sensiolabs.org
@@ -65,9 +68,7 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
-                - 'bin/*'
-                - 'data/*'
-                - 'www/*'
+                - 'examples/*'
 
     # PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files to detect and fix violations of a defined set of coding standards.
     # http://pear.php.net/package/PHP_CodeSniffer/
@@ -85,39 +86,37 @@ tools:
                 - 'docs/*'
                 - 'lib/*'
                 - 'tests/*'
-                - 'bin/*'
-                - 'data/*'
-                - 'www/*'
+                - 'examples/*'
 
     # Analyzes the size and structure of a PHP project.
     # https://github.com/sebastianbergmann/phploc
     php_loc:
         enabled: true
         excluded_dirs:
+            - docs
             - lib
             - tests
-            - bin
-            - data
-            - www
+            - examples
 
     # Copy/Paste Detector
     # https://github.com/sebastianbergmann/phpcpd
     php_cpd:
         enabled: false
         excluded_dirs:
+            - docs
             - lib
             - tests
+            - examples
 
     # Analyzes the size and structure of a PHP project.
     # https://pdepend.org
     php_pdepend:
         enabled: true
         excluded_dirs:
+            - docs
             - tests
             - lib
-            - bin
-            - data
-            - www
+            - examples
 
     # PHP Mess Detector
     # It takes a given PHP source code base and look for several potential problems within that source.
@@ -137,9 +136,7 @@ tools:
                 - 'docs/*'
                 - 'lib/*'
                 - 'tests/*'
-                - 'bin/*'
-                - 'data/*'
-                - 'www/*'
+                - 'examples/*'
 
     # Runs Scrutinizer's PHP Analyzer Tool
     # https://scrutinizer-ci.com/docs/tools/php/php-analyzer/config_reference
@@ -161,9 +158,7 @@ tools:
                 - 'docs/*'
                 - 'tests/*'
                 - 'lib/*'
-                - 'bin/*'
-                - 'data/*'
-                - 'www/*'
+                - 'examples/*'
 
     # Security Advisory Checker
     # https://security.sensiolabs.org
