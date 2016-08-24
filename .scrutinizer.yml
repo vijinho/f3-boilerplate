@@ -19,6 +19,9 @@ filter:
         - lib/*
         - tests/*
         - examples/*
+        - bin/*
+        - data/*
+        - www/*
 
 checks:
     php:
@@ -47,6 +50,9 @@ tools:
                 - 'tests/*'
                 - 'lib/*'
                 - 'examples/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     php_code_coverage:
         enabled: false
@@ -56,6 +62,9 @@ tools:
                 - 'tests/*'
                 - 'lib/*'
                 - 'examples/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # The PSR-1 and PSR-2 Coding Standards fixer for your code
     # http://cs.sensiolabs.org
@@ -69,6 +78,9 @@ tools:
                 - 'tests/*'
                 - 'lib/*'
                 - 'examples/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files to detect and fix violations of a defined set of coding standards.
     # http://pear.php.net/package/PHP_CodeSniffer/
@@ -87,6 +99,9 @@ tools:
                 - 'lib/*'
                 - 'tests/*'
                 - 'examples/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # Analyzes the size and structure of a PHP project.
     # https://github.com/sebastianbergmann/phploc
@@ -97,6 +112,9 @@ tools:
             - lib
             - tests
             - examples
+            - bin
+            - data
+            - www
 
     # Copy/Paste Detector
     # https://github.com/sebastianbergmann/phpcpd
@@ -107,6 +125,9 @@ tools:
             - lib
             - tests
             - examples
+            - bin
+            - data
+            - www
 
     # Analyzes the size and structure of a PHP project.
     # https://pdepend.org
@@ -117,6 +138,9 @@ tools:
             - tests
             - lib
             - examples
+            - bin
+            - data
+            - www
 
     # PHP Mess Detector
     # It takes a given PHP source code base and look for several potential problems within that source.
@@ -137,6 +161,9 @@ tools:
                 - 'lib/*'
                 - 'tests/*'
                 - 'examples/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # Runs Scrutinizer's PHP Analyzer Tool
     # https://scrutinizer-ci.com/docs/tools/php/php-analyzer/config_reference
@@ -159,6 +186,9 @@ tools:
                 - 'tests/*'
                 - 'lib/*'
                 - 'examples/*'
+                - 'bin/*'
+                - 'data/*'
+                - 'www/*'
 
     # Security Advisory Checker
     # https://security.sensiolabs.org
