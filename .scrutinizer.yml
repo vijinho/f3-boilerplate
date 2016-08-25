@@ -169,26 +169,31 @@ tools:
     # https://scrutinizer-ci.com/docs/tools/php/php-analyzer/config_reference
     php_analyzer:
         enabled: true
+        extensions:
+            - php
+            - phtml
+
         config:
+            security_analysis:
+                enabled: true
             checkstyle:
                 enabled: true
                 naming:
-                    enabled: true
-                    property_name: ^[_a-zA-Z][a-zA-Z0-9_]*$ #Allow underscores & caps
-                    method_name: ^(?:[_a-zA-Z]|__)[a-zA-Z0-9_]*$ #Allow underscores & caps
-                    parameter_name: ^[a-z][a-zA-Z0-9_]*$ # Allow underscores
-                    local_variable: ^[a-zA-Z][a-zA-Z0-9_]*$ #Allow underscores & caps
-                    exception_name: ^[a-zA-Z][a-zA-Z0-9]*Exception$
-                    isser_method_name: ^(?:[_a-zA-Z]|__)[a-zA-Z0-9]*$ #Allow underscores & caps
-        filter:
-            excluded_paths:
-                - 'docs/*'
-                - 'tests/*'
-                - 'lib/*'
-                - 'examples/*'
-                - 'bin/*'
-                - 'data/*'
-                - 'www/*'
+                    enabled: false
+            type_scanning:
+                raise_duplicate_warnings:  true
+            verify_php_doc_comments:
+                parameters:  true
+                return: true
+                suggest_more_specific_types:  true
+                ask_for_return_if_not_inferrable:  true
+            simplify_boolean_return:
+                enabled: true
+            phpunit_checks:
+                enabled: false
+            # Checks Common Precedence Mistakes
+            reflection_fixes:
+                enabled:  true
 
     # Security Advisory Checker
     # https://security.sensiolabs.org
