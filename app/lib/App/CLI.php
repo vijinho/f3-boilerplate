@@ -2,10 +2,6 @@
 
 namespace App;
 
-if (PHP_SAPI !== 'cli') {
-    die("This can only be executed in CLI mode.");
-}
-
 /**
  * Load, configure, run application
  */
@@ -22,6 +18,11 @@ function boot()
 
     // bootstrap initial environment
     $f3 = \Base::instance();
+
+    if (empty($f3->get('CLI'))) {
+        die('This can only be executed in CLI mode.');
+    }
+
     \FFMVC\App::start();
     $f3->set('UNLOAD', function () {
         \FFMVC\App::finish();
@@ -40,7 +41,7 @@ function boot()
         \FFMVC\Helpers\DB::createDbDsn($dbConfig),
         $dbConfig['user'],
         $dbConfig['pass'],
-        [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
+        [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION],
     ]]);
 
     // auto-create database if options set
