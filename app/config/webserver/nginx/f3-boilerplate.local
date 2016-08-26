@@ -95,6 +95,7 @@ session.use_only_cookies=0
 session.use_trans_sid=0
 session.cookie_lifetime=86400
 session.auto_start=0
+session.upload_progress.enabled=1
 
 short_open_tag=On
 default_charset=utf-8
@@ -111,4 +112,3 @@ register_argc_argv=Off
 		include fastcgi_params;
 	}
 }
-
