@@ -158,9 +158,8 @@ class App
                         'description' => $e['code'] . ' ' . $e['text'],
                     ];
 
-                        if ($debug == 3) {
-                            // show the $e['trace'] but it's in HTML!
-                            $data['trace'] = trim(strip_tags($e['trace']));
+                        if ($debug > 2) {
+                            $data['trace'] = $f3->trace(null, false);
                         }
                         $params = ['http_status' => $e['code']];
                         $response->json($data, $params);

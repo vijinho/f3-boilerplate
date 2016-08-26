@@ -1,6 +1,6 @@
 <?php
-$f3 = \Base::instance();
-$e = $f3->get('ERROR');
+$f3    = \Base::instance();
+$e     = $f3->get('ERROR');
 $title = 'Error: ' . $e['code'];
 $f3->set('title', $title);
 $debug = $f3->get('DEBUG');
@@ -28,8 +28,10 @@ We're sorry but an error occurred.  Our best muppets are on the case.
     <?php if ($debug > 1): ?>
 
         <h2>Error Trace</h2>
-        <?=nl2br($e['trace']) ?>
-
+        <pre>
+            <?=print_r($f3->trace(null, false)); ?>
+        </pre>
+    
     <?php endif ?>
 
     <?php if ($debug > 2): ?>
