@@ -33,27 +33,30 @@ class App
     {
         $f3 = \Base::instance();
 
+        $hive = []; // storage for $f3->set calls into one big $f3->mset
+
         // is the url under /api ?
-        $api = '/api' == substr($f3->get('PATH'), 0, 4);
-        $f3->set('api', $api);
+        $api         = '/api' == substr($f3->get('PATH'), 0, 4);
+        $hive['api'] = $api;
+
         $language = $f3->get('LANG');
 
         // do not use sessions for api calls
-        if ($f3->get('CLI') ||  $api) {
+        if ($f3->get('CLI') || $api) {
             if (session_status() !== PHP_SESSION_NONE) {
                 session_write_close();
             }
         } elseif (session_status() == PHP_SESSION_NONE) {
             session_start();
             // this is an array so not in registry
-            $f3->set('notifications', $f3->get('SESSION.notifications'));
-            $f3->set('uuid', $f3->get('SESSION.uuid')); // logged-in user id
+            $hive['notifications'] = $f3->get('SESSION.notifications');
+            $hive['uuid']          = $f3->get('SESSION.uuid');
 
             // initialise gettext
             // override language from request
             $language = $f3->get('REQUEST.language');
             if (!empty($language)) {
-                $f3->set('SESSION.language', $language);
+                $hive['SESSION']['language'] = $language;
             }
 
             // get language from session if set
@@ -67,7 +70,7 @@ class App
             // will now fall back to client browser language
             $language = empty($language) ? substr($f3->get('LANGUAGE'), 0, 2) : $language;
             // use LANG because f3 appends to LANGUAGE when setting
-            $f3->set('LANG', $language);
+            $hive['LANG'] = $language;
             putenv('LANG=' . $language);
             setlocale(LC_ALL, $language);
             $domain = 'messages';
@@ -78,6 +81,7 @@ class App
 
             // load cli routes and finish
         if ($f3->get('CLI')) {
+            $f3->mset($hive);
             $f3->route('GET /docs/@page', function ($f3, array $params) {
                 $filename = '../docs/' . strtoupper($params['page']) . '.md';
                 if (!file_exists($filename)) {
@@ -185,11 +189,10 @@ class App
                     });
                 }
                 ksort($cleaned);
-                $request = array_merge_recursive($request, $cleaned);
-                $f3->set($var, $cleaned);
+                $request    = array_merge_recursive($request, $cleaned);
+                $hive[$var] = $cleaned;
             }
         }
-
         unset($cleaned);
 
         // we don't want to include the session name in the request data
@@ -200,7 +203,7 @@ class App
 
         ksort($request);
         $f3->copy('REQUEST', 'REQUEST_UNCLEAN');
-        $f3->set('REQUEST', $request);
+        $hive['REQUEST'] = $request;
         unset($request);
 
         // get the access token and basic auth and set it in REQUEST.access_token
@@ -211,8 +214,7 @@ class App
                     $token = $matches['access_token'];
                 } elseif (preg_match('/Basic\s+(?P<data>.+)$/i', $header, $matches)) {
                     $data = preg_split('/:/', base64_decode($matches['data']));
-
-                    $f3->mset([
+                    $hive = array_merge($hive, [
                         'SERVER.PHP_AUTH_USER'  => $data[0],
                         'SERVER.PHP_AUTH_PW'    => $data[1],
                         'REQUEST.PHP_AUTH_USER' => $data[0],
@@ -222,11 +224,12 @@ class App
             }
         }
         if (!empty($token)) {
-            $f3->set('REQUEST.access_token', $token);
+            $hive['REQUEST.access_token'] = $token;
         }
 
         // load /api/* routes and finish
         if (!empty($api)) {
+            $f3->mset($hive);
             $f3->config('config/routes-api.ini');
             $f3->run();
             return;
@@ -235,10 +238,9 @@ class App
         // check csrf value if present, set input csrf to boolean true/false if matched session csrf
         if (!empty($f3->get('security.csrf'))) {
             $csrf = $f3->get('REQUEST.csrf');
-
             if (!$api && !empty($csrf)) {
-                $f3->set('csrf', $csrf == $f3->get('SESSION.csrf'));
-                $f3->clear('SESSION.csrf');
+                $hive['csrf']            = $csrf == $f3->get('SESSION.csrf');
+                $hive['SESSION']['csrf'] = null;
             }
         }
 
@@ -267,6 +269,9 @@ class App
             },
             $f3->get('ttl.minify')
         );
+
+        // mass-set $f3's hive
+        $f3->mset($hive);
 
         // load language-based routes, default english
         $f3->config('config/routes-en.ini');
