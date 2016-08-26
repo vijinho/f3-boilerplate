@@ -25,7 +25,7 @@ class Index extends Base
      * example to test if already running
      * run cli.php '/index/running' in two different terminals
      *
-     * @return void
+     * @return false|null
      */
     public function running()
     {

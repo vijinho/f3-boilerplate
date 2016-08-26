@@ -213,7 +213,7 @@ class API
      *
      * @param string $code        the error code
      * @param string $message     the error message
-     * @param int    $http_status the http status code
+     * @param integer|null    $http_status the http status code
      */
     public function failure($code, $message, $http_status = null)
     {
@@ -286,7 +286,7 @@ class API
      * Check that the credentials match the database
      * Cache result for 30 seconds.
      *
-     * @return bool success/failure
+     * @return boolean success/failure
      */
     public function basicAuthenticateLoginPassword(): boolean
     {
@@ -306,7 +306,7 @@ class API
      * Check that the credentials match a registered app
      * @param string $clientId the client id to check
      * @param string $clientSecret the client secret to check
-     * @return bool success/failure
+     * @return boolean success/failure
      */
     public function authenticateClientIdSecret($clientId, $clientSecret): boolean
     {
@@ -321,7 +321,7 @@ class API
      *
      * Check that the credentials match a registered app
      *
-     * @return bool success/failure
+     * @return boolean success/failure
      */
     public function basicAuthenticateClientIdSecret(): boolean
     {
