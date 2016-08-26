@@ -36,9 +36,10 @@ class App
         // is the url under /api ?
         $api = '/api' == substr($f3->get('PATH'), 0, 4);
         $f3->set('api', $api);
-        $language = $f3->get('REQUEST.language');
+        $language = $f3->get('LANG');
 
-        if ($f3->get('CLI') || $api) {
+        // do not use sessions for api calls
+        if ($f3->get('CLI') ||  $api) {
             if (session_status() !== PHP_SESSION_NONE) {
                 session_write_close();
             }
@@ -49,6 +50,8 @@ class App
             $f3->set('uuid', $f3->get('SESSION.uuid')); // logged-in user id
 
             // initialise gettext
+            // override language from request
+            $language = $f3->get('REQUEST.language');
             if (!empty($language)) {
                 $f3->set('SESSION.language', $language);
             }
@@ -74,7 +77,7 @@ class App
         }
 
             // load cli routes and finish
-        if (($f3->get('CLI'))) {
+        if ($f3->get('CLI')) {
             $f3->route('GET /docs/@page', function ($f3, array $params) {
                 $filename = '../docs/' . strtoupper($params['page']) . '.md';
                 if (!file_exists($filename)) {
@@ -110,64 +113,63 @@ class App
         // custom error handler if debugging
         $f3->set('ONERROR',
             function () use ($f3) {
-                $logger = \Registry::get('logger');
-                if (is_object($logger)) {
-                    $logger->write(print_r($f3->get('ERROR')), $f3->get('log.date'));
-                }
+            $logger = \Registry::get('logger');
+            if (is_object($logger)) {
+                $logger->write(print_r($f3->get('ERROR')), $f3->get('log.date'));
+            }
 
             // recursively clear existing output buffers:
             while (ob_get_level()) {
                 ob_end_clean();
             }
 
-                $debug = $f3->get('DEBUG');
-                $api = !empty($f3->get('api'));
-                $language = $f3->get('LANG');
-                $e = $f3->get('ERROR');
+            $debug = $f3->get('DEBUG');
+            $api = !empty($f3->get('api'));
+            $language = $f3->get('LANG');
+            $e = $f3->get('ERROR');
 
-                if (!$api && $e['code'] == '404') {
-                    $error_template = 'templates/' . $language . '/website/error/404.phtml';
+            if (!$api && $e['code'] == '404') {
+                $error_template = 'templates/' . $language . '/website/error/404.phtml';
+                if (!file_exists($error_template)) {
+                    $error_template = 'templates/en/website/error/404.phtml';
+                }
+                include_once $error_template;
+            } else {
+                if (!$api) {
+                    $error_template = 'templates/' . $language . '/website/error/error.phtml';
                     if (!file_exists($error_template)) {
-                        $error_template = 'templates/en/website/error/404.phtml';
+                        $error_template = 'templates/en/website/error/error.phtml';
                     }
-                    include_once $error_template;
-                } else {
-                    if (!$api) {
-                        $error_template = 'templates/' . $language . '/website/error/error.phtml';
-                        if (!file_exists($error_template)) {
-                            $error_template = 'templates/en/website/error/error.phtml';
-                        }
 
-                        $debug_template = 'templates/' . $language . '/website/error/error.phtml';
-                        if (!file_exists($debug_template)) {
-                            $debug_template = 'templates/en/website/error/debug.phtml';
-                        }
+                    $debug_template = 'templates/' . $language . '/website/error/error.phtml';
+                    if (!file_exists($debug_template)) {
+                        $debug_template = 'templates/en/website/error/debug.phtml';
+                    }
 
-                        include_once ('production' == $f3->get('app.env') && $debug < 1) ? $error_template
+                    include_once ('production' == $f3->get('app.env') && $debug < 1) ? $error_template
                                 : $debug_template;
-                    } else {
-                        $response = Helpers\Response::instance();
+                } else {
+                    $response = Helpers\Response::instance();
 
-                        $data = [
+                    $data = [
                         'method' => $f3->get('VERB'),
                     ];
 
-                        $data['error'] = [
+                    $data['error'] = [
                         'code' => substr($f3->snakecase(str_replace(' ', '',
                                     $e['status'])), 0),
                         'description' => $e['code'] . ' ' . $e['text'],
                     ];
-
-                        if ($debug > 2) {
-                            $data['trace'] = $f3->trace(null, false);
-                        }
-                        $params = ['http_status' => $e['code']];
-                        $response->json($data, $params);
+                    if ($debug > 2) {
+                        $data['error']['trace'] = $f3->trace(null, false);
                     }
+                    $params = ['http_status' => $e['code']];
+                    $response->json($data, $params);
                 }
+            }
             // http://php.net/manual/en/function.ob-end-flush.php
-            @ob_end_flush();
-            });
+            while (@ob_end_flush());
+        });
 
         // clean ALL incoming user input by default
         $request = [];
@@ -241,6 +243,7 @@ class App
         }
 
         $f3->route('GET /docs/@page', function ($f3, array $params) {
+
             $filename = '../docs/' . strtoupper($params['page']) . '.md';
 
             if (!file_exists($filename)) {
@@ -252,13 +255,14 @@ class App
 
             $f3->set('html', $html);
             echo \View::instance()->render('/markdown-template.phtml');
+
         }, $f3->get('ttl.doc'));
 
         // @see http://fatfreeframework.com/optimization
         $f3->route('GET /minify/@type',
             function ($f3) {
-                $path = realpath(dirname(__FILE__) . '/../www/');
-                $files = str_replace('../', '', $f3->get('GET_UNCLEAN.files')); // close potential hacking attempts
+                    $path = realpath(dirname(__FILE__) . '/../www/');
+                    $files = str_replace('../', '', $f3->get('GET.files')); // close potential hacking attempts
                     echo \Web::instance()->minify($files, null, true, $path);
             },
             $f3->get('ttl.minify')
@@ -271,6 +275,7 @@ class App
             $f3->config($file);
         }
 
+        // from here we add-in routes generated from the database (cms routes)
         $f3->run();
     }
 }
