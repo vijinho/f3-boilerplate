@@ -160,16 +160,10 @@ class App
 
                         if ($debug == 3) {
                             // show the $e['trace'] but it's in HTML!
+                            $data['trace'] = trim(strip_tags($e['trace']));
                         }
-
                         $params = ['http_status' => $e['code']];
-                        $return = $f3->get('REQUEST.return');
-
-                        switch ($return) {
-                        default:
-                        case 'json':
-                            $response->json($data, $params);
-                    }
+                        $response->json($data, $params);
                     }
                 }
             // http://php.net/manual/en/function.ob-end-flush.php
