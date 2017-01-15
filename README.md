@@ -17,6 +17,7 @@ Skeleton PHP7 Fatfree-framework MVC website codebase.
 - Change the `app/config/default.ini` and `config.example.ini` files to suit
   your project - create your local setup `config.ini` file from this.
 - Change the files in `app/lib/App` and the associated routes in `app/config/routes-*.ini` to suit.
+- Run `composer dump` to update your the autoloader with your newly created classes
 
 *PHP7 only now!* - see [CHANGELOG.md](CHANGELOG.md)
 
