@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=empty($title) ? 'f3-boilerplate' : $title ?></title>
     <meta name="description" content="<?=empty($description) ? '' : $description ?>">
     <meta name="keywords" content="<?=empty($keywords) ? '' : $keywords ?>">
@@ -14,10 +13,8 @@
 <?php if ($f3->get('application.environment') == 'production'): ?>
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link href="https://npmcdn.com/basscss@8.0.1/css/basscss.min.css" rel="stylesheet">
     <?php else: ?>
     <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/basscss.min.css">
 <?php endif ?>
     <link rel="stylesheet" href="/minify/css?files=/css/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
