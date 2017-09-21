@@ -176,35 +176,37 @@ class App
         });
 
         // clean ALL incoming user input by default
-        $request = [];
-        $utf     = \UTF::instance();
-        foreach (['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE'] as $var) {
-            $f3->copy($var, $var . '_UNCLEAN');
-            $input = $f3->get($var);
-            if (is_array($input) && count($input)) {
-                $cleaned = [];
-                foreach ($input as $k => $v) {
-                    $cleaned[strtolower($utf->trim($f3->clean($k)))] = $f3->recursive($v, function ($v) use ($f3, $utf) {
-                        return $utf->trim($f3->clean($v));
-                    });
+        if (!empty($f3->get('security.cleaninput'))) {
+            $request = [];
+            $utf     = \UTF::instance();
+            foreach (['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'COOKIE'] as $var) {
+                $f3->copy($var, $var . '_UNCLEAN');
+                $input = $f3->get($var);
+                if (is_array($input) && count($input)) {
+                    $cleaned = [];
+                    foreach ($input as $k => $v) {
+                        $cleaned[strtolower($utf->trim($f3->clean($k)))] = $f3->recursive($v, function ($v) use ($f3, $utf) {
+                            return $utf->trim($f3->clean($v));
+                        });
+                    }
+                    ksort($cleaned);
+                    $request    = array_merge_recursive($request, $cleaned);
+                    $hive[$var] = $cleaned;
                 }
-                ksort($cleaned);
-                $request    = array_merge_recursive($request, $cleaned);
-                $hive[$var] = $cleaned;
             }
-        }
-        unset($cleaned);
+            unset($cleaned);
 
-        // we don't want to include the session name in the request data
-        $session_name = strtolower(session_name());
-        if (array_key_exists($session_name, $request)) {
-            unset($request[$session_name]);
-        }
+            // we don't want to include the session name in the request data
+            $session_name = strtolower(session_name());
+            if (array_key_exists($session_name, $request)) {
+                unset($request[$session_name]);
+            }
 
-        ksort($request);
-        $f3->copy('REQUEST', 'REQUEST_UNCLEAN');
-        $hive['REQUEST'] = $request;
-        unset($request);
+            ksort($request);
+            $f3->copy('REQUEST', 'REQUEST_UNCLEAN');
+            $hive['REQUEST'] = $request;
+            unset($request);
+        }
 
         // get the access token and basic auth and set it in REQUEST.access_token
         $token = $f3->get('REQUEST.access_token');
