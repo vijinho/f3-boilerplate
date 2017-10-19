@@ -1,5 +1,7 @@
 # f3-boilerplate
 
+**NOTE:** The branch skeleton-nodb-nobs has NO DATABASE features enabled by default and NO BOOTSTRAP so you are free to choose as you wish (will ened to uncomment sections of files which reference 'db' to re-enable db).
+
 [![Travis CI](https://travis-ci.org/vijinho/f3-boilerplate.svg?branch=dev-master)](https://travis-ci.org/vijinho/f3-boilerplate)
 [![Build Status](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/badges/build.png?b=dev-master)](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/build-status/dev-master)
 [![Code Coverage](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/badges/coverage.png?b=dev-master)](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/?branch=dev-master)
