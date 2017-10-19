@@ -4,12 +4,6 @@
 
 # CONTRIBUTORS
 
-* Christian Knuth -- https://github.com/ikkez
-* Stefano Ricci -- http://www.sharmpro.com
-* Patrick Müller -- http://patrickmueller.net
-* Andy Williams -- https://github.com/andydwilliams
- 
 # SOFTWARE PROJECTS
 
 * Fat-Free Framework - http://fatfreeframework.com/
-* Bootstrap - http://getbootstrap.com

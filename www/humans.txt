@@ -6,16 +6,9 @@
     Vijay Mahrra -- vijay@yoyo.org -- @vijinh0
 
 # CONTRIBUTORS
-
-    Christian Knuth -- https://github.com/ikkez
-    Stefano Ricci -- http://www.sharmpro.com
-    Patrick Müller -- http://patrickmueller.net
-    Andy Williams -- https://github.com/andydwilliams
     
 # THANKS
 
 * Fat-Free Framework - http://fatfreeframework.com/
 
 # TECHNOLOGY COLOPHON
-
-* Bootstrap - http://getbootstrap.com
