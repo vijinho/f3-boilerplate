@@ -1,5 +1,7 @@
 # f3-boilerplate
 
+Use the branch **skeleton-nodb-nobs** for a skeleton setup with **no database features enabled** (commented-out), **no bootstrap** files and empty *.md* files.
+
 [![Travis CI](https://travis-ci.org/vijinho/f3-boilerplate.svg?branch=dev-master)](https://travis-ci.org/vijinho/f3-boilerplate)
 [![Build Status](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/badges/build.png?b=dev-master)](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/build-status/dev-master)
 [![Code Coverage](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/badges/coverage.png?b=dev-master)](https://scrutinizer-ci.com/g/vijinho/f3-boilerplate/?branch=dev-master)
