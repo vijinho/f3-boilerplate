@@ -34,6 +34,7 @@ function boot()
 
     // database connection used by app
     if ($f3->exists('db')) {
+        /*
         $dbConfig = $f3->get('db');
         $dice->addRule('DB\\SQL', ['shared' => true, 'constructParams' => [
             \FFMVC\Helpers\DB::createDbDsn($dbConfig),
@@ -44,6 +45,7 @@ function boot()
 
         // auto-create database if options set
         \App\Setup::database($dice);
+        */
     }
 
     // run the main application
