@@ -21,6 +21,7 @@ class Setup
      */
     public static function database(&$dice)
     {
+        /*
         $f3 = \Base::instance();
         $cache = \Cache::instance();
         // cli mode will not use cache on cli and will check db every time if in dev mode
@@ -34,5 +35,6 @@ class Setup
             }
             $cache->set('tables', $tables, 600);
         }
+        */
     }
 }

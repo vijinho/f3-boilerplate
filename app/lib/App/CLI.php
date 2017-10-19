@@ -35,6 +35,7 @@ function boot()
     $logfile = $f3->get('log.file');
     $dice->addRule('Log', ['shared' => true, 'constructParams' => [$logfile]]);
 
+    /*
     // database connection used by app
     $dbConfig = $f3->get('db');
     $dice->addRule('DB\\SQL', ['shared' => true, 'constructParams' => [
@@ -46,7 +47,8 @@ function boot()
 
     // auto-create database if options set
     \App\Setup::database($dice);
-
+    */
+    
     // run the main application
     require_once 'lib/App/App.php';
     $app = $dice->create('App\\App');

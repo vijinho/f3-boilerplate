@@ -19,7 +19,7 @@ abstract class Base
     /**
      * @var \DB\SQL database class
      */
-    protected $db;
+    //protected $db;
 
     /**
      * Use climate by default
@@ -40,7 +40,7 @@ abstract class Base
             exit("This controller can only be executed in CLI mode.");
         }
 
-        $this->db = \Registry::get('db');
+        //$this->db = \Registry::get('db');
         $this->logger = \Registry::get('logger');
         $this->cli = new \League\CLImate\CLImate;
     }

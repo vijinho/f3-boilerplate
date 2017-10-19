@@ -19,11 +19,12 @@ class App
      * @param \Log $logger
      * @param \DB\SQL $db
      */
-    public function __construct(\Log $logger, \DB\SQL $db)
+    //public function __construct(\Log $logger, \DB\SQL $db)
+    public function __construct(\Log $logger)
     {
         // single instances to registry
         \Registry::set('logger', $logger);
-        \Registry::set('db', $db);
+        //\Registry::set('db', $db);
     }
 
     /**

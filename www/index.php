@@ -33,16 +33,18 @@ function boot()
     $dice->addRule('Log', ['shared' => true, 'constructParams' => [$logfile]]);
 
     // database connection used by app
-    $dbConfig = $f3->get('db');
-    $dice->addRule('DB\\SQL', ['shared' => true, 'constructParams' => [
-        \FFMVC\Helpers\DB::createDbDsn($dbConfig),
-        $dbConfig['user'],
-        $dbConfig['pass'],
-        [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
-    ]]);
+    if ($f3->exists('db')) {
+        $dbConfig = $f3->get('db');
+        $dice->addRule('DB\\SQL', ['shared' => true, 'constructParams' => [
+            \FFMVC\Helpers\DB::createDbDsn($dbConfig),
+            $dbConfig['user'],
+            $dbConfig['pass'],
+            [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
+        ]]);
 
-    // auto-create database if options set
-    \App\Setup::database($dice);
+        // auto-create database if options set
+        \App\Setup::database($dice);
+    }
 
     // run the main application
     require_once 'lib/App/App.php';
