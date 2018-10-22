@@ -4,7 +4,7 @@ Having been encouraged by clients to adopt a written code of conduct, the f3-boi
 
 This rule is strict, and none are able to comply perfectly. Grace is readily granted for minor transgressions. All are encouraged to follow this rule closely, as in so doing they may expect to live happier, healthier, and more productive lives. The entire rule is good and wholesome, and yet we make no enforcement of the more introspective aspects.
 
-Everyone is free to use the f3-boilerplate source code, object code, and/or documentation regardless of their opinion of and adherence to this rule. f3-boilerplate has been and continues to be completely free to everyone, without precondition.
+Everyone is free to use the f3-boilerplate source code, object code, and/or documentation regardless of their opinion of and adherence to this rule. f3-boilerplate has been and continues to be completely free to everyone.
 
 However, those who wish to participate in the f3-boilerplate community, either by commenting on the public mailing lists or by contributing patches or suggestions or in any other way, are expected to conduct themselves in a manner that honors the overarching spirit of the rule, even if they disagree with specific details. Polite and professional discussion is always welcomed, from anyone.
 
