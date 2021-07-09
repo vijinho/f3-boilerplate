@@ -92,7 +92,7 @@ class App
                 }
             });
 
-            // @see http://fatfreeframework.com/routing-engine
+            // @see https://fatfreeframework.com/framework-variables#ConfigurationFiles
             //load routes from ini file
             $f3->config('config/routes-cli.ini');
             $f3->run();
@@ -101,7 +101,7 @@ class App
 
         // web start
 
-        // user feedback messages helper, inisialise so methods can be called statically
+        // user feedback messages helper, initialise so methods can be called statically
         $notifications = Helpers\Notifications::instance();
         $notifications->init();
 
